@@ -1,19 +1,40 @@
 <template>
-  <div class="container main-view">
-    <h1>
-     steam-empire
-    </h1>    
+  <div class="container">
+    <Main v-if="gameLoaded"/>
   </div>
 </template>
 
 <script>
-export default { }
+import Main from "../components/Main";
+
+import { setId, getId } from "../scripts/playerData";
+
+// Timer interval variable
+let gameTimer = null;
+
+// Main game loop. Its called every 100ms.
+const gameLoop = () => {
+  
+}
+
+export default {
+  components: {
+    Main
+  },
+  data() {
+    return {
+      gameLoaded: false
+    }
+  },
+  mounted() {
+    // Set the game timer and call to the main loop
+    gameTimer = setInterval(gameLoop, 100);
+
+    this.gameLoaded = true;
+  }
+ }
 </script>
 
-<style scoped>
-
-.main-view {
-  height: 100vh;
-}
+<style>
 
 </style>
