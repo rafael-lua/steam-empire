@@ -7,7 +7,7 @@
 <script>
 import Main from "../components/Main";
 
-import { setId, getId } from "../scripts/playerData";
+import Player from "../scripts/playerData";
 
 // Timer interval variable
 let gameTimer = null;

@@ -1,29 +1,29 @@
 <template>
   <div class="main-view">
 
-    <!-- Main grid items view -->
-    <div v-if="menuFocus === 'all'" class="main-grid">
-      <h1>
-        steam-empire
-      </h1>  
-    </div>
+    <!-- Menus navigation -->
+    <nav class="submenus-nav bg-light border-dark">
+      <img src="~/assets/icons/gold-mine.png" alt="Mine Icon" class="icon-menu">
+    </nav>
 
-    <!-- Submenu items view -->
-    <div v-if="menuFocus === 'sub'">
-      submenu
-    </div>
+    <!-- Main grid items view -->
+    <Mines v-if="menuFocus === 'mine'"/>
 
   </div>
 </template>
 
 <script>
 // All game components will be imported and managed in here
+import Mines from "./Menus/Mines";
 
 export default {
   name: "Main",
+  components: {
+    Mines
+  },
   data() {
     return {
-      menuFocus: "all", // Define each view will be shown in the main area
+      menuFocus: "mine", // Define each view will be shown in the main area
     }
   }
 }
@@ -33,14 +33,11 @@ export default {
 
 .main-view {
   height: 100%;
-}
-
-.main-grid {
-  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-content: center;
-  flex-wrap: wrap;
 }
 
 </style>

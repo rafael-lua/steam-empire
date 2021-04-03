@@ -1,5 +1,11 @@
 /* font-family: 'Montserrat', sans-serif; */
 
+:root {
+  --bg-color: 234, 224, 194;
+  --light-shadow: 176, 164, 144;
+  --dark-shadow: 131, 125, 109;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,6 +17,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: black;
+  background-color: #1f1f1b;
   line-height: 1.6;
 }
 
@@ -20,7 +27,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: white;
+  color: green;
 }
 
 h1, h2, h3 {
@@ -30,7 +37,7 @@ h1, h2, h3 {
 }
 
 p {
-  margin: 10px 0;
+  margin: 0 0;
 }
 
 img {
@@ -41,8 +48,45 @@ img {
 /* General utilities */
 
 .container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 1em;
   height: 100vh;
+}
+
+.bg-light {
+  background-color: rgb(var(--bg-color));
+}
+
+.border-dark {
+  border: 3px solid rgb(var(--dark-shadow));
+  border-radius: 2px;
+}
+
+.icon-menu {
+  width: 2.5em;
+  opacity: 0.75;
+}
+
+.icon-basic {
+  width: 3em;
+  opacity: 0.9;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.clickable:active {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.submenus-nav {
+  width: 100%;
+  padding: 0.25em;
+  margin: 0.5em 0;
+  display: flex;
+  gap: 0.5em;
 }
