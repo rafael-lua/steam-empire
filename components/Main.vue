@@ -1,13 +1,20 @@
 <template>
   <div class="main-view">
 
-    <!-- Menus navigation -->
+    <!-- Sub menus navigation -->
     <nav class="submenus-nav bg-light border-dark">
-      <img src="~/assets/icons/gold-mine.png" alt="Mine Icon" class="icon-menu">
+
+      <img src="~/assets/icons/gold-mine.png" 
+        alt="Mine Icon" 
+        class="icon-menu clickable" 
+        v-on:click="() => {changeMenu('mines')}"
+      >
+      
     </nav>
 
-    <!-- Main grid items view -->
-    <Mines v-if="menuFocus === 'mine'"/>
+    <!-- Main items view -->
+    <Mines v-if="menuFocus === 'mines'"/>
+    
 
   </div>
 </template>
@@ -23,7 +30,12 @@ export default {
   },
   data() {
     return {
-      menuFocus: "mine", // Define each view will be shown in the main area
+      menuFocus: "mines", // Define each view will be shown in the main area
+    }
+  },
+  methods: {
+    changeMenu: function(m) {
+      this.menuFocus = m;
     }
   }
 }

@@ -1,13 +1,19 @@
 <template>
-  <div class="container">
-    <Main v-if="gameLoaded"/>
+  <div class="main-grid">
+    <GameHeader />
+    <SideLeft />
+    <div class="container">
+      <Main v-if="gameLoaded"/>
+    </div>
+    <SideRight />
   </div>
 </template>
 
 <script>
 import Main from "../components/Main";
-
-import Player from "../scripts/playerData";
+import GameHeader from "../components/GameHeader";
+import SideLeft from "../components/SideLeft";
+import SideRight from "../components/SideRight";
 
 // Timer interval variable
 let gameTimer = null;
@@ -19,7 +25,10 @@ const gameLoop = () => {
 
 export default {
   components: {
-    Main
+    Main,
+    GameHeader,
+    SideLeft,
+    SideRight,
   },
   data() {
     return {
@@ -35,6 +44,18 @@ export default {
  }
 </script>
 
-<style>
+<style scoped>
+
+.main-grid {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+		"header header header"
+		"left center right";
+  gap: 0.5em;
+}
 
 </style>

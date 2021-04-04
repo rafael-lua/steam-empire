@@ -26,10 +26,10 @@ export default {
 <style scoped>
 
 .mines {
+  height: 100%;
   padding: 0.5em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
