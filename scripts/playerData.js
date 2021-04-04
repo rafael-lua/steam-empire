@@ -3,11 +3,13 @@ import utils from "./utils";
 /* The player status and functionalities */
 
 // The player data variables object
-const Player = {
+let properties = {
   coal: 0,
   capacity: 10,
+}
 
-  // Export all the functionalities as a object of functions
+// The player methods list
+let methods = {
   getCoal: function() {
     return this.coal;
   },
@@ -16,8 +18,15 @@ const Player = {
     if(this.coal < this.capacity) {
       this.coal += v;
       this.coal = utils.clamp(this.coal, 0, this.capacity);
+      console.log(this.coal );
     }
   }
+}
+
+// Cosntruct the player object
+const Player = {
+  ...properties,
+  ...methods
 }
 
 export default Player;

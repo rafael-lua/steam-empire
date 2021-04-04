@@ -1,4 +1,4 @@
-/* font-family: 'Montserrat', sans-serif; */
+/* font-family: 'Rubik', sans-serif; */
 
 :root {
   --bg-color: 234, 224, 194;
@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Rubik', sans-serif;
   color: black;
   background-color: #1f1f1b;
   line-height: 1.6;
@@ -45,13 +45,56 @@ img {
 }
 
 
-/* General utilities */
+/* General styles */
 
 .container {
   width: 800px;
   grid-area: center;
   margin-bottom: 0.5em;
 }
+
+.icon-menu {
+  display: inline-block;
+  width: 2.5em;
+  opacity: 0.75;
+}
+
+.icon-menu:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.icon-menu:active {
+  cursor: pointer;
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.icon-basic {
+  display: inline-block;
+  width: 3em;
+  opacity: 0.9;
+  margin: 0 0.25em;
+}
+
+.icon-basic-mini {
+  display: inline-block;
+  width: 1em;
+  opacity: 0.9;
+  margin: 0 0.25em;
+}
+
+.submenus-nav {
+  width: 100%;
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+  display: flex;
+  gap: 0.5em;
+}
+
+
+/* Utilities */
 
 .bg-light {
   background-color: rgb(var(--bg-color));
@@ -62,30 +105,68 @@ img {
   border-radius: 2px;
 }
 
-.icon-menu {
-  width: 2.5em;
-  opacity: 0.75;
-}
-
-.icon-basic {
-  width: 3em;
-  opacity: 0.9;
-}
-
 .clickable:hover {
   cursor: pointer;
   transform: scale(1.05);
+  opacity: 1;
 }
 
 .clickable:active {
   cursor: pointer;
   transform: scale(1.1);
+  opacity: 1;
 }
 
-.submenus-nav {
-  width: 100%;
-  padding: 0.25em;
-  margin-bottom: 0.5em;
+.flex-row {
   display: flex;
-  gap: 0.5em;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-j-center {
+  justify-content: center;
+}
+
+.flex-j-right {
+  justify-content: right;
+}
+
+.flex-j-between {
+  justify-content: space-between;
+}
+
+.flex-j-evenly {
+  justify-content: space-evenly;
+}
+
+.flex-a-center {
+  align-items: center;
+}
+
+.flex-a-right {
+  align-items: flex-end;
+}
+
+.text-300 {
+  font-weight: 300;
+}
+
+.text-400 {
+  font-weight: 400;
+}
+
+.text-500 {
+  font-weight: 500;
+}
+
+.text-700 {
+  font-weight: 700;
+}
+
+.text-italic {
+  font-style: italic;
 }

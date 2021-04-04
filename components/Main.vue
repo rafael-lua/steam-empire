@@ -6,7 +6,7 @@
 
       <img src="~/assets/icons/gold-mine.png" 
         alt="Mine Icon" 
-        class="icon-menu clickable" 
+        class="icon-menu" 
         v-on:click="() => {changeMenu('mines')}"
       >
       

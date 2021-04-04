@@ -1,7 +1,9 @@
 <template>
   <div class="mines bg-light border-dark">
-    <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic clickable" v-on:click="collectCoal">
-    <p class="info">Coal: {{player.getCoal()}}</p>
+    <div class="flex-row flex-a-center">
+      <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic clickable" v-on:click="collectCoal">
+      <p class="info">COAL MINE (COMMON)</p>
+    </div>
   </div>
 </template>
 
@@ -28,14 +30,12 @@ export default {
 .mines {
   height: 100%;
   padding: 0.5em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .info {
   font-weight: 700;
   font-size: 1em;
+  margin: 0 .5em;
 }
 
 </style>
