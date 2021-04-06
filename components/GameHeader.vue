@@ -1,6 +1,6 @@
 <template>
   <header class="header bg-light flex-row flex-a-center flex-j-evenly">
-    <p>Gold: </p>
+    <p>Gold: <span class="info-value text-500">{{player.gold}}</span></p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/coal-wagon.png" alt="Coal Wagon" class="icon-basic-mini">
       Coal: <span class="info-value text-500">{{player.coal}} <span class="text-italic">({{coalPercentage()}})</span></span>
@@ -25,6 +25,7 @@ export default {
       player: Player,
     }
   },
+
   methods: {
     coalPercentage: function () {
       return ((this.player.coal / this.player.capacity)*100).toFixed(2) + "%";
@@ -38,14 +39,9 @@ export default {
 
 .header {
   width: 100%;
-  height: 3.5em;
   border-bottom: 2px solid rgb(var(--dark-shadow));
   grid-area: header;
-  padding: 0 1em;
-}
-
-.info-value {
-  margin-left: 0.25em;
+  padding: 0.5em 1em;
 }
 
 </style>

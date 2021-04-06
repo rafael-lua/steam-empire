@@ -20,6 +20,7 @@ export default {
   methods: {
     collectCoal: function() {
       this.player.increaseCoal(1);
+      if(this.player.coal >= 10 && this.player.stage < 1){ this.player.setStage(1); }
     },
   }
 }

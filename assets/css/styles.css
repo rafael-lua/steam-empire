@@ -44,6 +44,11 @@ img {
   max-width: 100%;
 }
 
+hr {
+  height: 0;
+  border: 1px solid rgb(var(--light-shadow));
+}
+
 
 /* General styles */
 
@@ -103,6 +108,11 @@ img {
 .border-dark {
   border: 3px solid rgb(var(--dark-shadow));
   border-radius: 2px;
+}
+
+.info-value {
+  margin-left: 0.25em;
+  margin-right: 0.35em;
 }
 
 .clickable:hover {

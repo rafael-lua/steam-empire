@@ -4,14 +4,23 @@ import utils from "./utils";
 
 // The player data variables object
 let properties = {
+
+  stage: 0,
+
   coal: 0,
   capacity: 10,
+  gold: 0,
+
+  day: 1,
+  month: 1,
+  year: 1,
+  season: "spring",
 }
 
 // The player methods list
 let methods = {
-  getCoal: function() {
-    return this.coal;
+  setStage: function(v) {
+    if(this.stage < v){ this.stage = v; }
   },
 
   increaseCoal: function(v) {
@@ -20,7 +29,7 @@ let methods = {
       this.coal = utils.clamp(this.coal, 0, this.capacity);
       console.log(this.coal );
     }
-  }
+  },
 }
 
 // Cosntruct the player object
