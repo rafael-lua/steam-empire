@@ -9,27 +9,40 @@
         class="icon-menu" 
         v-on:click="() => {changeMenu('mines')}"
       >
+
+      <img src="~/assets/icons/cash.png" 
+        alt="Market Icon" 
+        class="icon-menu" 
+        v-on:click="() => {changeMenu('market')}"
+        v-if="player.stage >= 1"
+      >
       
     </nav>
 
     <!-- Main items view -->
     <Mines v-if="menuFocus === 'mines'"/>
+    <Market v-if="menuFocus === 'market' && player.stage >= 1"/>
     
 
   </div>
 </template>
 
 <script>
+import Player from "../scripts/playerData";
+
 // All game components will be imported and managed in here
-import Mines from "./Menus/Mines";
+import Mines from "./menus/Mines";
+import Market from "./menus/Market";
 
 export default {
   name: "Main",
   components: {
-    Mines
+    Mines,
+    Market,
   },
   data() {
     return {
+      player: Player,
       menuFocus: "mines", // Define each view will be shown in the main area
     }
   },

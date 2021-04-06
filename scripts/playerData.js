@@ -5,6 +5,7 @@ import utils from "./utils";
 // The player data variables object
 let properties = {
 
+  amount: 1,
   stage: 0,
 
   coal: 0,

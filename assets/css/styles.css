@@ -45,6 +45,8 @@ img {
 }
 
 hr {
+  width: 95%;
+  margin: 0 auto;
   height: 0;
   border: 1px solid rgb(var(--light-shadow));
 }
