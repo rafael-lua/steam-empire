@@ -11,18 +11,16 @@
     </p>
     <div class="amount clickable" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
     <div class="popup" v-if="amountPopup">
-      <button type="button" alt="Close Popup" class="close icon-basic-mid clickable" v-on:click="togglePopup()">
-        <img src="~/assets/icons/cancel.png">
+      <button type="button" alt="Close Popup" class="confirm icon-basic-mid clickable" v-on:click="togglePopup()">
+        <img src="~/assets/icons/confirmed.png">
       </button>
-      <form @submit.prevent="method"> <!-- submit.pevent will prevent the default -->
-        <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">
-        <button type="submit" class="confirm icon-basic-mid clickable"><img src="~/assets/icons/confirmed.png"/></button>
-      </form>
+      <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">  
     </div>
   </header>
 </template>
 
 <script>
+import utils from "../scripts/utils";
 import Player from "../scripts/playerData";
 
 export default {
@@ -56,7 +54,7 @@ export default {
         }
     },
     formatedAmount: function() {
-      return this.player.amount >= 1000000 ? this.player.amount.toExponential(3) : this.player.amount;
+      return utils.format(this.player.amount);
     }
 }
 
@@ -80,7 +78,6 @@ export default {
   font-size: 0.9em;
 }
 
-.close,
 .confirm {
   border: none;
   margin: 0;
@@ -88,7 +85,6 @@ export default {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.close:active,
 .confirm:active {
   outline: none;
 }
@@ -106,16 +102,11 @@ export default {
   background-color: rgba(var(--light-shadow), 0.5);
 }
 
-.popup .close {
-  position: absolute;
-  bottom: -1.5em;
-  left: 10%;
-}
-
 .popup .confirm {
   position: absolute;
   bottom: -1.5em;
-  right: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .amount-value {
