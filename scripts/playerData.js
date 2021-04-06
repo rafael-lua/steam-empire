@@ -20,15 +20,24 @@ let properties = {
 
 // The player methods list
 let methods = {
+  // Change amount
+  setAmount: function(v) {
+    if(isNaN(v) === false && v > 0) {
+      this.amount = v;
+      console.log(this.amount);
+    }
+  },
+
+  // Change stage
   setStage: function(v) {
     if(this.stage < v){ this.stage = v; }
   },
 
+  // Coal methods
   increaseCoal: function(v) {
     if(this.coal < this.capacity) {
       this.coal += v;
       this.coal = utils.clamp(this.coal, 0, this.capacity);
-      console.log(this.coal );
     }
   },
 }

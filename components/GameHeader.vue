@@ -9,7 +9,16 @@
       <img src="~/assets/icons/cargo-crate.png" alt="Coal Wagon" class="icon-basic-mini">
       Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
-    <p>Other... </p>
+    <div class="amount clickable" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
+    <div class="popup" v-if="amountPopup">
+      <button type="button" alt="Close Popup" class="close icon-basic-mid clickable" v-on:click="togglePopup()">
+        <img src="~/assets/icons/cancel.png">
+      </button>
+      <form @submit.prevent="method"> <!-- submit.pevent will prevent the default -->
+        <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">
+        <button type="submit" class="confirm icon-basic-mid clickable"><img src="~/assets/icons/confirmed.png"/></button>
+      </form>
+    </div>
   </header>
 </template>
 
@@ -23,14 +32,33 @@ export default {
   data() {
     return {
       player: Player,
+      amountPopup: false,
     }
   },
 
   methods: {
     coalPercentage: function () {
       return ((this.player.coal / this.player.capacity)*100).toFixed(2) + "%";
+    },
+
+    togglePopup: function () {
+      this.amountPopup = !this.amountPopup;
+    },
+  },
+
+  computed: {
+    modelAmount: { // With get and set
+        get(){
+          return this.player.amount;
+        },
+        set(newVal){
+          this.player.setAmount(newVal);
+        }
+    },
+    formatedAmount: function() {
+      return this.player.amount >= 1000000 ? this.player.amount.toExponential(3) : this.player.amount;
     }
-  }
+}
 
 }
 </script>
@@ -41,7 +69,64 @@ export default {
   width: 100%;
   border-bottom: 2px solid rgb(var(--dark-shadow));
   grid-area: header;
-  padding: 0.5em 1em;
+  padding: 0.25em 1em;
+}
+
+.amount {
+  border: 2px solid black;
+  border-radius: 1em;
+  padding: 0.1em 0.5em;
+  background-color: gold;
+  font-size: 0.9em;
+}
+
+.close,
+.confirm {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.close:active,
+.confirm:active {
+  outline: none;
+}
+
+.popup {
+  padding: 1em;
+  width: 350px;
+  height: 150px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid rgba(var(--dark-shadow), 0.9);
+  border-radius: 1em;
+  background-color: rgba(var(--light-shadow), 0.5);
+}
+
+.popup .close {
+  position: absolute;
+  bottom: -1.5em;
+  left: 10%;
+}
+
+.popup .confirm {
+  position: absolute;
+  bottom: -1.5em;
+  right: 10%;
+}
+
+.amount-value {
+  width: 100%;
+  padding: 1em;
+  border: 2px solid rgba(var(--dark-shadow), 0.75);
+  border-radius: 1em;
+}
+
+.amount-value:focus {
+  outline: none;
 }
 
 </style>

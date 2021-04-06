@@ -1,6 +1,6 @@
 <template>
   <div class="side-left bg-light border-dark">
-    <p><span class="text-500">{{player.season.toUpperCase()}}</span></p>
+    <p><span class="text-500">{{player.season.toUpperCase()}}</span></p>      
     <p class="calendar">
       <span>Day:<span class="info-value text-500">{{player.day}}</span></span>
       <span>Month:<span class="info-value text-500">{{player.month}}</span></span>
