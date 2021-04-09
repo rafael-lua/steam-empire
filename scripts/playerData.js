@@ -4,6 +4,7 @@ import utils from "./utils";
 
 // The player data variables object
 let properties = {
+  debugValue: 0,
 
   amount: 1,
   stage: 0,

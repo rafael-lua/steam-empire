@@ -9,9 +9,10 @@
       <img src="~/assets/icons/cargo-crate.png" alt="Coal Wagon" class="icon-basic-mini">
       Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
-    <div class="amount clickable" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
+    <div class="amount clickable noselect" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
     <div class="popup" v-if="amountPopup">
-      <button type="button" alt="Close Popup" class="confirm icon-basic-mid clickable" v-on:click="togglePopup()">
+      <p class="popup-title">Type an amount value: </p>
+      <button type="button" alt="Close Popup" class="confirm icon-basic-mid clickable noselect" v-on:click="togglePopup()">
         <img src="~/assets/icons/confirmed.png">
       </button>
       <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">  
@@ -107,6 +108,12 @@ export default {
   bottom: -1.5em;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.popup-title {
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
 }
 
 .amount-value {

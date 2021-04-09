@@ -6,13 +6,13 @@
 
       <img src="~/assets/icons/gold-mine.png" 
         alt="Mine Icon" 
-        class="icon-menu" 
+        class="icon-menu noselect" 
         v-on:click="() => {changeMenu('mines')}"
       >
 
       <img src="~/assets/icons/cash.png" 
         alt="Market Icon" 
-        class="icon-menu" 
+        class="icon-menu noselect" 
         v-on:click="() => {changeMenu('market')}"
         v-if="player.stage >= 1"
       >

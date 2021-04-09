@@ -2,8 +2,8 @@
   <div class="market bg-light border-dark">
     <div class="market-list">
       <ul>
-        <li class="selected clickable" v-on:click="changeMarketFocus('nomads')">NOMADS</li>
-        <li class="clickable" v-on:click="changeMarketFocus('caravan')">CARAVAN</li>
+        <li class="clickable" v-bind:class="focusClass('nomads')" v-on:click="changeMarketFocus('nomads')">NOMADS</li>
+        <li class="clickable" v-bind:class="focusClass('caravan')" v-on:click="changeMarketFocus('caravan')">CARAVAN</li>
         <li>...</li>
       </ul>
     </div>
@@ -32,8 +32,11 @@ export default {
   methods: {
     changeMarketFocus: function(v) {
       this.marketFocus = v;
+    },
+    focusClass: function(v) {
+      return v === this.marketFocus ? {selected: true} : {};
     }
-  }
+  },
 }
 </script>
 
@@ -70,7 +73,6 @@ export default {
 }
 
 .market-content {
-  padding: 0.5em;
   width: 80%;
 }
 

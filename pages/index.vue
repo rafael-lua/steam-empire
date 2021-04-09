@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Player from "../scripts/playerData";
 import Main from "../components/Main";
 import GameHeader from "../components/GameHeader";
 import SideLeft from "../components/SideLeft";
@@ -20,7 +21,7 @@ let gameTimer = null;
 
 // Main game loop. Its called every 100ms.
 const gameLoop = () => {
-  
+  Player.debugValue += 1;
 }
 
 export default {

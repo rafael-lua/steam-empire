@@ -48,10 +48,6 @@ h1, h2, h3 {
   margin: 10px 0; /* Top and bottom margin */
 }
 
-p {
-  margin: 0 0;
-}
-
 img {
   max-width: 100%;
 }
@@ -61,6 +57,15 @@ hr {
   margin: 0 auto;
   height: 0;
   border: 1px solid rgb(var(--light-shadow));
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+     -khtml-user-select: none;
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
 }
 
 
@@ -182,6 +187,8 @@ hr {
   align-items: flex-end;
 }
 
+/* Text styles */
+
 .text-300 {
   font-weight: 300;
 }
@@ -200,4 +207,34 @@ hr {
 
 .text-italic {
   font-style: italic;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+
+/* Text sizes */
+.text-s1 {
+  font-size: 0.9em;
+}
+
+.text-b1 {
+  font-size: 1.1em;
+}
+
+.text-b2 {
+  font-size: 1.25em;
+}
+
+.text-b3 {
+  font-size: 1.5em;
+}
+
+.text-b4 {
+  font-size: 2em;
 }
