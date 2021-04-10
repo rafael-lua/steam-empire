@@ -16,12 +16,19 @@ import GameHeader from "../components/GameHeader";
 import SideLeft from "../components/SideLeft";
 import SideRight from "../components/SideRight";
 
-// Timer interval variable
+// Timer interval variables
 let gameTimer = null;
+let calendarClock = 0;
 
 // Main game loop. Its called every 100ms.
 const gameLoop = () => {
-  Player.debugValue += 1;
+  // Calculates the time
+  calendarClock += 1;
+  Player.updateTickRender();
+  if(calendarClock >= 100) {
+    calendarClock = 0;
+    Player.updateCalendar();
+  }
 }
 
 export default {

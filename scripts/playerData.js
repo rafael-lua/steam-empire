@@ -17,6 +17,7 @@ let properties = {
   month: 1,
   year: 1,
   season: "spring",
+  tickRender: 0,
 
   nomads: {
     sellCoal: {
@@ -39,6 +40,43 @@ let methods = {
   // Change stage
   setStage: function(v) {
     if(this.stage < v){ this.stage = v; }
+  },
+
+  // Calendar update
+  updateCalendar: function() {
+    this.day += 1;
+    if(this.day > 30) {
+      this.day = 1;
+      this.month += 1;
+
+      switch(this.month) {
+        case 1:
+          this.season = "spring";
+          break;
+        case 4:
+          this.season = "summer";
+          break;
+        case 7:
+          this.season = "autumn";
+          break;
+        case 10:
+          this.season = "winter";
+          break;
+      }
+
+      if(this.month > 12) {
+        this.month = 1;
+        this.year += 1;
+      }
+
+    }
+  },
+
+  updateTickRender: function() {
+    this.tickRender += 1;
+    if(this.tickRender >= 100) {
+      this.tickRender = 0;
+    }
   },
 
   // Coal methods
