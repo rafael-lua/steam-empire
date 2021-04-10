@@ -9,14 +9,10 @@
       <img src="~/assets/icons/cargo-crate.png" alt="Coal Wagon" class="icon-basic-mini">
       Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
-    <div class="amount clickable noselect" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
-    <div class="popup" v-if="amountPopup">
-      <p class="popup-title">Type an amount value: </p>
-      <button type="button" alt="Close Popup" class="confirm icon-basic-mid clickable noselect" v-on:click="togglePopup()">
-        <img src="~/assets/icons/confirmed.png">
-      </button>
-      <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">  
-    </div>
+    <form class="amount-form" v-on:submit.prevent="">
+      <div class="amount noselect" v-on:click="togglePopup()">Amount: {{formatedAmount}}</div>
+      <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">
+    </form>
   </header>
 </template>
 
@@ -72,8 +68,7 @@ export default {
 }
 
 .amount {
-  border: 2px solid black;
-  border-radius: 1em;
+  border-radius: 0.5em;
   padding: 0.1em 0.5em;
   background-color: gold;
   font-size: 0.9em;
@@ -90,35 +85,14 @@ export default {
   outline: none;
 }
 
-.popup {
-  padding: 1em;
-  width: 350px;
-  height: 150px;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 5px solid rgba(var(--dark-shadow), 0.9);
-  border-radius: 1em;
-  background-color: rgba(var(--light-shadow), 0.75);
-}
-
-.popup .confirm {
-  position: absolute;
-  bottom: -1.5em;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.popup-title {
-  font-weight: 700;
-  font-size: 1.1em;
-  margin-bottom: 0.5em;
+.amount-form {
+  display: flex;
 }
 
 .amount-value {
-  width: 100%;
-  padding: 1em;
+  margin-left: 0.5em;
+  width: 10em;
+  padding: 0 0.5em;
   border: 2px solid rgba(var(--dark-shadow), 0.75);
   border-radius: 1em;
 }
