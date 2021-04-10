@@ -1,5 +1,6 @@
 <template>
   <div class="nomads noselect">
+    <!-- Nav section -->
     <nav class="nomads-nav">
       <p 
         v-bind:class="navFocus('sell')" 
@@ -17,15 +18,15 @@
       </p>
     </nav>
     <hr>
+
+    <!-- Sell section -->
+
     <div class="shop-wrapper" v-if="shopFocus === 'sell'">
-      <div class="shop-item clickable">
-        <p class="text-center text-500">COAL</p>
-        <hr>
-        <p class="text-center text-500">MAX (0/10)</p>
-        <hr>
-        <p class="text-center text-italic">1.123e306</p>
-      </div>
+       <SellCoal />
     </div>
+
+    <!-- Buy section -->
+
     <div class="shop-wrapper" v-if="shopFocus === 'buy'">
       <div class="shop-item clickable">
         <p class="text-center text-500">STONE EQUIPMENT</p>
@@ -34,14 +35,12 @@
       </div>
       <div class="shop-item clickable">
         <p class="text-center text-500">CRAFTING TOOLS</p>
-                <hr>
-
+        <hr>
         <p class="text-center text-italic">1.123e306</p>
       </div>
       <div class="shop-item clickable">
         <p class="text-center text-500">MAP #1</p>
-                <hr>
-
+        <hr>
         <p class="text-center text-italic">1.123e306</p>
       </div>
     </div>
@@ -49,8 +48,13 @@
 </template>
 
 <script>
+import SellCoal from "./SellCoal";
+
 export default {
   name: "Nomads",
+  components: {
+    SellCoal
+  },
   data() {
     return {
       shopFocus: "sell"
@@ -88,9 +92,9 @@ export default {
 }
 
 .nomads-nav-selected {
-  border: 3px solid rgba(var(--dark-shadow), 0.35);
+  border: 3px solid rgba(var(--golden-tone), 1);
   border-radius: 0.5em;
-  background-color: rgba(var(--light-shadow), 0.15);
+  background-color: rgba(var(--golden-tone), 0.25);
 }
 
 .nomads-nav-notselected {
@@ -106,7 +110,11 @@ export default {
   flex-wrap: wrap;
 }
 
-.shop-item {
+/* 
+  v-deep allows to create a deep selector that affects children even when scoped.
+  So all items can share the same style with the wrapper class.
+*/
+::v-deep .shop-item {
   width: 125px;
   margin: 0.5em;
   padding: 0.25em;
@@ -116,14 +124,15 @@ export default {
   align-items: center;
   border: 2px solid rgb(var(--dark-shadow));
   border-radius: 1em;
+  background-color: rgba(255, 255, 255, 0.35);
 }
 
-.shop-item p {
+::v-deep .shop-item p {
   font-size: 0.9em;
   margin: 0.1em 0;
 }
 
-.shop-item:hover {
+::v-deep .shop-item:hover {
   background-color: rgba(110, 223, 100, 0.219);
 }
 

@@ -4,6 +4,8 @@
   --bg-color: 234, 224, 194;
   --light-shadow: 176, 164, 144;
   --dark-shadow: 131, 125, 109;
+  --golden-tone: 230, 169, 56;
+  --red-tone: 228, 56, 56;
 }
 
 * {
@@ -188,6 +190,10 @@ hr {
 }
 
 /* Text styles */
+
+.text-danger {
+  color: rgb(var(--red-tone));
+}
 
 .text-300 {
   font-weight: 300;

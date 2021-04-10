@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Player from "../../scripts/playerData";
-import Nomads from "../elements/Nomads";
+import Player from "~/scripts/playerData";
+import Nomads from "../elements/nomads/Nomads";
 
 export default {
   name: "Market",

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-view">
+  <div class="main-view noselect">
 
     <!-- Sub menus navigation -->
     <nav class="submenus-nav bg-light border-dark">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Player from "../scripts/playerData";
+import Player from "~/scripts/playerData";
 
 // All game components will be imported and managed in here
 import Mines from "./menus/Mines";

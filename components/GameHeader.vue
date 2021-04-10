@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import utils from "../scripts/utils";
-import Player from "../scripts/playerData";
+import utils from "~/scripts/utils";
+import Player from "~/scripts/playerData";
 
 export default {
 
@@ -100,7 +100,7 @@ export default {
   transform: translate(-50%, -50%);
   border: 5px solid rgba(var(--dark-shadow), 0.9);
   border-radius: 1em;
-  background-color: rgba(var(--light-shadow), 0.5);
+  background-color: rgba(var(--light-shadow), 0.75);
 }
 
 .popup .confirm {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Player from "../scripts/playerData";
+import Player from "~/scripts/playerData";
 import Main from "../components/Main";
 import GameHeader from "../components/GameHeader";
 import SideLeft from "../components/SideLeft";
