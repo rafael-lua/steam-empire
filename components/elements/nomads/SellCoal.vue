@@ -24,7 +24,8 @@ export default {
       let sellCoal = this.player.nomads.sellCoal;
       let available = sellCoal.max - sellCoal.sold;
       if(available > 0) {
-        let amount = utils.clamp(this.player.amount, 1, available);
+        let limit = (available <= this.player.coal) ? available : this.player.coal;
+        let amount = utils.clamp(this.player.amount, 1, limit);
         if(this.player.coal >= amount) {
           sellCoal.sold += amount;
           this.player.decreaseCoal(amount);
@@ -40,7 +41,9 @@ export default {
     },
     calculatedValue: function() {
       let sellCoal = this.player.nomads.sellCoal;
-      let amount = utils.clamp(this.player.amount, 1, sellCoal.max);
+      let available = sellCoal.max - sellCoal.sold;
+      let limit = (available <= this.player.coal) ? available : this.player.coal;
+      let amount = utils.clamp(this.player.amount, 1, limit);
       return sellCoal.sold !== sellCoal.max ? utils.format(amount * sellCoal.value) : 0;
     },
   }

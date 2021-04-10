@@ -33,7 +33,6 @@ let methods = {
   setAmount: function(v) {
     if(isNaN(v) === false && v > 0) {
       this.amount = v;
-      console.log(this.amount);
     }
   },
 
