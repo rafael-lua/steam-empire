@@ -7,11 +7,6 @@ let properties = {
   debugValue: 0,
 
   amount: 1,
-  stages: {
-    market: false,
-    craft: false,
-    alchemy: false,
-  },
 
   coal: 0,
   capacity: 10,
@@ -22,6 +17,16 @@ let properties = {
   year: 1,
   season: "spring",
   tickRender: 0,
+
+  inventory: {
+
+  },
+
+  stages: {
+    market: false,
+    craft: false,
+    alchemy: false,
+  },
 
   nomads: {
     sellCoal: {

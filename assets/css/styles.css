@@ -84,13 +84,17 @@ hr {
 .icon-menu {
   display: inline-block;
   width: 2.5em;
-  opacity: 0.75;
+  opacity: 0.5;
+}
+
+.icon-menu.is-focused {
+  opacity: 1;
 }
 
 .icon-menu:hover {
   cursor: pointer;
   transform: scale(1.05);
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .icon-menu:active {
