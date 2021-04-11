@@ -7,7 +7,9 @@ let properties = {
   debugValue: 0,
 
   amount: 1,
-  stage: 0,
+  stages: {
+    market: false
+  },
 
   coal: 0,
   capacity: 10,
@@ -39,7 +41,7 @@ let methods = {
 
   // Change stage
   setStage: function(v) {
-    if(this.stage < v){ this.stage = v; }
+    this.stages[v] = true;
   },
 
   // Calendar update

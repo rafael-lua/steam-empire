@@ -14,14 +14,14 @@
         alt="Market Icon" 
         class="icon-menu noselect" 
         v-on:click="() => {changeMenu('market')}"
-        v-if="player.stage >= 1"
+        v-if="player.stages.market === true"
       >
       
     </nav>
 
     <!-- Main items view -->
     <Mines v-if="menuFocus === 'mines'"/>
-    <Market v-if="menuFocus === 'market' && player.stage >= 1"/>
+    <Market v-if="menuFocus === 'market' && player.stages.market === true"/>
     
 
   </div>
@@ -48,7 +48,7 @@ export default {
       menuFocus: "mines", // Define each view will be shown in the main area
     }
   },
-  
+
   methods: {
     changeMenu: function(m) {
       this.menuFocus = m;
