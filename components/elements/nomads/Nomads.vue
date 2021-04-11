@@ -60,7 +60,8 @@ export default {
 
   data() {
     return {
-      shopFocus: "sell"
+      shopFocus: "sell",
+      hovered: false
     }
   },
 

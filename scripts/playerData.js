@@ -8,6 +8,8 @@ let properties = {
 
   amount: 1,
 
+  population: 1,
+
   coal: 0,
   capacity: 10,
   gold: 0,

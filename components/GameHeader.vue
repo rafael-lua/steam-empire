@@ -1,15 +1,19 @@
 <template>
   <header class="header bg-light flex-row flex-a-center flex-j-evenly">
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/two-coins.png" alt="Coal Wagon" class="icon-basic-mini">
+      <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-mini">
+      Population: <span class="info-value text-500">{{player.population}}</span>
+    </p>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/two-coins.png" alt="Gold Icon" class="icon-basic-mini">
       Gold: <span class="info-value text-500">{{player.gold}}</span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/coal-wagon.png" alt="Coal Wagon" class="icon-basic-mini">
+      <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-mini">
       Coal: <span class="info-value text-500">{{player.coal}} <span class="text-italic">({{coalPercentage()}})</span></span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/cargo-crate.png" alt="Coal Wagon" class="icon-basic-mini">
+      <img src="~/assets/icons/cargo-crate.png" alt="Capacity Icon" class="icon-basic-mini">
       Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
     <form class="amount-form" v-on:submit.prevent="">
