@@ -4,6 +4,12 @@
     <!-- Sub menus navigation -->
     <nav class="submenus-nav bg-light border-dark">
 
+      <img src="~/assets/icons/mustache.png" 
+        alt="Population Icon" 
+        class="icon-menu noselect" 
+        v-on:click="() => {changeMenu('population')}"
+      >
+
       <img src="~/assets/icons/gold-mine.png" 
         alt="Mine Icon" 
         class="icon-menu noselect" 
@@ -15,6 +21,20 @@
         class="icon-menu noselect" 
         v-on:click="() => {changeMenu('market')}"
         v-if="player.stages.market === true"
+      >
+
+      <img src="~/assets/icons/hammer-nails.png" 
+        alt="Craft Icon" 
+        class="icon-menu noselect" 
+        v-on:click="() => {changeMenu('craft')}"
+        v-if="player.stages.craft === true"
+      >
+
+      <img src="~/assets/icons/pocket-watch.png" 
+        alt="Alchemy Icon" 
+        class="icon-menu noselect" 
+        v-on:click="() => {changeMenu('alchemy')}"
+        v-if="player.stages.alchemy === true"
       >
       
     </nav>

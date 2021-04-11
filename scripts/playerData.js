@@ -8,7 +8,9 @@ let properties = {
 
   amount: 1,
   stages: {
-    market: false
+    market: false,
+    craft: false,
+    alchemy: false,
   },
 
   coal: 0,
