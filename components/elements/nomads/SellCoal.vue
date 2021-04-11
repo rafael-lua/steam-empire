@@ -6,7 +6,10 @@
       <hr>
       <p class="text-center text-500">MAX ({{maxSold}})</p>
       <hr>
-      <p class="text-center text-italic">${{calculatedValue}}</p>
+      <p class="text-center text-italic flex-row flex-a-center">
+        <img src="~/assets/icons/two-coins.png" alt="Coal Wagon" class="icon-basic-mini">
+        {{calculatedValue}}
+      </p>
     </div>
   </div>
 </template>

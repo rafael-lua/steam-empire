@@ -112,6 +112,7 @@ export default {
   padding: 0.5em 0;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
 }
 
