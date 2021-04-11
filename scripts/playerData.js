@@ -49,6 +49,11 @@ let methods = {
       this.day = 1;
       this.month += 1;
 
+      if(this.month > 12) {
+        this.month = 1;
+        this.year += 1;
+      }
+
       switch(this.month) {
         case 1:
           this.season = "spring";
@@ -63,12 +68,6 @@ let methods = {
           this.season = "winter";
           break;
       }
-
-      if(this.month > 12) {
-        this.month = 1;
-        this.year += 1;
-      }
-
     }
   },
 

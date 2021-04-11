@@ -17,12 +17,13 @@
         BUY FROM
       </p>
     </nav>
+
     <hr>
 
     <!-- Sell section -->
 
     <div class="shop-wrapper" v-if="shopFocus === 'sell'">
-       <SellCoal />
+      <SellCoal />
     </div>
 
     <!-- Buy section -->
@@ -52,14 +53,17 @@ import SellCoal from "./SellCoal";
 
 export default {
   name: "Nomads",
+
   components: {
     SellCoal
   },
+
   data() {
     return {
       shopFocus: "sell"
     }
   },
+
   methods: {
     toggleShopFocus: function(f) {
       this.shopFocus = f;
@@ -103,6 +107,7 @@ export default {
 }
 
 .shop-wrapper {
+  height: 70vh;
   overflow-y: auto;
   padding: 0.5em 0;
   display: flex;

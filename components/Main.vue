@@ -36,16 +36,19 @@ import Market from "./menus/Market";
 
 export default {
   name: "Main",
+
   components: {
     Mines,
     Market,
   },
+
   data() {
     return {
       player: Player,
       menuFocus: "mines", // Define each view will be shown in the main area
     }
   },
+  
   methods: {
     changeMenu: function(m) {
       this.menuFocus = m;

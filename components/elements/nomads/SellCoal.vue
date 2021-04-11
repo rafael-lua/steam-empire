@@ -1,24 +1,35 @@
 <template>
-  <div class="shop-item clickable" v-on:click="sell">
-    <p class="text-center text-500">COAL</p>
-    <hr>
-    <p class="text-center text-500">MAX ({{maxSold}})</p>
-    <hr>
-    <p class="text-center text-italic">${{calculatedValue}}</p>
+  <div>
+    <Popup v-if="hovered" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days." /> 
+    <div class="shop-item clickable" v-on:click="sell" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
+      <p class="text-center text-500">COAL</p>
+      <hr>
+      <p class="text-center text-500">MAX ({{maxSold}})</p>
+      <hr>
+      <p class="text-center text-italic">${{calculatedValue}}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
+import Popup from "../../Popup";
 
 export default {
   name: "SellCoal",
+
+  components: {
+    Popup
+  },
+
   data() {
     return {
-      player: Player
+      player: Player,
+      hovered: false
     }
   },
+
   methods: {
     sell: function() {
       let sellCoal = this.player.nomads.sellCoal;
@@ -32,8 +43,9 @@ export default {
           this.player.increaseGold(amount * sellCoal.value);
         }
       }
-    }
+    },
   },
+
   computed: {
     maxSold: function() {
       let sellCoal = this.player.nomads.sellCoal;

@@ -6,6 +6,8 @@
   --dark-shadow: 131, 125, 109;
   --golden-tone: 230, 169, 56;
   --red-tone: 228, 56, 56;
+  --pink-tone-light: 239, 179, 199;
+  --pink-tone-dark: 216, 75, 102;
 }
 
 * {
@@ -126,7 +128,6 @@ hr {
   gap: 0.5em;
 }
 
-
 /* Utilities */
 
 .bg-light {
@@ -154,6 +155,8 @@ hr {
   transform: scale(1.1);
   opacity: 1;
 }
+
+/* Flex classes */
 
 .flex-row {
   display: flex;
@@ -188,6 +191,7 @@ hr {
 .flex-a-right {
   align-items: flex-end;
 }
+
 
 /* Text styles */
 

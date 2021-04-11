@@ -20,15 +20,18 @@ import Nomads from "../elements/nomads/Nomads";
 
 export default {
   name: "Market",
+
   data() {
     return {
       player: Player,
       marketFocus: "nomads",
     }
   },
+
   components: {
     Nomads
   },
+  
   methods: {
     changeMarketFocus: function(v) {
       this.marketFocus = v;
