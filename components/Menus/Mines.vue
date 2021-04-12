@@ -2,7 +2,7 @@
   <div class="mines bg-light border-dark">
     <div class="flex-row flex-a-center">
       <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic clickable" v-on:click="collectCoal">
-      <p class="info">COAL MINE (COMMON)</p>
+      <p class="info text-500">COAL MINE lv <span class="text-500">(YIELDS COMMON COAL)</span> hardness 1</p>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     collectCoal: function() {
-      this.player.increaseCoal(1);
+      this.player.increaseCoal(this.player.competency);
       if(this.player.coal >= 10 && this.player.stages.market === false){ this.player.setStage("market"); }
     },
   }
@@ -34,7 +34,6 @@ export default {
 }
 
 .info {
-  font-weight: 700;
   font-size: 1em;
   margin: 0 .5em;
 }

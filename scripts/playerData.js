@@ -10,6 +10,8 @@ let properties = {
 
   population: 1,
 
+  competency: 1,
+
   coal: 0,
   capacity: 10,
   gold: 0,
@@ -21,7 +23,9 @@ let properties = {
   tickRender: 0,
 
   inventory: {
-
+    stoneEquiment: false,
+    craftingTools: false,
+    map_1: false
   },
 
   stages: {
@@ -112,6 +116,16 @@ let methods = {
     if((this.gold - v) >= 0) {
       this.gold -= v;
     }
+  },
+
+  // Competency. Everytime something that affects competency is acquired, call the update method.
+  // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
+  updateCompetency: function() {
+    let comp = 1;
+
+    if(this.inventory.stoneEquiment === true) { comp += 1; }
+
+    this.competency = comp;
   },
 }
 

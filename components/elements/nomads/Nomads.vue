@@ -29,37 +29,27 @@
     <!-- Buy section -->
 
     <div class="shop-wrapper" v-if="shopFocus === 'buy'">
-      <div class="shop-item clickable">
-        <p class="text-center text-500">STONE EQUIPMENT</p>
-        <hr>
-        <p class="text-center text-italic">1.123e306</p>
-      </div>
-      <div class="shop-item clickable">
-        <p class="text-center text-500">CRAFTING TOOLS</p>
-        <hr>
-        <p class="text-center text-italic">1.123e306</p>
-      </div>
-      <div class="shop-item clickable">
-        <p class="text-center text-500">MAP #1</p>
-        <hr>
-        <p class="text-center text-italic">1.123e306</p>
-      </div>
+      <StoneEquipment v-if="!player.inventory.stoneEquiment" />
     </div>
   </div>
 </template>
 
 <script>
+import Player from "~/scripts/playerData";
 import SellCoal from "./SellCoal";
+import StoneEquipment from "./StoneEquipment";
 
 export default {
   name: "Nomads",
 
   components: {
-    SellCoal
+    SellCoal,
+    StoneEquipment
   },
 
   data() {
     return {
+      player: Player,
       shopFocus: "sell",
       hovered: false
     }
@@ -113,7 +103,7 @@ export default {
   padding: 0.5em 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
@@ -122,7 +112,7 @@ export default {
   So all items can share the same style with the wrapper class.
 */
 ::v-deep .shop-item {
-  width: 125px;
+  min-width: 125px;
   margin: 0.5em;
   padding: 0.25em;
   display: flex;

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Popup v-if="hovered" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days." /> 
+    <Popup v-if="hovered" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days" /> 
     <div class="shop-item clickable" v-on:click="sell" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
       <p class="text-center text-500">COAL</p>
       <hr>
       <p class="text-center text-500">MAX ({{maxSold}})</p>
       <hr>
       <p class="text-center text-italic flex-row flex-a-center">
-        <img src="~/assets/icons/two-coins.png" alt="Coal Wagon" class="icon-basic-mini">
+        <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
         {{calculatedValue}}
       </p>
     </div>
