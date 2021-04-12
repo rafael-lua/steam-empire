@@ -30,6 +30,8 @@
 
     <div class="shop-wrapper" v-if="shopFocus === 'buy'">
       <StoneEquipment v-if="!player.inventory.stoneEquiment" />
+      <CraftingTools v-if="!player.inventory.craftingTools" />
+      <Map1 v-if="!player.inventory.map_1" />
     </div>
   </div>
 </template>
@@ -38,13 +40,17 @@
 import Player from "~/scripts/playerData";
 import SellCoal from "./SellCoal";
 import StoneEquipment from "./StoneEquipment";
+import CraftingTools from "./CraftingTools";
+import Map1 from "./Map1";
 
 export default {
   name: "Nomads",
 
   components: {
     SellCoal,
-    StoneEquipment
+    StoneEquipment,
+    CraftingTools,
+    Map1,
   },
 
   data() {
@@ -103,7 +109,7 @@ export default {
   padding: 0.5em 0;
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   flex-wrap: wrap;
 }
 

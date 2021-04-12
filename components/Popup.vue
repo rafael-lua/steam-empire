@@ -20,7 +20,7 @@ export default {
 
 .content {
   margin: 0 auto;
-  width: 250px;
+  width: 350px;
   overflow-wrap: break-word;
   font-weight: 500;
 }
