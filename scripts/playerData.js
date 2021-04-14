@@ -32,6 +32,7 @@ let properties = {
     market: false,
     craft: false,
     alchemy: false,
+    savage: false,
   },
 
   nomads: {

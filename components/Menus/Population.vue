@@ -8,7 +8,7 @@
       <p class="text-center text-500 text-b2">CITIZENS</p>
     </div>
 
-    <div v-if="player.population === 1">
+    <div v-if="player.inventory.map_1 === false">
       <p class="text-center text-500 initial-text">
         The alchemist observes a flat land ahead.<br>
         It seems empty and large.<br>
@@ -17,9 +17,13 @@
       </p>
     </div>
 
-    <div v-else>
-      ...
+    <div v-else-if="player.inventory.map_1 === true && player.stages.savage === true">
+      <p class="text-center text-500 initial-text">
+        The alchemist learns about the savages in the surroundings.<br>
+        They accept to work for gold.
+      </p>
     </div>
+    
   </div>
 </template>
 

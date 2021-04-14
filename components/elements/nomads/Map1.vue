@@ -27,13 +27,17 @@ export default {
     return {
       player: Player,
       hovered: false,
-      price: 10
+      price: 100
     }
   },
 
   methods: {
     buy: function() {
-    
+      if((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
+        this.player.gold -= this.price;
+        this.player.inventory.map_1 = true;
+        this.player.stages.savage = true;
+      }
     }
   },
 }

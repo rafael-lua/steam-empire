@@ -27,13 +27,17 @@ export default {
     return {
       player: Player,
       hovered: false,
-      price: 10
+      price: 50
     }
   },
 
   methods: {
     buy: function() {
-    
+      if((this.player.inventory.craftingTools !== true) && (this.player.gold >= this.price)) {
+        this.player.gold -= this.price;
+        this.player.inventory.craftingTools = true;
+        this.player.stages.craft = true;
+      }
     }
   },
 }
