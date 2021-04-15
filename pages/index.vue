@@ -19,13 +19,23 @@ import SideRight from "../components/SideRight";
 // Timer interval variables
 let gameTimer = null;
 let calendarClock = 0;
+let dayTimer = 0;
 
 // Main game loop. Its called every 100ms.
 const gameLoop = () => {
+
+  // Per second update
+  dayTimer += 1;
+  if(dayTimer >= 10) { // Updates every second, or 10x per day.
+    Player.updateCommonMine();
+
+    dayTimer = 0;
+  }
+
   // Calculates the time
   calendarClock += 1;
   Player.updateTickRender();
-  if(calendarClock >= 100) {
+  if(calendarClock >= 100) { // Compelted day update
     calendarClock = 0;
     Player.updateCalendar();
   }

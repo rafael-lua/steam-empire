@@ -41,6 +41,13 @@ let properties = {
       max: 100,
       value: 1
     }
+  },
+
+  mines: {
+    common: {
+      workers: 0,
+      hardness: 1
+    }
   }
 }
 
@@ -119,7 +126,7 @@ let methods = {
     }
   },
 
-  // Competency. Everytime something that affects competency is acquired, call the update method.
+  // Competency update. Everytime something that affects competency is acquired, call the update method.
   // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
   updateCompetency: function() {
     let comp = 1;
@@ -127,6 +134,12 @@ let methods = {
     if(this.inventory.stoneEquiment === true) { comp += 1; }
 
     this.competency = comp;
+  },
+
+  // Common mine update
+  updateCommonMine: function() {
+    this.increaseCoal((this.player.competency * this.mines.common.workers) / player.mines.common.hardness);
+    if(this.coal >= 10 && this.stages.market === false){ this.setStage("market"); }
   },
 }
 
