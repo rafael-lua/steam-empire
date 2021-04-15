@@ -1,28 +1,27 @@
 <template>
   <div class="side-left bg-light border-dark">
-    <div class="side-left-top">
-      <p class="text-500">{{player.season.toUpperCase()}}</p>
-      <div class="tick-render">
-        <img 
-          v-for="i in tickAmount" 
-          v-bind:key="i" 
-          src="~/assets/icons/pokecog.png" 
-          alt="Gear Tick" 
-          class="gear-tick-icon"
-          v-bind:class="rotateClass(i)"
-        />
-      </div>
-    </div>
-    <p class="calendar">
-      <span>Day:<span class="info-value text-500">{{player.day}}</span></span>
-      <span>Month:<span class="info-value text-500">{{player.month}}</span></span>
-      <span>Year:<span class="info-value text-500">{{player.year}}</span></span>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-mini">
+      Population: <span class="info-value text-500">{{player.population}}</span>
+    </p>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/two-coins.png" alt="Gold Icon" class="icon-basic-mini">
+      Gold: <span class="info-value text-500">{{player.gold}}</span>
+    </p>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-mini">
+      Coal: <span class="info-value text-500">{{player.coal}} <span class="text-italic">({{coalPercentage()}})</span></span>
+    </p>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/cargo-crate.png" alt="Capacity Icon" class="icon-basic-mini">
+      Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
     <hr>
   </div>
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "../scripts/playerData";
 
 export default {
@@ -35,17 +34,13 @@ export default {
   },
 
   methods: {
-    rotateClass: function(i) {
-      let classNames = {};
-      classNames["rotate-" + i] = true;
-      return classNames;
-    }
+    coalPercentage: function () {
+      return ((this.player.coal / this.player.capacity)*100).toFixed(2) + "%";
+    },
   },
 
   computed: {
-    tickAmount: function() {
-      return Math.floor(this.player.tickRender / 10);
-    }
+    
   }
 
 }
@@ -60,68 +55,5 @@ export default {
   flex-direction: column;
 }
 
-.calendar {
-  font-size: 0.85em;
-  display: flex;
-  justify-content: space-between;
-}
-
-.side-left-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.tick-render {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.gear-tick-icon {
-  display: inline-block;
-  width: 1em;
-  opacity: 0.9;
-}
-
-.rotate-1 {
-  transform: rotate(0deg);
-}
-
-.rotate-2 {
-  transform: rotate(18deg);
-}
-
-.rotate-3 {
-  transform: rotate(36deg);
-}
-
-.rotate-4 {
-  transform: rotate(54deg);
-}
-
-.rotate-5 {
-  transform: rotate(72deg);
-}
-
-.rotate-6 {
-  transform: rotate(90deg);
-}
-
-.rotate-7 {
-  transform: rotate(108deg);
-}
-
-.rotate-8 {
-  transform: rotate(126deg);
-}
-
-.rotate-9 {
-  transform: rotate(144deg);
-}
-
-.rotate-10 {
-  transform: rotate(162deg);
-}
 
 </style>

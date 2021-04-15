@@ -175,6 +175,10 @@ hr {
 
 /* Utilities */
 
+.hover-highlight {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .bg-light {
   background-color: rgb(var(--bg-color));
 }

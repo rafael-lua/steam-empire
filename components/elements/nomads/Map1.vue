@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popup v-if="hovered" text="Acquire knowledge of the surroundings, revealing all types of useful information and possibilities" /> 
+    <Popup v-if="hovered" pos="top" text="Acquire knowledge of the surroundings, revealing all types of useful information and possibilities" /> 
     <div class="shop-item clickable" v-on:click="buy" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
       <p class="text-center text-500">MAP #1</p>
       <hr>

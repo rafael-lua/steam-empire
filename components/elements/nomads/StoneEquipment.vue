@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popup v-if="hovered" text="Increases overall competency of collecting coal by 1" /> 
+    <Popup v-if="hovered" pos="top" text="Increases overall competency of collecting coal by 1" /> 
     <div class="shop-item clickable" v-on:click="buy" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
       <p class="text-center text-500">STONE<br>EQUIPMENT</p>
       <hr>

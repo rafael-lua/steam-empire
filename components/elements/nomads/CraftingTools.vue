@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popup v-if="hovered" text="Open the crafting capability, allowing the construction of buildings and instruments" /> 
+    <Popup v-if="hovered" pos="top" text="Open the crafting capability, allowing the construction of buildings and instruments" /> 
     <div class="shop-item clickable" v-on:click="buy" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
       <p class="text-center text-500">CRAFTING<br>TOOLS</p>
       <hr>

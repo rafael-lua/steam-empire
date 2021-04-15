@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popup v-if="hovered" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days" /> 
+    <Popup v-if="hovered" pos="top" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days" /> 
     <div class="shop-item clickable" v-on:click="sell" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
       <p class="text-center text-500">COAL</p>
       <hr>
