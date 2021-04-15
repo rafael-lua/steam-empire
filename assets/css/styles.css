@@ -63,6 +63,18 @@ hr {
   border: 1px solid rgb(var(--light-shadow));
 }
 
+.hr-mg {
+  margin: 0.35em auto;
+}
+
+.hr-left {
+  border-left: 2px solid rgb(var(--light-shadow));
+}
+
+.hr-right {
+  border-right: 2px solid rgb(var(--light-shadow));
+}
+
 .noselect {
   -webkit-touch-callout: none;
     -webkit-user-select: none; 
@@ -231,6 +243,10 @@ hr {
   text-align: right;
 }
 
+.line-s {
+  line-height: 1.4;
+}
+
 /* Text sizes */
 .text-s1 {
   font-size: 0.9em;
@@ -250,4 +266,61 @@ hr {
 
 .text-b4 {
   font-size: 2em;
+}
+
+/* Margin and paddings */
+.pd-1 {
+  padding: 1em;
+}
+
+.mg-1 {
+  margin: 1em;
+}
+
+.pd-1x {
+  padding: 0 1em;
+}
+
+.mg-1x {
+  margin: 0 1em;
+}
+
+.pd-1y {
+  padding: 1em 0;
+}
+
+.mg-1y {
+  margin: 1em 0;
+}
+
+.pd-top-1 {
+  padding-top: 1em;
+}
+
+.mg-top-1 {
+  margin-top: 1em;
+}
+
+.pd-bottom-1 {
+  padding-bottom: 1em;
+}
+
+.mg-bottom-1 {
+  margin-bottom: 1em;
+}
+
+.pd-right-1 {
+  padding-right: 1em;
+}
+
+.mg-right-1 {
+  margin-right: 1em;
+}
+
+.pd-left-1 {
+  padding-left: 1em;
+}
+
+.mg-left-1 {
+  margin-left: 1em;
 }

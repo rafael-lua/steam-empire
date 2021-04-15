@@ -1,9 +1,23 @@
 <template>
   <div class="mines bg-light border-dark">
-    <div class="flex-row flex-a-center">
-      <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic clickable" v-on:click="collectCoal">
-      <p class="info text-500">COAL MINE lv <span class="text-500">(YIELDS COMMON COAL)</span> hardness 1</p>
+
+    <div class="flex-row flex-a-center flex-j-center">
+      <div class="flex-col flex-a-center flex-j-center pd-1x">
+        <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic clickable" v-on:click="collectCoal">
+        <p class="text-500">COAL MINE</p>
+        <p class="text-italic line-s">(common)</p>
+      </div>
+      <div class="flex-col flex-a-center flex-j-center hr-left pd-1x">
+        <p class="text-400">HARDNESS</p>
+        <p class="text-700 text-b2">1</p>
+      </div>
+      <div class="flex-col flex-a-center flex-j-center hr-left pd-1x">
+        <p class="text-400">YIELD VALUE</p>
+        <p class="text-700 text-b2">{{(player.competency * 10) / 1}} /day</p>
+      </div>
     </div>
+    <hr class="hr-mg">
+
   </div>
 </template>
 
@@ -31,11 +45,6 @@ export default {
 .mines {
   height: 100%;
   padding: 0.5em;
-}
-
-.info {
-  font-size: 1em;
-  margin: 0 .5em;
 }
 
 </style>
