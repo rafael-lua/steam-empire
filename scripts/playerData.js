@@ -9,6 +9,7 @@ let properties = {
   amount: 1,
 
   population: 1,
+  employed: 0,
 
   competency: 1,
 
@@ -126,6 +127,19 @@ let methods = {
     }
   },
 
+  // Population calculations
+  getUnemployed: function() {
+    return this.population - this.employed;
+  },
+
+  increaseEmployed: function(v) {
+    return this.employed += v;
+  },
+
+  decreaseEmployed: function(v) {
+    return this.employed -= v;
+  },
+
   // Competency update. Everytime something that affects competency is acquired, call the update method.
   // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
   updateCompetency: function() {
@@ -138,7 +152,7 @@ let methods = {
 
   // Common mine update
   updateCommonMine: function() {
-    this.increaseCoal((this.player.competency * this.mines.common.workers) / player.mines.common.hardness);
+    this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness);
     if(this.coal >= 10 && this.stages.market === false){ this.setStage("market"); }
   },
 }
