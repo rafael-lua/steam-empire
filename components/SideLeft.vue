@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "../scripts/playerData";
+import Player from "~/scripts/playerData";
 
 export default {
   name: "SideLeft",
@@ -40,7 +39,7 @@ export default {
   },
 
   computed: {
-    
+
   }
 
 }

@@ -20,6 +20,7 @@ import SideRight from "../components/SideRight";
 let gameTimer = null;
 let calendarClock = 0;
 let dayTimer = 0;
+let week = 0;
 
 // Main game loop. Its called every 100ms.
 const gameLoop = () => {
@@ -35,9 +36,16 @@ const gameLoop = () => {
   // Calculates the time
   calendarClock += 1;
   Player.updateTickRender();
-  if(calendarClock >= 100) { // Compelted day update
+  if(calendarClock >= 100) { // Completed day update
+    week += 1;
     calendarClock = 0;
     Player.updateCalendar();
+  }
+
+  if(week == 7) { // Completed week.
+    week = 1;
+
+    Player.resetNomadCoal();
   }
 }
 

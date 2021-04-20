@@ -1,12 +1,11 @@
 <template>
   <div class="side-right bg-light border-dark">
-    side b
   </div>
 </template>
 
 <script>
 export default {
-  name: "SideRight"
+  name: "SideRight",
 }
 </script>
 

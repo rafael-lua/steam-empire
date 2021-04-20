@@ -32,6 +32,7 @@
       <StoneEquipment v-if="!player.inventory.stoneEquiment" />
       <CraftingTools v-if="!player.inventory.craftingTools" />
       <Map1 v-if="!player.inventory.map_1" />
+      <Backpack v-if="!player.inventory.backpack" />
     </div>
   </div>
 </template>
@@ -42,6 +43,7 @@ import SellCoal from "./SellCoal";
 import StoneEquipment from "./StoneEquipment";
 import CraftingTools from "./CraftingTools";
 import Map1 from "./Map1";
+import Backpack from "./Backpack";
 
 export default {
   name: "Nomads",
@@ -51,6 +53,7 @@ export default {
     StoneEquipment,
     CraftingTools,
     Map1,
+    Backpack,
   },
 
   data() {

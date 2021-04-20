@@ -26,7 +26,8 @@ let properties = {
   inventory: {
     stoneEquiment: false,
     craftingTools: false,
-    map_1: false
+    map_1: false,
+    backpack: false,
   },
 
   stages: {
@@ -39,7 +40,7 @@ let properties = {
   nomads: {
     sellCoal: {
       sold: 0,
-      max: 100,
+      max: 50,
       value: 1
     }
   },
@@ -150,11 +151,27 @@ let methods = {
     this.competency = comp;
   },
 
+  // Capacity update. Everytime something that affects Capacity is acquired, call the update method.
+  // Using this instead of getCapacity so it doesn't need to run the checks every game tick.
+  updateCapacity: function() {
+    let cap = 10;
+
+    if(this.inventory.backpack === true) { cap += 15; }
+
+    this.capacity = cap;
+  },
+
   // Common mine update
   updateCommonMine: function() {
     this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness);
     if(this.coal >= 10 && this.stages.market === false){ this.setStage("market"); }
   },
+
+  // Nomads updates
+  resetNomadCoal: function() {
+    this.nomads.sellCoal.sold = 0;
+  },
+
 }
 
 // Construct the player object
