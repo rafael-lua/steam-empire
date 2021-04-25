@@ -50,6 +50,11 @@ let properties = {
       workers: 0,
       hardness: 1
     }
+  },
+
+  achievementPoints: 0,
+  achievements: {
+    firstSteps: { progress: 0, target: 10, completed: false }
   }
 }
 
@@ -108,6 +113,7 @@ let methods = {
     if(this.coal < this.capacity) {
       this.coal += v;
       this.coal = utils.clamp(this.coal, 0, this.capacity);
+      this.updateAchievement("firstSteps", v, "add");
     }
   },
 
@@ -170,6 +176,27 @@ let methods = {
   // Nomads updates
   resetNomadCoal: function() {
     this.nomads.sellCoal.sold = 0;
+  },
+
+  // Achievements functions
+  // Achivements are either increment or set value for its progress. The update should be called anywhere 
+  // that can affect the achievement progress.
+  updateAchievement(name, value, method) {
+    let achievement = this.achievements[name];
+    if(achievement.completed === false) {
+
+      if (method === "set") {
+        achievement.progress = value;
+      } else if(method === "add") {
+        achievement.progress += value;
+      }
+      
+      if(achievement.progress / achievement.target >= 1) {
+        achievement.completed = true;
+        this.achievementPoints += 1;
+      }
+
+    }
   },
 
 }
