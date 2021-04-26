@@ -13,9 +13,9 @@ let properties = {
 
   competency: 1,
 
-  coal: 0,
-  capacity: 10,
-  gold: 0,
+  coal: 0,         
+  capacity: 10,     
+  gold: 100,          
 
   day: 1,
   month: 1,
