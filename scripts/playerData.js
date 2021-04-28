@@ -10,6 +10,7 @@ let properties = {
 
   population: 1,
   employed: 0,
+  proficiency: 1,
 
   competency: 1,
 
@@ -49,6 +50,15 @@ let properties = {
     common: {
       workers: 0,
       hardness: 1
+    }
+  },
+
+  crafting: {
+    tavern: {
+      workers: 0,
+      complexity: 100,
+      progress: 0,
+      target: 100
     }
   },
 

@@ -3,7 +3,7 @@
     <div class="citizens">
       <p class="text-center text-700 text-b3 flex-row flex-a-center flex-j-center">
         {{player.population}}
-        <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-mini">
+        <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-mini only-left">
       </p>
       <p class="text-center text-500 text-b2">CITIZENS</p>
     </div>

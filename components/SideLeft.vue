@@ -1,23 +1,27 @@
 <template>
   <div class="side-left bg-light border-dark">
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-mini">
+      <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-small only-right">
       Population: <span class="info-value text-500">{{player.population}}</span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/farmer.png" alt="Farmer Icon" class="icon-basic-mini">
+      <img src="~/assets/icons/farmer.png" alt="Farmer Icon" class="icon-basic-small only-right">
       Employed: <span class="info-value text-500">{{player.employed}}</span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/two-coins.png" alt="Gold Icon" class="icon-basic-mini">
+      <img src="~/assets/icons/brain.png" alt="Proficiency Icon" class="icon-basic-small only-right">
+      Proficiency: <span class="info-value text-500">{{player.proficiency}}</span>
+    </p>
+    <p class="flex-row flex-a-center">
+      <img src="~/assets/icons/two-coins.png" alt="Gold Icon" class="icon-basic-small only-right">
       Gold: <span class="info-value text-500">{{player.gold}}</span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-mini">
+      <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-small only-right">
       Coal: <span class="info-value text-500">{{player.coal}} <span class="text-italic">({{coalPercentage()}})</span></span>
     </p>
     <p class="flex-row flex-a-center">
-      <img src="~/assets/icons/cargo-crate.png" alt="Capacity Icon" class="icon-basic-mini">
+      <img src="~/assets/icons/cargo-crate.png" alt="Capacity Icon" class="icon-basic-small only-right">
       Capacity: <span class="info-value text-500">{{player.capacity}}</span>
     </p>
     <hr>

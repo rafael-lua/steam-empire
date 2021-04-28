@@ -60,6 +60,8 @@ img {
   max-width: 100%;
 }
 
+/* HR utilities */
+
 hr {
   width: 95%;
   margin: 0 auto;
@@ -71,6 +73,14 @@ hr {
   margin: 0.35em auto;
 }
 
+.hr-half {
+  width: 50%;
+}
+
+.hr-75 {
+  width: 75%;
+}
+
 .hr-left {
   border-left: 2px solid rgb(var(--light-shadow));
 }
@@ -78,6 +88,38 @@ hr {
 .hr-right {
   border-right: 2px solid rgb(var(--light-shadow));
 }
+
+.hr-1em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 1em;
+}
+
+.hr-2em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 2em;
+}
+
+.hr-4em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 4em;
+}
+
+.hr-8em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 8em;
+}
+
+.hr-16em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 16em;
+}
+
+.hr-32em {
+  border: 1px solid rgb(var(--light-shadow));
+  height: 32em;
+}
+
+/* Remove selection */
 
 .noselect {
   -webkit-touch-callout: none;
@@ -148,6 +190,13 @@ hr {
   margin: 0 0.25em;
 }
 
+.icon-basic-small {
+  display: inline-block;
+  width: 1.25em;
+  opacity: 0.9;
+  margin: 0 0.25em;
+}
+
 .icon-basic-mini {
   display: inline-block;
   width: 1em;
@@ -155,11 +204,13 @@ hr {
   margin: 0 0.25em;
 }
 
+.icon-basic-small.only-right,
 .icon-basic-mini.only-right {
   margin: 0;
   margin-right: 0.25em;
 }
 
+.icon-basic-small.only-left,
 .icon-basic-mini.only-left {
   margin: 0;
   margin-left: 0.25em;
@@ -186,6 +237,11 @@ hr {
 
 .border-dark {
   border: 3px solid rgb(var(--dark-shadow));
+  border-radius: 2px;
+}
+
+.border-light {
+  border: 2px solid rgb(var(--light-shadow));
   border-radius: 2px;
 }
 
@@ -361,4 +417,60 @@ hr {
 
 .mg-left-1 {
   margin-left: 1em;
+}
+
+.pd-05 {
+  padding: .5em;
+}
+
+.mg-05 {
+  margin: .5em;
+}
+
+.pd-05x {
+  padding: 0 .5em;
+}
+
+.mg-05x {
+  margin: 0 .5em;
+}
+
+.pd-05y {
+  padding: .5em 0;
+}
+
+.mg-05y {
+  margin: .5em 0;
+}
+
+.pd-top-05 {
+  padding-top: .5em;
+}
+
+.mg-top-05 {
+  margin-top: .5em;
+}
+
+.pd-bottom-05 {
+  padding-bottom: .5em;
+}
+
+.mg-bottom-05 {
+  margin-bottom: .5em;
+}
+
+.pd-right-05 {
+  padding-right: .5em;
+}
+
+.mg-right-05 {
+  margin-right: .5em;
+}
+
+.pd-left-05 {
+  padding-left: .5em;
+}
+
+.mg-left-05 {
+  margin-left: .5em;
 }
