@@ -22,7 +22,7 @@ let calendarClock = 0;
 let dayTimer = 0;
 let week = 0;
 
-// Main game loop. Its called every 100ms.
+// Main game loop. Its called every 100ms. It is the base game tick.
 const gameLoop = () => {
 
   // Per second update
@@ -47,6 +47,9 @@ const gameLoop = () => {
 
     Player.resetNomadCoal();
   }
+
+  // Per tick updates
+  Player.updateCraftings();
 }
 
 export default {

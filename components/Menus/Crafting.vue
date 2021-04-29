@@ -8,11 +8,12 @@
             <img src="~/assets/icons/tavern-sign.png" alt="Coin Icon" class="icon-basic">
           </div>
           <div class="flex-col flex-a-center">
-            <div class="flex-row flex-a-center flex-j-between">
-              <p class="text-center mg-1x"><span class="text-italic">COMPLEXITY: <span class="text-500">100</span></span></p>
-              <p class="text-center mg-1x"><span class="text-italic">PROFICIENCY: <span class="text-500">100</span></span></p>
-            </div>
-            <div><p class="text-700">PROGRESS (100%) / TARGET</p></div>
+            <p class="text-center mg-1x"><span class="text-italic">
+              COMPLEXITY: <span class="text-500">{{player.crafting.tavern.complexity}}</span></span>
+            </p>
+            <p class="text-400">
+              PROGRESS: <span class="text-700">{{tavernProgress}} / {{player.crafting.tavern.target}}</span>
+            </p>
           </div>
         </div>
         <hr class="hr-75 hr-mg">
@@ -36,15 +37,26 @@
               <p class="text-500">RESET</p>
             </div>
           </div>
-          <div class="hr-left"><p>WORK VALUE/s<br>(x10tickXworkers)</p></div>
-          <div class="hr-left"><p>RESOURCES<br>REQUIREMENTS</p></div>
+          <div class="hr-4em"></div>
+          <div class="flex-col flex-a-center flex-j-center">
+            <p class="text-400">WORK VALUE</p>
+            <p class="text-700">{{tavernWorkValue}}</p>
+          </div>
+          <div class="hr-4em"></div>
+          <div class="flex-col flex-a-center flex-j-center">
+            <p class="text-400">MATERIALS REQUIRED</p>
+            <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('wood')">WOOD</p>
+            <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('water')">WATER</p>
+            <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('barley')">BARLEY</p>
+          </div>
         </div>
-      </div>
+      </div>      
     </div>
   </div>
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
 
 export default {
@@ -53,6 +65,12 @@ export default {
   data() {
     return {
       player: Player,
+    }
+  },
+
+  methods: {
+    notAcquired: function (m) {
+      return (this.player.rawMaterials[m] === true) ? null : { "material-not-acquired": true }
     }
   },
 
@@ -65,6 +83,17 @@ export default {
         return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed);
       }
     },
+
+    tavernProgress: function() {
+      let p = ((this.player.crafting.tavern.progress / this.player.crafting.tavern.target) * 100).toFixed(2);
+      return `${(this.player.crafting.tavern.progress).toFixed(2)} (${p}%)`;
+    },
+
+    tavernWorkValue: function() {
+      let t = this.player.crafting.tavern;
+      let workValue = (this.player.proficiency / t.complexity).toFixed(2);
+      return `${workValue * 10 * t.workers} /s`;
+    }
   }
 }
 </script>
@@ -84,6 +113,10 @@ export default {
 .item {
   width: 100%;
   padding: 0.25em;
+}
+
+.material-not-acquired {
+  color: rgba(var(--wine-tone-dark), 0.5);
 }
 
 </style>

@@ -32,10 +32,11 @@ let properties = {
   },
 
   stages: {
-    market: false,
-    craft: false,
-    alchemy: false,
-    savage: false,
+    // Dafault is all false
+    market: true,
+    craft: true,
+    alchemy: true,
+    savage: true,
   },
 
   nomads: {
@@ -53,12 +54,19 @@ let properties = {
     }
   },
 
+  rawMaterials: {
+    wood: false,
+    water: false,
+    barley: false
+  },
+
   crafting: {
     tavern: {
       workers: 0,
       complexity: 100,
       progress: 0,
-      target: 100
+      target: 100,
+      completed: false
     }
   },
 
@@ -186,6 +194,11 @@ let methods = {
   // Nomads updates
   resetNomadCoal: function() {
     this.nomads.sellCoal.sold = 0;
+  },
+
+  // Crafting updates
+  updateCraftings: function() {
+    
   },
 
   // Achievements functions
