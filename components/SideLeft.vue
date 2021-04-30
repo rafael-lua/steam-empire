@@ -18,7 +18,7 @@
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-small only-right">
-      Coal: <span class="info-value text-500">{{player.coal}} <span class="text-italic">({{coalPercentage()}})</span></span>
+      Coal: <span class="info-value text-500">{{formatedCoal}} <span class="text-italic">({{coalPercentage()}})</span></span>
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/cargo-crate.png" alt="Capacity Icon" class="icon-basic-small only-right">
@@ -50,7 +50,10 @@ export default {
   computed: {
     formatedGold: function() {
       return utils.format(this.player.gold);
-    }
+    },
+    formatedCoal: function() {
+      return utils.format(this.player.coal);
+    },
   }
 
 }

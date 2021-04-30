@@ -19,19 +19,10 @@ import SideRight from "../components/SideRight";
 // Timer interval variables
 let gameTimer = null;
 let calendarClock = 0;
-let dayTimer = 0;
 let week = 0;
 
 // Main game loop. Its called every 100ms. It is the base game tick.
 const gameLoop = () => {
-
-  // Per second update
-  dayTimer += 1;
-  if(dayTimer >= 10) { // Updates every second, or 10x per day.
-    Player.updateCommonMine();
-
-    dayTimer = 0;
-  }
 
   // Calculates the time
   calendarClock += 1;
@@ -48,8 +39,9 @@ const gameLoop = () => {
     Player.resetNomadCoal();
   }
 
-  // Per tick updates
+  // Per tick updates. Each 10 ticks is one second, or one wheel step.
   Player.updateCraftings();
+  Player.updateCommonMine();
 }
 
 export default {

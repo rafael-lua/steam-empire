@@ -51,7 +51,7 @@ let properties = {
   mines: {
     common: {
       workers: 0,
-      hardness: 1
+      hardness: 10
     }
   },
 
