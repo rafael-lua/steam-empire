@@ -7,9 +7,9 @@ const clamp = (value, min, max) => {
 const format = (value) => {
   let formatedValue;
   if(value >= 1000000) {
-    formatedValue = value;
+    formatedValue = value.toExponential(3);
   } else {
-    formatedValue = value === Math.floor(value) ? String(value).replace(/(.)(?=(\d{3})+$)/g,'$1,') : String(value.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+    formatedValue = (value === Math.floor(value)) ? String(value).replace(/(.)(?=(\d{3})+$)/g,'$1,') : String(value.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,'$1,');
   }
   return formatedValue;
 }

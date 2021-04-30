@@ -20,9 +20,22 @@
       <span>Year:<span class="info-value-calendar text-500">{{player.year}}</span></span>
     </p>
 
-    <form class="amount-form" v-on:submit.prevent="">
-      <div class="amount noselect">Amount: {{formatedAmount}}</div>
-      <input type="number" v-model.number="modelAmount" placeholder="Amount..." class="amount-value" min="1" max="9999999999">
+    <form class="amount-form" v-on:submit.prevent="changeAmount">
+      <Popup v-if="hoveredAmount" text="Type a new value and press enter to register." /> 
+      <div class="amount noselect hover-clean" v-on:mouseover="hoveredAmount = true" v-on:mouseleave="hoveredAmount = false">
+        Amount: {{formatedAmount}}
+      </div>
+      <input 
+        type="number" 
+        v-model.number="modelAmount" 
+        placeholder="Amount..." 
+        class="amount-value hover-clean" 
+        v-on:mouseover="hoveredAmount = true" 
+        v-on:mouseleave="hoveredAmount = false"
+        min="1" 
+        max="999999999"
+        step="0.001"
+      >
     </form>
 
   </header>
@@ -31,14 +44,21 @@
 <script>
 import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
+import Popup from "./Popup";
 
 export default {
 
   name: "GameHeader",
 
+  components: {
+    Popup
+  },
+
   data() {
     return {
-      player: Player
+      player: Player,
+      newAmount: 1,
+      hoveredAmount: false
     }
   },
 
@@ -48,15 +68,19 @@ export default {
       classNames["rotate-" + i] = true;
       return classNames;
     },
+
+    changeAmount: function() {
+      this.player.setAmount(this.newAmount);
+    }
   },
 
   computed: {
     modelAmount: { // With get and set
         get(){
-          return this.player.amount;
+          return this.newAmount;
         },
         set(newVal){
-          this.player.setAmount(newVal);
+           this.newAmount = newVal;
         }
     },
 

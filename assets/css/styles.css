@@ -231,6 +231,10 @@ hr {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.hover-clean:hover {
+  cursor: help;
+}
+
 .bg-light {
   background-color: rgb(var(--bg-color));
 }

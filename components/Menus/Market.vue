@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import Popup from "../Popup";
 import Player from "~/scripts/playerData";
 import Nomads from "../elements/nomads/Nomads";
 
@@ -52,7 +53,8 @@ export default {
   },
 
   components: {
-    Nomads
+    Nomads,
+    Popup
   },
 
   methods: {
