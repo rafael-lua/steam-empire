@@ -42,7 +42,8 @@ export default {
 
 .content {
   margin: 0 auto;
-  width: 350px;
+  min-width: 150px;
+  max-width: 600px;
   overflow-wrap: break-word;
   font-weight: 500;
 }

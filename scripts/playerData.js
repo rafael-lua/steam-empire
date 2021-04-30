@@ -11,6 +11,7 @@ let properties = {
   population: 1,
   employed: 0,
   proficiency: 1,
+  wildPopulation: 0,
 
   competency: 1,
 
@@ -32,11 +33,11 @@ let properties = {
   },
 
   stages: {
-    // Dafault is all false
+    // Initial/Dafault is all false
     market: true,
     craft: true,
     alchemy: true,
-    savage: true,
+    savage: true
   },
 
   nomads: {
@@ -62,6 +63,7 @@ let properties = {
 
   crafting: {
     tavern: {
+      baseCost: 0.01,
       workers: 0,
       complexity: 100,
       progress: 0,
@@ -196,9 +198,29 @@ let methods = {
     this.nomads.sellCoal.sold = 0;
   },
 
-  // Crafting updates
+  // Crafting functions
   updateCraftings: function() {
-    
+    Object.keys(this.crafting).forEach(key => {
+      let price = this.getCraftCost(key);
+      if(this.gold >= price) {
+        let workValue = this.proficiency / this.crafting[key].complexity;
+        this.crafting[key].progress += workValue * this.crafting[key].workers;
+        if(this.crafting[key].progress / this.crafting[key].target >= 1) {
+          this.crafting[key].completed = true;
+        }
+        this.decreaseGold(price);
+      }
+      else {
+        // No gold, reset employed!
+        this.decreaseEmployed(this.crafting[key].workers);
+        this.crafting[key].workers = 0;
+      }
+    });
+  },
+
+  getCraftCost: function(c) {
+    let tickCost = this.crafting[c].workers * this.crafting[c].baseCost;
+    return tickCost;
   },
 
   // Achievements functions

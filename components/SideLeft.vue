@@ -14,7 +14,7 @@
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/two-coins.png" alt="Gold Icon" class="icon-basic-small only-right">
-      Gold: <span class="info-value text-500">{{player.gold}}</span>
+      Gold: <span class="info-value text-500">{{formatedGold}}</span>
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/coal-wagon.png" alt="Coal Icon" class="icon-basic-small only-right">
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
 
 export default {
@@ -47,7 +48,9 @@ export default {
   },
 
   computed: {
-
+    formatedGold: function() {
+      return utils.format(this.player.gold);
+    }
   }
 
 }

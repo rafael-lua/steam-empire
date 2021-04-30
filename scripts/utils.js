@@ -5,7 +5,13 @@ const clamp = (value, min, max) => {
 
 // Format
 const format = (value) => {
-  return value >= 1000000 ? value.toExponential(3) : String(value).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+  let formatedValue;
+  if(value >= 1000000) {
+    formatedValue = value;
+  } else {
+    formatedValue = value === Math.floor(value) ? String(value).replace(/(.)(?=(\d{3})+$)/g,'$1,') : String(value.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+  }
+  return formatedValue;
 }
 
 // All functions bandled together
