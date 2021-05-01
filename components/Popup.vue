@@ -15,7 +15,7 @@ export default {
     },
     pos: {
       type: String,
-      required: true
+      default: "top"
     }
   },
 

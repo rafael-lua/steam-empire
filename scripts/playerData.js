@@ -223,6 +223,15 @@ let methods = {
     return tickCost;
   },
 
+  hasMaterials: function(materials) {
+    return materials.reduce((hasAll, material) => {
+      if (this.rawMaterials[material] === false) {
+        hasAll = false;
+      };
+      return hasAll;
+    }, true)
+  },  
+
   // Achievements functions
   // Achivements are either increment or set value for its progress. The update should be called anywhere 
   // that can affect the achievement progress.

@@ -5,7 +5,8 @@
   --light-shadow: 176, 164, 144;
   --dark-shadow: 131, 125, 109;
   --golden-tone: 230, 169, 56;
-  --red-tone: 228, 56, 56;
+  --red-tone: 206, 37, 37;
+  --green-tone: 33, 167, 10;
   --pink-tone-light: 239, 179, 199;
   --pink-tone-dark: 216, 75, 102;
   --blue-tone-light: 128, 190, 183;
@@ -305,8 +306,12 @@ hr {
 
 /* Text styles */
 
-.text-danger {
+.text-red {
   color: rgb(var(--red-tone));
+}
+
+.text-green {
+  color: rgb(var(--green-tone));
 }
 
 .text-300 {

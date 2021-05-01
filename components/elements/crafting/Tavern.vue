@@ -1,7 +1,7 @@
 <template>
   <div class="item flex-col border-dark mg-bottom-05">
     <div class="flex-row flex-a-center flex-j-evenly">
-      <Popup v-if="hovered.tavern" text="A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1" />    
+      <Popup v-if="hovered.tavern" pos="top" text="A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1" />    
       <div 
         class="flex-col flex-a-center flex-j-center mg-1x hover-highlight"
         v-on:mouseover="hovered.tavern = true" 
@@ -25,7 +25,7 @@
           COMPLEXITY: <span class="text-500">{{player.crafting.tavern.complexity}}</span></span>
         </p>
         <p class="text-400">
-          PROGRESS: <span class="text-700">{{progress}} / {{player.crafting.tavern.target}}</span>
+          PROGRESS: <span class="text-700"><span class="text-green">{{progress}}</span> / {{player.crafting.tavern.target}}</span>
         </p>
       </div>
     </div>
@@ -91,12 +91,16 @@ export default {
     },
 
      workersEmploy: function() {
-      let unemployed = this.player.getUnemployed();
-      if(unemployed > 0) {
-        let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed;
-        this.player.increaseEmployed(newEmployers);
-        this.player.crafting.tavern.workers += newEmployers;
-      }
+        let canCraft = this.player.hasMaterials(["water", "wood", "barley"]);
+        console.log(canCraft);
+        if(canCraft === true) {
+          let unemployed = this.player.getUnemployed();
+          if(unemployed > 0) {
+            let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed;
+            this.player.increaseEmployed(newEmployers);
+            this.player.crafting.tavern.workers += newEmployers;
+          }
+        }
     },
 
     workersReset: function() {
