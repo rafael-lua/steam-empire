@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Popup v-if="hovered" pos="top" text="Open the crafting capability, allowing the construction of buildings and instruments" /> 
-    <div class="shop-item clickable" v-on:click="buy" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
+    <div 
+      class="shop-item clickable" 
+      v-on:click="buy" 
+      v-on:mouseover="togglePopup('on', 'Open the crafting capability, allowing the construction of buildings and instruments')" 
+      v-on:mouseleave="togglePopup('off', null)"
+    >
       <p class="text-center text-500">CRAFTING<br>TOOLS</p>
       <hr>
       <p class="text-center text-italic flex-row flex-a-center">
@@ -13,15 +17,11 @@
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
-import Popup from "../../Popup";
 
 export default {
   name: "CraftingTools",
-
-  components: {
-    Popup
-  },
 
   data() {
     return {
@@ -37,6 +37,15 @@ export default {
         this.player.gold -= this.price;
         this.player.inventory.craftingTools = true;
         this.player.stages.craft = true;
+      }
+    },
+
+    togglePopup: function(e, t) {
+      if(e === "on") {
+        utils.popup.text = t;
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
       }
     }
   },

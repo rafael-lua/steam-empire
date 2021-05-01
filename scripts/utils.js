@@ -14,10 +14,16 @@ const format = (value) => {
   return formatedValue;
 }
 
+const popup = {
+  text: "",
+  hovered: false
+}
+
 // All functions bandled together
 const utils = {
   clamp,
-  format
+  format,
+  popup
 }
 
 export default utils;

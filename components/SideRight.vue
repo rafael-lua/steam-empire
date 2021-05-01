@@ -2,8 +2,13 @@
   <div class="side-right bg-light border-dark">
     <div class="flex-col">
       <div class="info-wrapper">
-        <Popup v-if="apHovered" pos="bottom" text="AP (achievement points) can be used to upgrade alchemy/idle mechanics." /> 
-        <p class="text-500 hover-highlight" v-on:mouseover="apHovered = true" v-on:mouseleave="apHovered = false">AP: <span class="info-value text-700">{{player.achievementPoints}}</span></p>
+        <p 
+          class="text-500 hover-highlight" 
+          v-on:mouseover="togglePopup('on')" 
+          v-on:mouseleave="togglePopup('off')"
+        >
+          AP: <span class="info-value text-700">{{player.achievementPoints}}</span>
+        </p>
         <hr>
       </div>
 
@@ -19,22 +24,35 @@
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
 import Achievement from "./Achievement";
-import Popup from "./Popup";
 
 export default {
   name: "SideRight",
+
   components: {
-    Achievement,
-    Popup
+    Achievement
   },
+
   data() {
     return {
       player: Player,
       apHovered: false
     }
   },
+
+  methods: {
+    togglePopup: function(e) {
+      if(e === "on") {
+        utils.popup.text = "AP (achievement points) can be used to upgrade alchemy/idle mechanics.";
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
+      }
+    }
+  },
+  
   computed: {
     firstStep: function() {
       let p = this.player.achievements.firstSteps.progress / this.player.achievements.firstSteps.target;

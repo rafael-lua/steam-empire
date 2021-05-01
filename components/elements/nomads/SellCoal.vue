@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Popup v-if="hovered" pos="top" text="Sell a limited amount of coal to a traveling nomad. Resets every 7 days." /> 
-    <div class="shop-item clickable" v-on:click="sell" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
+    <div 
+      class="shop-item clickable" 
+      v-on:click="sell" 
+      v-on:mouseover="togglePopup('on', 'Sell a limited amount of coal to a traveling nomad. Resets every 7 days')" 
+      v-on:mouseleave="togglePopup('off', null)"
+    >
       <p class="text-center text-500">COAL</p>
       <hr>
       <p class="text-center text-500">MAX ({{maxSold}})</p>
@@ -17,14 +21,9 @@
 <script>
 import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
-import Popup from "../../Popup";
 
 export default {
   name: "SellCoal",
-
-  components: {
-    Popup
-  },
 
   data() {
     return {
@@ -47,6 +46,15 @@ export default {
         }
       }
     },
+
+    togglePopup: function(e, t) {
+      if(e === "on") {
+        utils.popup.text = t;
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
+      }
+    }
   },
 
   computed: {

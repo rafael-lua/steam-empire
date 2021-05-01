@@ -1,11 +1,10 @@
 <template>
   <div class="item flex-col border-dark mg-bottom-05">
     <div class="flex-row flex-a-center flex-j-evenly">
-      <Popup v-if="hovered.tavern" pos="top" text="A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1" />    
-      <div 
+       <div 
         class="flex-col flex-a-center flex-j-center mg-1x hover-highlight"
-        v-on:mouseover="hovered.tavern = true" 
-        v-on:mouseleave="hovered.tavern = false"
+        v-on:mouseover="togglePopup('on', 'A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1')" 
+        v-on:mouseleave="togglePopup('off', null)"
       >
         <p class="text-500">TAVERN</p>
         <img src="~/assets/icons/tavern-sign.png" alt="Coin Icon" class="icon-basic">
@@ -92,7 +91,6 @@ export default {
 
      workersEmploy: function() {
         let canCraft = this.player.hasMaterials(["water", "wood", "barley"]);
-        console.log(canCraft);
         if(canCraft === true) {
           let unemployed = this.player.getUnemployed();
           if(unemployed > 0) {
@@ -110,6 +108,15 @@ export default {
         this.player.crafting.tavern.workers = 0;
       }
     },
+
+    togglePopup: function(e, t) {
+      if(e === "on") {
+        utils.popup.text = t;
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
+      }
+    }
   },
 
   computed: {

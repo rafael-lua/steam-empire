@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Popup v-if="hovered" pos="top" text="Increases the total capacity by 15." /> 
-    <div class="shop-item clickable" v-on:click="buy" v-on:mouseover="hovered = true" v-on:mouseleave="hovered = false">
+    <div 
+      class="shop-item clickable" 
+      v-on:click="buy" 
+      v-on:mouseover="togglePopup('on', 'Increases the total capacity by 15')" 
+      v-on:mouseleave="togglePopup('off', null)"
+    >
       <p class="text-center text-500">BACKPACK</p>
       <hr>
       <p class="text-center text-400 text-break">CAPACITY<br><span class="text-700">15</span></p>
@@ -15,15 +19,11 @@
 </template>
 
 <script>
+import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
-import Popup from "../../Popup";
 
 export default {
   name: "Backpack",
-  
-  components: {
-    Popup
-  },
 
   data() {
     return {
@@ -41,6 +41,15 @@ export default {
         this.player.updateCapacity();
       }
     },
+
+    togglePopup: function(e, t) {
+      if(e === "on") {
+        utils.popup.text = t;
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
+      }
+    }
   },
 }
 </script>

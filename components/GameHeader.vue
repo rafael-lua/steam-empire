@@ -21,8 +21,7 @@
     </p>
 
     <form class="amount-form" v-on:submit.prevent="changeAmount">
-      <Popup v-if="hoveredAmount" text="Type a new value and press enter to register." /> 
-      <div class="amount noselect hover-clean" v-on:mouseover="hoveredAmount = true" v-on:mouseleave="hoveredAmount = false">
+      <div class="amount noselect hover-clean" v-on:mouseover="togglePopup('on')" v-on:mouseleave="togglePopup('off')">
         Amount: {{formatedAmount}}
       </div>
       <input 
@@ -30,8 +29,8 @@
         v-model.number="modelAmount" 
         placeholder="Amount..." 
         class="amount-value hover-clean" 
-        v-on:mouseover="hoveredAmount = true" 
-        v-on:mouseleave="hoveredAmount = false"
+        v-on:mouseover="togglePopup('on')" 
+        v-on:mouseleave="togglePopup('off')"
         min="1" 
         max="999999999"
         step="0.001"
@@ -44,15 +43,10 @@
 <script>
 import utils from "~/scripts/utils";
 import Player from "~/scripts/playerData";
-import Popup from "./Popup";
 
 export default {
 
   name: "GameHeader",
-
-  components: {
-    Popup
-  },
 
   data() {
     return {
@@ -71,6 +65,15 @@ export default {
 
     changeAmount: function() {
       this.player.setAmount(this.newAmount);
+    },
+
+    togglePopup: function(e) {
+      if(e === "on") {
+        utils.popup.text = "Type a new value and press enter to register.";
+        utils.popup.hovered = true;
+      } else {
+        utils.popup.hovered = false;
+      }
     }
   },
 

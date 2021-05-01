@@ -1,39 +1,52 @@
 <template>
-  <div class="description" v-bind:class="classPos">
-    <p class="content">{{text}}</p>
+  <div 
+    id="popup" 
+    class="description" 
+    v-bind:class="pos" 
+    v-on:click="cancelHover"
+    v-on:mouseover="changePos"
+    v-show="popup.hovered"
+  >
+    <p class="content">{{popup.text}}</p>
   </div>
 </template>
 
 <script>
+import utils from "~/scripts/utils"
+
 export default {
   name: "Popup",
 
-  props: {
-    text: {
-      type: String,
-      required: true
-    },
-    pos: {
-      type: String,
-      default: "top"
+  data() {
+    return {
+      popup: utils.popup,
+      pos: { bottom: true, top: false }
     }
   },
 
-  computed: {
-    classPos: function() {
-      switch(this.pos) {
-        case "top":
-          return {top: true};
-        case "right":
-          return {right: true};
-        case "left":
-          return {left: true};
-        case "bottom":
-        default:
-          return {bottom: true}
-      }
+  watch: {
+    // whenever popup changes, this function will run. Called with this format to activate deep so it watches nested properties of a object
+    popup: {
+      handler: function (newPop, oldPop) {
+        if(newPop.hovered === false) {
+          this.pos.bottom = true;
+          this.pos.top = false;
+        }
+      },
+      deep: true
     }
-  }
+  },
+
+  methods: {
+    changePos: function() {
+      this.pos.bottom = !this.pos.bottom;
+      this.pos.top = !this.pos.top;
+    },
+
+    cancelHover: function() {
+      this.popup.hovered = false;
+    },
+  },
 
 }
 </script>
@@ -49,36 +62,25 @@ export default {
 }
 
 .description {
-  position: absolute;
+  position: fixed;
   padding: 0.5em;
   border: 5px solid rgb(var(--pink-tone-dark));
   border-radius: 1em;
   background-color: rgb(var(--pink-tone-light));
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 1000;
 }
 
 .top {
   left: 50%;
   top: 0;
-  transform: translate(-50%, 25%);
-}
-
-.right {
-  right: 0;
-  top: 50%;
-  transform: translate(-10%, -50%);
+  transform: translate(-50%, 35%);
 }
 
 .bottom {
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, -25%);
-}
-
-.left {
-  left: 0;
-  top: 50%;
-  transform: translate(10%, -50%);
+  transform: translate(-50%, -35%);
 }
 
 </style>
