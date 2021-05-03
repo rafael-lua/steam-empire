@@ -1,7 +1,7 @@
 <template>
   <div class="mines-wrapper bg-light border-dark">
     <div class="mines">
-      
+
       <div class="flex-row flex-a-center flex-j-center">
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic">
@@ -51,51 +51,51 @@
 </template>
 
 <script>
-import Player from "~/scripts/playerData";
-import utils from "~/scripts/utils";
+import Player from "~/scripts/playerData"
+import utils from "~/scripts/utils"
 
 export default {
   name: "Mines",
 
-  data() {
+  data () {
     return {
       player: Player,
     }
   },
 
   methods: {
-    commonEmploy: function() {
-      let unemployed = this.player.getUnemployed();
-      if(unemployed > 0) {
-        let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed;
-        this.player.increaseEmployed(newEmployers);
-        this.player.mines.common.workers += newEmployers;
+    commonEmploy: function () {
+      let unemployed = this.player.getUnemployed()
+      if (unemployed > 0) {
+        let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed
+        this.player.increaseEmployed(newEmployers)
+        this.player.mines.common.workers += newEmployers
       }
     },
 
-    commonReset: function() {
-      let workers = this.player.mines.common.workers;
-      if(workers > 0) {
-        this.player.decreaseEmployed(workers);
-        this.player.mines.common.workers = 0;
+    commonReset: function () {
+      let workers = this.player.mines.common.workers
+      if (workers > 0) {
+        this.player.decreaseEmployed(workers)
+        this.player.mines.common.workers = 0
       }
     },
   },
 
   computed: {
-    amountCalculated: function() {
-      let unemployed = this.player.getUnemployed();
-      if(unemployed === 0) {
-        return 0;
+    amountCalculated: function () {
+      let unemployed = this.player.getUnemployed()
+      if (unemployed === 0) {
+        return 0
       } else {
-        return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed);
+        return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed)
       }
     },
-    commonEmployed: function() {
-      return utils.format(this.player.mines.common.workers);
+    commonEmployed: function () {
+      return utils.format(this.player.mines.common.workers)
     },
-    commonEmployedRatio: function() {
-      return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`;
+    commonEmployedRatio: function () {
+      return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
     },
   }
 }

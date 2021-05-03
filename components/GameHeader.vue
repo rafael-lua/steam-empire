@@ -1,14 +1,14 @@
 <template>
   <header class="header bg-light flex-row flex-a-center flex-j-evenly">
-    
+
     <p class="text-500">{{player.season.toUpperCase()}}</p>
 
     <div class="tick-render">
-      <img 
-        v-for="i in tickAmount" 
-        v-bind:key="i" 
-        src="~/assets/icons/pokecog.png" 
-        alt="Gear Tick" 
+      <img
+        v-for="i in tickAmount"
+        v-bind:key="i"
+        src="~/assets/icons/pokecog.png"
+        alt="Gear Tick"
         class="gear-tick-icon"
         v-bind:class="rotateClass(i)"
       />
@@ -24,14 +24,14 @@
       <div class="amount noselect hover-clean" v-on:mouseover="togglePopup('on')" v-on:mouseleave="togglePopup('off')">
         Amount: {{formatedAmount}}
       </div>
-      <input 
-        type="number" 
-        v-model.number="modelAmount" 
-        placeholder="Amount..." 
-        class="amount-value hover-clean" 
-        v-on:mouseover="togglePopup('on')" 
+      <input
+        type="number"
+        v-model.number="modelAmount"
+        placeholder="Amount..."
+        class="amount-value hover-clean"
+        v-on:mouseover="togglePopup('on')"
         v-on:mouseleave="togglePopup('off')"
-        min="1" 
+        min="1"
         max="999999999"
         step="0.001"
       >
@@ -41,14 +41,14 @@
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "~/scripts/playerData";
+import utils from "~/scripts/utils"
+import Player from "~/scripts/playerData"
 
 export default {
 
   name: "GameHeader",
 
-  data() {
+  data () {
     return {
       player: Player,
       newAmount: 1,
@@ -57,44 +57,44 @@ export default {
   },
 
   methods: {
-    rotateClass: function(i) {
-      let classNames = {};
-      classNames["rotate-" + i] = true;
-      return classNames;
+    rotateClass: function (i) {
+      let classNames = {}
+      classNames["rotate-" + i] = true
+      return classNames
     },
 
-    changeAmount: function() {
-      this.player.setAmount(this.newAmount);
+    changeAmount: function () {
+      this.player.setAmount(this.newAmount)
     },
 
-    togglePopup: function(e) {
-      if(e === "on") {
-        utils.popup.text = "Type a new value and press enter to register.";
-        utils.popup.hovered = true;
+    togglePopup: function (e) {
+      if (e === "on") {
+        utils.popup.text = "Type a new value and press enter to register."
+        utils.popup.hovered = true
       } else {
-        utils.popup.hovered = false;
+        utils.popup.hovered = false
       }
     }
   },
 
   computed: {
     modelAmount: { // With get and set
-        get(){
-          return this.newAmount;
-        },
-        set(newVal){
-           this.newAmount = newVal;
-        }
+      get (){
+        return this.newAmount
+      },
+      set (newVal){
+        this.newAmount = newVal
+      }
     },
 
-    formatedAmount: function() {
-      return utils.format(this.player.amount);
+    formatedAmount: function () {
+      return utils.format(this.player.amount)
     },
 
-    tickAmount: function() {
-      return Math.floor(this.player.tickRender / 10);
+    tickAmount: function () {
+      return Math.floor(this.player.tickRender / 10)
     }
-}
+  }
 
 }
 </script>

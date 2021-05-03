@@ -23,17 +23,17 @@
         They accept to work for gold.
       </p>
     </div>
-    
+
   </div>
 </template>
 
 <script>
-import Player from "~/scripts/playerData";
+import Player from "~/scripts/playerData"
 
 export default {
   name: "Population",
 
-  data() {
+  data () {
     return {
       player: Player,
     }

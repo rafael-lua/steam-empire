@@ -2,21 +2,21 @@
   <div class="market bg-light border-dark">
     <div class="market-list">
       <ul>
-        <li 
-          class="clickable" 
-          v-bind:class="focusClass('nomads')" 
+        <li
+          class="clickable"
+          v-bind:class="focusClass('nomads')"
           v-on:click="changeMarketFocus('nomads')"
-          v-on:mouseover="togglePopup('on', 'Nomads wander through the lands trading goods.')" 
+          v-on:mouseover="togglePopup('on', 'Nomads wander through the lands trading goods.')"
           v-on:mouseleave="togglePopup('off', null)"
         >
           NOMADS
         </li>
-        
-        <li 
-          class="clickable" 
-          v-bind:class="focusClass('caravan')" 
+
+        <li
+          class="clickable"
+          v-bind:class="focusClass('caravan')"
           v-on:click="changeMarketFocus('caravan')"
-          v-on:mouseover="togglePopup('on', 'Caravans...')" 
+          v-on:mouseover="togglePopup('on', 'Caravans...')"
           v-on:mouseleave="togglePopup('off', null)"
         >
           CARAVAN
@@ -33,13 +33,13 @@
 
 <script>
 import utils from "~/scripts/utils"
-import Player from "~/scripts/playerData";
-import Nomads from "../elements/nomads/Nomads";
+import Player from "~/scripts/playerData"
+import Nomads from "../elements/nomads/Nomads"
 
 export default {
   name: "Market",
 
-  data() {
+  data () {
     return {
       player: Player,
       marketFocus: "nomads",
@@ -51,20 +51,20 @@ export default {
   },
 
   methods: {
-    changeMarketFocus: function(v) {
-      this.marketFocus = v;
+    changeMarketFocus: function (v) {
+      this.marketFocus = v
     },
 
-    focusClass: function(v) {
-      return v === this.marketFocus ? {selected: true} : {};
+    focusClass: function (v) {
+      return v === this.marketFocus ? { selected: true } : {}
     },
 
-    togglePopup: function(e, t) {
-      if(e === "on") {
-        utils.popup.text = t;
-        utils.popup.hovered = true;
+    togglePopup: function (e, t) {
+      if (e === "on") {
+        utils.popup.text = t
+        utils.popup.hovered = true
       } else {
-        utils.popup.hovered = false;
+        utils.popup.hovered = false
       }
     }
   },

@@ -1,4 +1,4 @@
-import utils from "./utils";
+import utils from "./utils"
 
 /* The player status and functionalities */
 
@@ -15,9 +15,9 @@ let properties = {
 
   competency: 1,
 
-  coal: 0,         
-  capacity: 10,     
-  gold: 100,          
+  coal: 0,
+  capacity: 10,
+  gold: 100,
 
   day: 1,
   month: 1,
@@ -81,173 +81,173 @@ let properties = {
 // The player methods list
 let methods = {
   // Change amount
-  setAmount: function(v) {
-    if(isNaN(v) === false && v > 0) {
-      this.amount = v;
+  setAmount: function (v) {
+    if (isNaN(v) === false && v > 0) {
+      this.amount = v
     }
   },
 
   // Change stage
-  setStage: function(v) {
-    this.stages[v] = true;
+  setStage: function (v) {
+    this.stages[v] = true
   },
 
   // Calendar update
-  updateCalendar: function() {
-    this.day += 1;
-    if(this.day > 30) {
-      this.day = 1;
-      this.month += 1;
+  updateCalendar: function () {
+    this.day += 1
+    if (this.day > 30) {
+      this.day = 1
+      this.month += 1
 
-      if(this.month > 12) {
-        this.month = 1;
-        this.year += 1;
+      if (this.month > 12) {
+        this.month = 1
+        this.year += 1
       }
 
-      switch(this.month) {
-        case 1:
-          this.season = "spring";
-          break;
-        case 4:
-          this.season = "summer";
-          break;
-        case 7:
-          this.season = "autumn";
-          break;
-        case 10:
-          this.season = "winter";
-          break;
+      switch (this.month) {
+      case 1:
+        this.season = "spring"
+        break
+      case 4:
+        this.season = "summer"
+        break
+      case 7:
+        this.season = "autumn"
+        break
+      case 10:
+        this.season = "winter"
+        break
       }
     }
   },
 
-  updateTickRender: function() {
-    this.tickRender += 1;
-    if(this.tickRender >= 100) {
-      this.tickRender = 0;
+  updateTickRender: function () {
+    this.tickRender += 1
+    if (this.tickRender >= 100) {
+      this.tickRender = 0
     }
   },
 
   // Coal methods
-  increaseCoal: function(v) {
-    if(this.coal < this.capacity) {
-      this.coal += v;
-      this.coal = utils.clamp(this.coal, 0, this.capacity);
-      this.updateAchievement("firstSteps", v, "add");
+  increaseCoal: function (v) {
+    if (this.coal < this.capacity) {
+      this.coal += v
+      this.coal = utils.clamp(this.coal, 0, this.capacity)
+      this.updateAchievement("firstSteps", v, "add")
     }
   },
 
-  decreaseCoal: function(v) {
-    if((this.coal - v) >= 0) {
-      this.coal -= v;
+  decreaseCoal: function (v) {
+    if ((this.coal - v) >= 0) {
+      this.coal -= v
     }
   },
 
   // Gold methods
-  increaseGold: function(v) {
-    this.gold += v;
+  increaseGold: function (v) {
+    this.gold += v
   },
 
-  decreaseGold: function(v) {
-    if((this.gold - v) >= 0) {
-      this.gold -= v;
+  decreaseGold: function (v) {
+    if ((this.gold - v) >= 0) {
+      this.gold -= v
     }
   },
 
   // Population calculations
-  getUnemployed: function() {
-    return this.population - this.employed;
+  getUnemployed: function () {
+    return this.population - this.employed
   },
 
-  increaseEmployed: function(v) {
-    return this.employed += v;
+  increaseEmployed: function (v) {
+    return this.employed += v
   },
 
-  decreaseEmployed: function(v) {
-    return this.employed -= v;
+  decreaseEmployed: function (v) {
+    return this.employed -= v
   },
 
   // Competency update. Everytime something that affects competency is acquired, call the update method.
   // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
-  updateCompetency: function() {
-    let comp = 1;
+  updateCompetency: function () {
+    let comp = 1
 
-    if(this.inventory.stoneEquiment === true) { comp += 1; }
+    if (this.inventory.stoneEquiment === true) { comp += 1 }
 
-    this.competency = comp;
+    this.competency = comp
   },
 
   // Capacity update. Everytime something that affects Capacity is acquired, call the update method.
   // Using this instead of getCapacity so it doesn't need to run the checks every game tick.
-  updateCapacity: function() {
-    let cap = 10;
+  updateCapacity: function () {
+    let cap = 10
 
-    if(this.inventory.backpack === true) { cap += 15; }
+    if (this.inventory.backpack === true) { cap += 15 }
 
-    this.capacity = cap;
+    this.capacity = cap
   },
 
   // Common mine update
-  updateCommonMine: function() {
-    this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness);
-    if(this.coal >= 10 && this.stages.market === false){ this.setStage("market"); }
+  updateCommonMine: function () {
+    this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness)
+    if (this.coal >= 10 && this.stages.market === false){ this.setStage("market") }
   },
 
   // Nomads updates
-  resetNomadCoal: function() {
-    this.nomads.sellCoal.sold = 0;
+  resetNomadCoal: function () {
+    this.nomads.sellCoal.sold = 0
   },
 
   // Crafting functions
-  updateCraftings: function() {
+  updateCraftings: function () {
     Object.keys(this.crafting).forEach(key => {
-      let price = this.getCraftCost(key);
-      if(this.gold >= price) {
-        let workValue = this.proficiency / this.crafting[key].complexity;
-        this.crafting[key].progress += workValue * this.crafting[key].workers;
-        if(this.crafting[key].progress / this.crafting[key].target >= 1) {
-          this.crafting[key].completed = true;
+      let price = this.getCraftCost(key)
+      if (this.gold >= price) {
+        let workValue = this.proficiency / this.crafting[key].complexity
+        this.crafting[key].progress += workValue * this.crafting[key].workers
+        if (this.crafting[key].progress / this.crafting[key].target >= 1) {
+          this.crafting[key].completed = true
         }
-        this.decreaseGold(price);
+        this.decreaseGold(price)
       }
       else {
         // No gold, reset employed!
-        this.decreaseEmployed(this.crafting[key].workers);
-        this.crafting[key].workers = 0;
+        this.decreaseEmployed(this.crafting[key].workers)
+        this.crafting[key].workers = 0
       }
-    });
+    })
   },
 
-  getCraftCost: function(c) {
-    let tickCost = this.crafting[c].workers * this.crafting[c].baseCost;
-    return tickCost;
+  getCraftCost: function (c) {
+    let tickCost = this.crafting[c].workers * this.crafting[c].baseCost
+    return tickCost
   },
 
-  hasMaterials: function(materials) {
+  hasMaterials: function (materials) {
     return materials.reduce((hasAll, material) => {
       if (this.rawMaterials[material] === false) {
-        hasAll = false;
-      };
-      return hasAll;
+        hasAll = false
+      }
+      return hasAll
     }, true)
-  },  
+  },
 
   // Achievements functions
-  // Achivements are either increment or set value for its progress. The update should be called anywhere 
+  // Achivements are either increment or set value for its progress. The update should be called anywhere
   // that can affect the achievement progress.
-  updateAchievement(name, value, method) {
-    let achievement = this.achievements[name];
-    if(achievement.completed === false) {
+  updateAchievement (name, value, method) {
+    let achievement = this.achievements[name]
+    if (achievement.completed === false) {
 
       if (method === "set") {
-        achievement.progress = value;
-      } else if(method === "add") {
-        achievement.progress += value;
+        achievement.progress = value
+      } else if (method === "add") {
+        achievement.progress += value
       }
-      
-      if(achievement.progress / achievement.target >= 1) {
-        achievement.completed = true;
-        this.achievementPoints += 1;
+
+      if (achievement.progress / achievement.target >= 1) {
+        achievement.completed = true
+        this.achievementPoints += 1
       }
 
     }
@@ -261,4 +261,4 @@ const Player = {
   ...methods
 }
 
-export default Player;
+export default Player

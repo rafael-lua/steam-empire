@@ -7,7 +7,7 @@
 </template>
 
 <script>
-let ProgressBar = require("progressbar.js");
+let ProgressBar = require("progressbar.js")
 
 export default {
   name: "Achievement",
@@ -31,53 +31,53 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       bar: null,
     }
   },
 
-  mounted() {
-    let selector = "." + this.className;
+  mounted () {
+    let selector = "." + this.className
     this.bar = new ProgressBar.Line(selector, {
-        strokeWidth: 3,
-        trailColor: "#3a3a3a",
-        trailWidth: 2,
-        easing: "easeOut",
+      strokeWidth: 3,
+      trailColor: "#3a3a3a",
+      trailWidth: 2,
+      easing: "easeOut",
 
-        from: { color: "#dd5456"},
-        to: { color: "#4ee564"},
-        step: function(state, bar, attachment) {
-            bar.path.setAttribute("stroke", state.color);
-        }
-    });
-    this.bar.set(this.factor);
+      from: { color: "#dd5456" },
+      to: { color: "#4ee564" },
+      step: function (state, bar, attachment) {
+        bar.path.setAttribute("stroke", state.color)
+      }
+    })
+    this.bar.set(this.factor)
   },
 
   watch: {
     // whenever factor changes, this function will run
     factor: function (newFactor, oldFactor) {
-      if(oldFactor < 100) {
-        this.bar.animate(newFactor > 1 ? 1 : newFactor);
+      if (oldFactor < 100) {
+        this.bar.animate(newFactor > 1 ? 1 : newFactor)
       }
     }
   },
 
   computed: {
-    progress: function() {
-      let v = this.factor * 100;
-      return v >= 1 ? "COMPLETED" : `${v.toFixed(2)}%`;
+    progress: function () {
+      let v = this.factor * 100
+      return v >= 1 ? "COMPLETED" : `${v.toFixed(2)}%`
     },
-    uniqueClass: function() {
-      let c = {};
-      c[this.className] = true;
-      return c;
+    uniqueClass: function () {
+      let c = {}
+      c[this.className] = true
+      return c
     },
-    uniqueStyle: function() {
-      let c = {};
-      c["style-" + this.classStyle] = true;
-      return c;
-    },    
+    uniqueStyle: function () {
+      let c = {}
+      c["style-" + this.classStyle] = true
+      return c
+    },
   }
 }
 </script>

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Tavern from "../elements/crafting/Tavern";
-import Player from "~/scripts/playerData";
+import Tavern from "../elements/crafting/Tavern"
+import Player from "~/scripts/playerData"
 
 export default {
   name: "Crafting",
@@ -17,7 +17,7 @@ export default {
     Tavern
   },
 
-  data() {
+  data () {
     return {
       crafting: Player.crafting
     }

@@ -3,27 +3,27 @@ export default {
   ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: "static",
 
   router: {
-    base: '/steam-empire/'
+    base: "/steam-empire/"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'steam-empire',
+    title: "steam-empire",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Incremental idle game about a stemapunk civilization' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "Incremental idle game about a stemapunk civilization" }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap' },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" },
     ]
   },
 

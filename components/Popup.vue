@@ -1,8 +1,8 @@
 <template>
-  <div 
-    id="popup" 
-    class="description" 
-    v-bind:class="pos" 
+  <div
+    id="popup"
+    class="description"
+    v-bind:class="pos"
     v-on:click="cancelHover"
     v-on:mouseover="changePos"
     v-show="popup.hovered"
@@ -17,7 +17,7 @@ import utils from "~/scripts/utils"
 export default {
   name: "Popup",
 
-  data() {
+  data () {
     return {
       popup: utils.popup,
       pos: { bottom: true, top: false }
@@ -28,9 +28,9 @@ export default {
     // whenever popup changes, this function will run. Called with this format to activate deep so it watches nested properties of a object
     popup: {
       handler: function (newPop, oldPop) {
-        if(newPop.hovered === false) {
-          this.pos.bottom = true;
-          this.pos.top = false;
+        if (newPop.hovered === false) {
+          this.pos.bottom = true
+          this.pos.top = false
         }
       },
       deep: true
@@ -38,13 +38,13 @@ export default {
   },
 
   methods: {
-    changePos: function() {
-      this.pos.bottom = !this.pos.bottom;
-      this.pos.top = !this.pos.top;
+    changePos: function () {
+      this.pos.bottom = !this.pos.bottom
+      this.pos.top = !this.pos.top
     },
 
-    cancelHover: function() {
-      this.popup.hovered = false;
+    cancelHover: function () {
+      this.popup.hovered = false
     },
   },
 

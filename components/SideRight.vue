@@ -2,9 +2,9 @@
   <div class="side-right bg-light border-dark">
     <div class="flex-col">
       <div class="info-wrapper">
-        <p 
-          class="text-500 hover-highlight" 
-          v-on:mouseover="togglePopup('on')" 
+        <p
+          class="text-500 hover-highlight"
+          v-on:mouseover="togglePopup('on')"
           v-on:mouseleave="togglePopup('off')"
         >
           AP: <span class="info-value text-700">{{player.achievementPoints}}</span>
@@ -12,21 +12,21 @@
         <hr>
       </div>
 
-      <Achievement 
-        className="test1" 
-        v-bind:classStyle="1" 
-        v-bind:factor="firstStep" 
-        desc="Collect your first 10 coal ores" 
+      <Achievement
+        className="test1"
+        v-bind:classStyle="1"
+        v-bind:factor="firstStep"
+        desc="Collect your first 10 coal ores"
       />
-      
+
     </div>
   </div>
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "~/scripts/playerData";
-import Achievement from "./Achievement";
+import utils from "~/scripts/utils"
+import Player from "~/scripts/playerData"
+import Achievement from "./Achievement"
 
 export default {
   name: "SideRight",
@@ -35,7 +35,7 @@ export default {
     Achievement
   },
 
-  data() {
+  data () {
     return {
       player: Player,
       apHovered: false
@@ -43,20 +43,20 @@ export default {
   },
 
   methods: {
-    togglePopup: function(e) {
-      if(e === "on") {
-        utils.popup.text = "AP (achievement points) can be used to upgrade alchemy/idle mechanics.";
-        utils.popup.hovered = true;
+    togglePopup: function (e) {
+      if (e === "on") {
+        utils.popup.text = "AP (achievement points) can be used to upgrade alchemy/idle mechanics."
+        utils.popup.hovered = true
       } else {
-        utils.popup.hovered = false;
+        utils.popup.hovered = false
       }
     }
   },
-  
+
   computed: {
-    firstStep: function() {
-      let p = this.player.achievements.firstSteps.progress / this.player.achievements.firstSteps.target;
-      return p;
+    firstStep: function () {
+      let p = this.player.achievements.firstSteps.progress / this.player.achievements.firstSteps.target
+      return p
     }
   }
 }

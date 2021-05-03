@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "~/scripts/playerData";
+import utils from "~/scripts/utils"
+import Player from "~/scripts/playerData"
 
 export default {
   name: "SideLeft",
 
-  data() {
+  data () {
     return {
       player: Player,
     }
@@ -43,16 +43,16 @@ export default {
 
   methods: {
     coalPercentage: function () {
-      return ((this.player.coal / this.player.capacity)*100).toFixed(2) + "%";
+      return ((this.player.coal / this.player.capacity)*100).toFixed(2) + "%"
     },
   },
 
   computed: {
-    formatedGold: function() {
-      return utils.format(this.player.gold);
+    formatedGold: function () {
+      return utils.format(this.player.gold)
     },
-    formatedCoal: function() {
-      return utils.format(this.player.coal);
+    formatedCoal: function () {
+      return utils.format(this.player.coal)
     },
   }
 

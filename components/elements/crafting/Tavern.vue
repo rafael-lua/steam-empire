@@ -1,9 +1,9 @@
 <template>
   <div class="item flex-col border-dark mg-bottom-05">
     <div class="flex-row flex-a-center flex-j-evenly">
-       <div 
+       <div
         class="flex-col flex-a-center flex-j-center mg-1x hover-highlight"
-        v-on:mouseover="togglePopup('on', 'A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1')" 
+        v-on:mouseover="togglePopup('on', 'A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1')"
         v-on:mouseleave="togglePopup('off', null)"
       >
         <p class="text-500">TAVERN</p>
@@ -15,7 +15,7 @@
       </div>
       <div class="flex-col flex-a-center limit-width">
         <p class="text-400 flex-row flex-a-center">
-          BASE COST 
+          BASE COST
           <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
           <span class="text-700">{{player.crafting.tavern.baseCost}}</span>
         </p>
@@ -65,17 +65,17 @@
         <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('barley')">BARLEY</p>
       </div>
     </div>
-  </div>    
+  </div>
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "~/scripts/playerData";
+import utils from "~/scripts/utils"
+import Player from "~/scripts/playerData"
 
 export default {
   name: "Tavern",
 
-  data() {
+  data () {
     return {
       player: Player,
       hovered: {
@@ -89,67 +89,67 @@ export default {
       return (this.player.rawMaterials[m] === true) ? null : { "material-not-acquired": true }
     },
 
-     workersEmploy: function() {
-        let canCraft = this.player.hasMaterials(["water", "wood", "barley"]);
-        if(canCraft === true) {
-          let unemployed = this.player.getUnemployed();
-          if(unemployed > 0) {
-            let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed;
-            this.player.increaseEmployed(newEmployers);
-            this.player.crafting.tavern.workers += newEmployers;
-          }
+    workersEmploy: function () {
+      let canCraft = this.player.hasMaterials(["water", "wood", "barley"])
+      if (canCraft === true) {
+        let unemployed = this.player.getUnemployed()
+        if (unemployed > 0) {
+          let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed
+          this.player.increaseEmployed(newEmployers)
+          this.player.crafting.tavern.workers += newEmployers
         }
-    },
-
-    workersReset: function() {
-      let workers = this.player.crafting.tavern.workers;
-      if(workers > 0) {
-        this.player.decreaseEmployed(workers);
-        this.player.crafting.tavern.workers = 0;
       }
     },
 
-    togglePopup: function(e, t) {
-      if(e === "on") {
-        utils.popup.text = t;
-        utils.popup.hovered = true;
+    workersReset: function () {
+      let workers = this.player.crafting.tavern.workers
+      if (workers > 0) {
+        this.player.decreaseEmployed(workers)
+        this.player.crafting.tavern.workers = 0
+      }
+    },
+
+    togglePopup: function (e, t) {
+      if (e === "on") {
+        utils.popup.text = t
+        utils.popup.hovered = true
       } else {
-        utils.popup.hovered = false;
+        utils.popup.hovered = false
       }
     }
   },
 
   computed: {
-    amountCalculated: function() {
-      let unemployed = this.player.getUnemployed();
-      if(unemployed === 0) {
-        return 0;
+    amountCalculated: function () {
+      let unemployed = this.player.getUnemployed()
+      if (unemployed === 0) {
+        return 0
       } else {
-        return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed);
+        return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed)
       }
     },
 
-    progress: function() {
-      let p = ((this.player.crafting.tavern.progress / this.player.crafting.tavern.target) * 100).toFixed(2);
-      return `${(this.player.crafting.tavern.progress).toFixed(2)} (${p}%)`;
+    progress: function () {
+      let p = ((this.player.crafting.tavern.progress / this.player.crafting.tavern.target) * 100).toFixed(2)
+      return `${(this.player.crafting.tavern.progress).toFixed(2)} (${p}%)`
     },
 
-    workValue: function() {
-      let t = this.player.crafting.tavern;
-      let workValue = (this.player.proficiency / t.complexity).toFixed(2);
-      return `${workValue * 10 * t.workers} /s`;
+    workValue: function () {
+      let t = this.player.crafting.tavern
+      let workValue = (this.player.proficiency / t.complexity).toFixed(2)
+      return `${workValue * 10 * t.workers} /s`
     },
 
-    dailyCost: function() {
-      return utils.format(this.player.getCraftCost("tavern") * 100);
+    dailyCost: function () {
+      return utils.format(this.player.getCraftCost("tavern") * 100)
     },
 
-    employed: function() {
-      return utils.format(this.player.crafting.tavern.workers);
+    employed: function () {
+      return utils.format(this.player.crafting.tavern.workers)
     },
 
-    employedRatio: function() {
-      return `${((this.player.crafting.tavern.workers / this.player.population) * 100).toFixed(2)}%`;
+    employedRatio: function () {
+      return `${((this.player.crafting.tavern.workers / this.player.population) * 100).toFixed(2)}%`
     },
   }
 }

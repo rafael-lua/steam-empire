@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div 
-      class="shop-item clickable" 
-      v-on:click="buy" 
-      v-on:mouseover="togglePopup('on', 'Acquire knowledge of the surroundings, revealing all types of useful information, materials and possibilities')" 
+    <div
+      class="shop-item clickable"
+      v-on:click="buy"
+      v-on:mouseover="togglePopup('on', 'Acquire knowledge of the surroundings, revealing all types of useful information, materials and possibilities')"
       v-on:mouseleave="togglePopup('off', null)"
     >
       <p class="text-center text-500">MAP #1</p>
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import utils from "~/scripts/utils";
-import Player from "~/scripts/playerData";
+import utils from "~/scripts/utils"
+import Player from "~/scripts/playerData"
 
 export default {
   name: "Map1",
 
-  data() {
+  data () {
     return {
       player: Player,
       hovered: false,
@@ -32,20 +32,20 @@ export default {
   },
 
   methods: {
-    buy: function() {
-      if((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
-        this.player.gold -= this.price;
-        this.player.inventory.map_1 = true;
-        this.player.stages.savage = true;
+    buy: function () {
+      if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
+        this.player.gold -= this.price
+        this.player.inventory.map_1 = true
+        this.player.stages.savage = true
       }
     },
 
-    togglePopup: function(e, t) {
-      if(e === "on") {
-        utils.popup.text = t;
-        utils.popup.hovered = true;
+    togglePopup: function (e, t) {
+      if (e === "on") {
+        utils.popup.text = t
+        utils.popup.hovered = true
       } else {
-        utils.popup.hovered = false;
+        utils.popup.hovered = false
       }
     }
   },

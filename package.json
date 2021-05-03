@@ -8,12 +8,17 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "pushdist": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "deploy": "npm run generate && npm run pushdist"
+    "deploy": "npm run generate && npm run pushdist",
+    "lint": "eslint ."
   },
   "dependencies": {
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
     "progressbar.js": "^1.1.0",
     "push-dir": "^0.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-plugin-vue": "^7.9.0"
   }
 }

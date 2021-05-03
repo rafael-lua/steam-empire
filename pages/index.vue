@@ -10,38 +10,37 @@
 </template>
 
 <script>
-import Player from "~/scripts/playerData";
-import Main from "../components/Main";
-import GameHeader from "../components/GameHeader";
-import SideLeft from "../components/SideLeft";
-import SideRight from "../components/SideRight";
+import Player from "~/scripts/playerData"
+import Main from "../components/Main"
+import GameHeader from "../components/GameHeader"
+import SideLeft from "../components/SideLeft"
+import SideRight from "../components/SideRight"
 
 // Timer interval variables
-let gameTimer = null;
-let calendarClock = 0;
-let week = 0;
+let calendarClock = 0
+let week = 0
 
 // Main game loop. Its called every 100ms. It is the base game tick.
 const gameLoop = () => {
 
   // Calculates the time
-  calendarClock += 1;
-  Player.updateTickRender();
-  if(calendarClock >= 100) { // Completed day update
-    week += 1;
-    calendarClock = 0;
-    Player.updateCalendar();
+  calendarClock += 1
+  Player.updateTickRender()
+  if (calendarClock >= 100) { // Completed day update
+    week += 1
+    calendarClock = 0
+    Player.updateCalendar()
   }
 
-  if(week == 7) { // Completed week.
-    week = 1;
+  if (week === 7) { // Completed week.
+    week = 1
 
-    Player.resetNomadCoal();
+    Player.resetNomadCoal()
   }
 
   // Per tick updates. Each 10 ticks is one second, or one wheel step.
-  Player.updateCraftings();
-  Player.updateCommonMine();
+  Player.updateCraftings()
+  Player.updateCommonMine()
 }
 
 export default {
@@ -51,18 +50,19 @@ export default {
     SideLeft,
     SideRight,
   },
-  data() {
+  data () {
     return {
-      gameLoaded: false
+      gameLoaded: false,
+      gameTimer: null
     }
   },
-  mounted() {
+  mounted () {
     // Set the game timer and call to the main loop
-    gameTimer = setInterval(gameLoop, 100);
+    this.gameTimer = setInterval(gameLoop, 100)
 
-    this.gameLoaded = true;
+    this.gameLoaded = true
   }
- }
+}
 </script>
 
 <style scoped>

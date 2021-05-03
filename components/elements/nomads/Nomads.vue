@@ -2,15 +2,15 @@
   <div class="nomads noselect">
     <!-- Nav section -->
     <nav class="nomads-nav">
-      <p 
-        v-bind:class="navFocus('sell')" 
+      <p
+        v-bind:class="navFocus('sell')"
         class="text-700 text-italic text-b2 clickable"
         v-on:click="toggleShopFocus('sell')"
       >
         SELL TO
       </p>
-      <p 
-        v-bind:class="navFocus('buy')" 
+      <p
+        v-bind:class="navFocus('buy')"
         class="text-700 text-italic text-b2 clickable"
         v-on:click="toggleShopFocus('buy')"
       >
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import Player from "~/scripts/playerData";
-import SellCoal from "./SellCoal";
-import StoneEquipment from "./StoneEquipment";
-import CraftingTools from "./CraftingTools";
-import Map1 from "./Map1";
-import Backpack from "./Backpack";
+import Player from "~/scripts/playerData"
+import SellCoal from "./SellCoal"
+import StoneEquipment from "./StoneEquipment"
+import CraftingTools from "./CraftingTools"
+import Map1 from "./Map1"
+import Backpack from "./Backpack"
 
 export default {
   name: "Nomads",
@@ -56,7 +56,7 @@ export default {
     Backpack,
   },
 
-  data() {
+  data () {
     return {
       player: Player,
       shopFocus: "sell",
@@ -65,11 +65,11 @@ export default {
   },
 
   methods: {
-    toggleShopFocus: function(f) {
-      this.shopFocus = f;
+    toggleShopFocus: function (f) {
+      this.shopFocus = f
     },
-    navFocus: function(f) {
-      return this.shopFocus === f ? {"nomads-nav-selected": true} : {"nomads-nav-notselected": true};
+    navFocus: function (f) {
+      return this.shopFocus === f ? { "nomads-nav-selected": true } : { "nomads-nav-notselected": true }
     }
   }
 }
@@ -116,7 +116,7 @@ export default {
   flex-wrap: wrap;
 }
 
-/* 
+/*
   v-deep allows to create a deep selector that affects children even when scoped.
   So all items can share the same style with the wrapper class.
 */
