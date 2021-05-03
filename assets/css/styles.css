@@ -230,10 +230,12 @@ hr {
 .hover-highlight:hover {
   cursor: help;
   background-color: rgba(0, 0, 0, 0.05);
+  outline: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .hover-clean:hover {
   cursor: help;
+  outline: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .bg-light {

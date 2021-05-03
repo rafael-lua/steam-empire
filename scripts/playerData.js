@@ -75,10 +75,22 @@ let properties = {
   achievementPoints: 0,
   achievements: {
     firstSteps: { progress: 0, target: 10, completed: false }
+  },
+
+  reports: {
+    coalGains: { current: 0, reported: 0 },
+    coalLosses: { current: 0, reported: 0 },
+    goldGains: { current: 0, reported: 0 },
+    goldLosses: { current: 0, reported: 0 },
   }
 }
 
-// The player methods list
+
+
+/* -------------------------------------------------------------------------- */
+/*                           The player methods list                          */
+/* -------------------------------------------------------------------------- */
+
 let methods = {
   // Change amount
   setAmount: function (v) {
@@ -135,23 +147,31 @@ let methods = {
       this.coal = utils.clamp(this.coal, 0, this.capacity)
       this.updateAchievement("firstSteps", v, "add")
     }
+
+    this.reports.coalGains.current += v
   },
 
   decreaseCoal: function (v) {
     if ((this.coal - v) >= 0) {
       this.coal -= v
     }
+
+    this.reports.coalLosses.current += v
   },
 
   // Gold methods
   increaseGold: function (v) {
     this.gold += v
+
+    this.reports.goldGains.current += v
   },
 
   decreaseGold: function (v) {
     if ((this.gold - v) >= 0) {
       this.gold -= v
     }
+
+    this.reports.goldLosses.current += v
   },
 
   // Population calculations
@@ -253,6 +273,13 @@ let methods = {
     }
   },
 
+  // Report the gains per tick accumulatted in the current accumulator
+  updateReports () {
+    (Object.keys(this.reports)).forEach((key) => {
+      this.reports[key].reported = this.reports[key].current
+      this.reports[key].current = 0
+    })
+  }
 }
 
 // Construct the player object

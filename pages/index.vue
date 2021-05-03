@@ -41,6 +41,8 @@ const gameLoop = () => {
   // Per tick updates. Each 10 ticks is one second, or one wheel step.
   Player.updateCraftings()
   Player.updateCommonMine()
+
+  Player.updateReports()
 }
 
 export default {
