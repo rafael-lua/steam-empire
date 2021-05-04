@@ -70,6 +70,10 @@ hr {
   border: 1px solid rgb(var(--light-shadow));
 }
 
+.hr-light {
+  border: 1px solid rgba(var(--light-shadow), 0.5);
+}
+
 .hr-mg {
   margin: 0.35em auto;
 }

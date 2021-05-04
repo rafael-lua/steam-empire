@@ -49,6 +49,7 @@
     <Mines v-if="menuFocus === 'mines'"/>
     <Market v-if="menuFocus === 'market' && player.stages.market === true"/>
     <Crafting v-if="menuFocus === 'craft' && player.stages.craft === true"/>
+    <Alchemy v-if="menuFocus === 'alchemy' && player.stages.alchemy === true"/>
 
 
   </div>
@@ -62,6 +63,7 @@ import Population from "./menus/Population"
 import Mines from "./menus/Mines"
 import Market from "./menus/Market"
 import Crafting from "./menus/Crafting"
+import Alchemy from "./menus/Alchemy"
 
 export default {
   name: "Main",
@@ -71,6 +73,7 @@ export default {
     Market,
     Population,
     Crafting,
+    Alchemy
   },
 
   data () {
