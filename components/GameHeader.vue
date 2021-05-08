@@ -20,21 +20,21 @@
       <span>Year:<span class="info-value-calendar text-500">{{player.year}}</span></span>
     </p>
 
-    <form class="amount-form" v-on:submit.prevent="changeAmount">
-      <div class="amount noselect hover-clean" v-on:mouseover="togglePopup('on')" v-on:mouseleave="togglePopup('off')">
-        Amount: {{formatedAmount}}
+    <form v-on:submit.prevent="changeAmount">
+      <div class="amount-form noselect hover-clean" v-on:mouseover="togglePopup('on')" v-on:mouseleave="togglePopup('off')">
+        <div class="amount">
+          Amount: {{formatedAmount}}
+        </div>
+        <input
+          type="number"
+          v-model.number="modelAmount"
+          placeholder="Amount..."
+          class="amount-value"
+          min="1"
+          max="999999999"
+          step="0.001"
+        >
       </div>
-      <input
-        type="number"
-        v-model.number="modelAmount"
-        placeholder="Amount..."
-        class="amount-value hover-clean"
-        v-on:mouseover="togglePopup('on')"
-        v-on:mouseleave="togglePopup('off')"
-        min="1"
-        max="999999999"
-        step="0.001"
-      >
     </form>
 
   </header>
@@ -69,7 +69,7 @@ export default {
 
     togglePopup: function (e) {
       if (e === "on") {
-        utils.popup.text = "Type a new value and press enter to register."
+        utils.popup.text = "Type a new amount value and press enter to register."
         utils.popup.hovered = true
       } else {
         utils.popup.hovered = false

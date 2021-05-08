@@ -4,7 +4,7 @@ import utils from "./utils"
 
 // The player data variables object
 let properties = {
-  debugValue: 0,
+  saveDate: new Date(),
 
   amount: 1,
 
@@ -72,6 +72,17 @@ let properties = {
     }
   },
 
+  alchemy: {
+    infusion: {
+      class: "weak",
+      multiplier: 1,
+    },
+    chrysopoeia: {
+      class: "weak",
+      multiplier: 1,
+    }
+  },
+
   achievementPoints: 0,
   achievements: {
     firstSteps: { progress: 0, target: 10, completed: false }
@@ -82,6 +93,8 @@ let properties = {
     coalLosses: { current: 0, reported: 0 },
     goldGains: { current: 0, reported: 0 },
     goldLosses: { current: 0, reported: 0 },
+    infusion: { current: 0, reported: 0 },
+    chrysopoeia: { current: 0, reported: 0 },
   }
 }
 
@@ -117,18 +130,18 @@ let methods = {
       }
 
       switch (this.month) {
-      case 1:
-        this.season = "spring"
-        break
-      case 4:
-        this.season = "summer"
-        break
-      case 7:
-        this.season = "autumn"
-        break
-      case 10:
-        this.season = "winter"
-        break
+        case 1:
+          this.season = "spring"
+          break
+        case 4:
+          this.season = "summer"
+          break
+        case 7:
+          this.season = "autumn"
+          break
+        case 10:
+          this.season = "winter"
+          break
       }
     }
   },
@@ -252,10 +265,41 @@ let methods = {
     }, true)
   },
 
+  // Alchemy functions
+  // Alchemy update. Everytime something that affects competency is acquired, call the update method.
+  // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
+  updateAlchemy: function () {
+    let infusionMult = 1
+    let chrysopoeiaMult = 1
+
+    if (this.alchemy.infusion.class === "median") { infusionMult += 1 }
+    if (this.alchemy.chrysopoeia.class === "median") { chrysopoeiaMult += 1 }
+
+    this.alchemy.infusion.multiplier = infusionMult
+    this.alchemy.chrysopoeia.multiplier = chrysopoeiaMult
+  },
+
+  // The upgrade requirement check happens on the component level.
+  // This only finishes the switch and call the update method.
+  upgradeAlchemy: function (a) {
+
+    switch (this.alchemy[a].class) {
+      case "weak": {
+        this.alchemy[a].class = "median"
+        break
+      }
+      default:
+        break
+    }
+
+    this.updateAlchemy()
+  },
+
+
   // Achievements functions
   // Achivements are either increment or set value for its progress. The update should be called anywhere
   // that can affect the achievement progress.
-  updateAchievement (name, value, method) {
+  updateAchievement: function (name, value, method) {
     let achievement = this.achievements[name]
     if (achievement.completed === false) {
 
@@ -274,7 +318,7 @@ let methods = {
   },
 
   // Report the gains per tick accumulatted in the current accumulator
-  updateReports () {
+  updateReports: function () {
     (Object.keys(this.reports)).forEach((key) => {
       this.reports[key].reported = this.reports[key].current
       this.reports[key].current = 0

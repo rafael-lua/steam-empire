@@ -7,6 +7,8 @@
   --golden-tone: 230, 169, 56;
   --red-tone: 206, 37, 37;
   --green-tone: 33, 167, 10;
+  --aqua-tone-light: 93, 178, 179;
+  --aqua-tone-dark: 42, 103, 123;
   --pink-tone-light: 239, 179, 199;
   --pink-tone-dark: 216, 75, 102;
   --blue-tone-light: 128, 190, 183;
@@ -156,6 +158,13 @@ hr {
   padding: 0.25em;
   background-color: rgb(var(--wine-tone-light));
   border: 2px solid rgb(var(--wine-tone-dark));
+  border-radius: 0.75em;
+}
+
+.button-aqua {
+  padding: 0.25em;
+  background-color: rgb(var(--aqua-tone-light));
+  border: 2px solid rgb(var(--aqua-tone-dark));
   border-radius: 0.75em;
 }
 
