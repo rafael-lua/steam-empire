@@ -153,6 +153,27 @@ let methods = {
     }
   },
 
+  // General methods (items is an array of objects with type/value)
+  increaseAny: function (items) {
+    items.forEach((item) => {
+      if (item.type === "coal") {
+        this.increaseCoal(item.value)
+      } else if (item.type === "gold") {
+        this.increaseGold(item.value)
+      }
+    })
+  },
+
+  decreaseAny: function (items) {
+    items.forEach((item) => {
+      if (item.type === "coal") {
+        this.decreaseCoal(item.value)
+      } else if (item.type === "gold") {
+        this.decreaseGold(item.value)
+      }
+    })
+  },
+
   // Coal methods
   increaseCoal: function (v) {
     if (this.coal < this.capacity) {

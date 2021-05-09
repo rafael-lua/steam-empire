@@ -32,8 +32,9 @@
             v-bind:key="required.name"
             v-bind:class="required.has === true ? hasStyle : hasntStyle"
           >
-            {{required.name}} <span class="text-italic">{{formatNumber(required.amount)}}</span>
-          </p>
+            <span>{{required.name}}</span>
+            <span class="text-italic">{{formatNumber(required.amount)}}</span>
+        </p>
         </div>
       </div>
 

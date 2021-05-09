@@ -32,7 +32,8 @@
           v-bind:key="required.name"
           v-bind:class="required.has === true ? hasStyle : hasntStyle"
         >
-          {{required.name}} <span class="text-italic">{{formatNumber(required.amount)}}</span>
+          <span>{{required.name}}</span>
+          <span class="text-italic">{{formatNumber(required.amount)}}</span>
         </p>
       </div>
     </div>
@@ -43,6 +44,7 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
+import { infusionData } from "~/scripts/gameData"
 
 export default {
   name: "Infusion",
@@ -64,19 +66,30 @@ export default {
 
   methods: {
     upgradeInfusion: function () {
+      switch (this.player.alchemy.infusion.class) {
+        case "weak": {
+          const upgradeData = infusionData["weak"].canUpgrade(this.player)
+          if (upgradeData) {
+            this.player.decreaseAny(upgradeData)
+            this.player.upgradeAlchemy("infusion")
+          }
+          break
+        }
 
+        case "median": {
+
+          break
+        }
+
+        default:
+          break
+      }
     },
 
     requiredMaterials: function () {
       switch (this.player.alchemy.infusion.class) {
         case "weak": {
-          const required = [
-            { name: "Material 1", amount: 5, has: false },
-            { name: "Material 2", amount: null, has: true },
-            { name: "Material 3", amount: null, has: false },
-            { name: "Material 4", amount: 999999999, has: false },
-          ]
-          return required
+          return infusionData["weak"].getRequiredList(this.player)
         }
 
         case "median": {
