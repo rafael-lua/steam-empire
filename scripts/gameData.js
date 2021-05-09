@@ -3,8 +3,8 @@
 export const infusionData = {
   "weak": {
     // Upgrade to median required data
-    coal: 100,
-    ap: 50,
+    coal: 25,
+    ap: 5,
     inventory: ["backpack"],
 
     getRequiredList: function (player) {
