@@ -20,7 +20,7 @@
     <div v-else-if="player.inventory.map_1 === true && player.stages.savage === true">
       <p class="text-center text-500 initial-text">
         The alchemist learns about the savages in the surroundings.<br>
-        They accept to work for gold.
+        They accept doing work for gold.
       </p>
     </div>
 

@@ -27,7 +27,7 @@ export default {
     return {
       player: Player,
       hovered: false,
-      price: 100
+      price: 50
     }
   },
 
@@ -36,6 +36,9 @@ export default {
       if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
         this.player.gold -= this.price
         this.player.inventory.map_1 = true
+        this.player.rawMaterials.water = true
+        this.player.rawMaterials.barley = true
+        this.player.rawMaterials.wood = true
         this.player.stages.savage = true
       }
     },

@@ -17,7 +17,7 @@ let properties = {
 
   coal: 0,
   capacity: 10,
-  gold: 100,
+  gold: 0,
 
   day: 1,
   month: 1,
@@ -34,10 +34,10 @@ let properties = {
 
   stages: {
     // Initial/Dafault is all false
-    market: true,
-    craft: true,
-    alchemy: true,
-    savage: true
+    market: false,
+    craft: false,
+    alchemy: false,
+    savage: false
   },
 
   nomads: {
