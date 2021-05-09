@@ -25,11 +25,15 @@
       </div>
 
       <div class="flex-col flex-a-center">
-        <p class="text-500 text-s2">REQUIREMENTS</p>
+        <p class="text-700 text-s2">REQUIREMENTS</p>
         <hr class="hr-half hr-light">
-        <p class="text-700">ABC 123</p>
-        <p class="text-700">ABC 123</p>
-        <p class="text-700">ABC 123</p>
+        <p
+          v-for="required in requiredMaterials()"
+          v-bind:key="required.name"
+          v-bind:class="required.has === true ? hasStyle : hasntStyle"
+        >
+          {{required.name}} <span class="text-italic">{{formatNumber(required.amount)}}</span>
+        </p>
       </div>
     </div>
 
@@ -46,6 +50,15 @@ export default {
   data () {
     return {
       player: Player,
+      hasStyle: {
+        "text-500": true,
+        "text-s1": true
+      },
+      hasntStyle: {
+        "text-500": true,
+        "text-s1": true,
+        "low-opacity": true
+      }
     }
   },
 
@@ -53,6 +66,37 @@ export default {
     upgradeInfusion: function () {
 
     },
+
+    requiredMaterials: function () {
+      switch (this.player.alchemy.infusion.class) {
+        case "weak": {
+          const required = [
+            { name: "Material 1", amount: 5, has: false },
+            { name: "Material 2", amount: null, has: true },
+            { name: "Material 3", amount: null, has: false },
+            { name: "Material 4", amount: 999999999, has: false },
+          ]
+          return required
+        }
+
+        case "median": {
+          const required = [
+            { name: "Material A", amount: 5, has: false },
+            { name: "Material B", amount: null, has: true },
+            { name: "Material C", amount: null, has: false },
+            { name: "Material D", amount: 999999999, has: false },
+          ]
+          return required
+        }
+
+        default:
+          break
+      }
+    },
+
+    formatNumber: function (n) {
+      return n === null ? null : utils.format(n)
+    }
   },
 
   computed: {
@@ -71,6 +115,10 @@ export default {
 
 .fixed-box {
   width: 150px;
+}
+
+.low-opacity {
+  opacity: 0.5;
 }
 
 </style>
