@@ -170,6 +170,8 @@ let methods = {
         this.decreaseCoal(item.value)
       } else if (item.type === "gold") {
         this.decreaseGold(item.value)
+      } else if (item.type === "ap") {
+        this.decreaseAchievementPoints(item.value)
       }
     })
   },
@@ -336,6 +338,10 @@ let methods = {
       }
 
     }
+  },
+
+  decreaseAchievementPoints: function (v) {
+    return this.achievementPoints -= v
   },
 
   // Report the gains per tick accumulatted in the current accumulator
