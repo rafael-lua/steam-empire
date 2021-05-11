@@ -34,10 +34,10 @@ let properties = {
 
   stages: {
     // Initial/Dafault is all false
-    market: false,
-    craft: false,
-    alchemy: false,
-    savage: false
+    market: true,
+    craft: true,
+    alchemy: true,
+    savage: true
   },
 
   nomads: {

@@ -1,3 +1,7 @@
+import Vue from "vue"
+const eventBus = new Vue()
+// Use like: utils.eventBus.$emit("notificate", "Welcome!")
+
 // Clamp
 const clamp = (value, min, max) => {
   return Math.min(Math.max(value, min), max)
@@ -14,16 +18,17 @@ const format = (value) => {
   return formatedValue
 }
 
+// Popup data
 const popup = {
   text: "",
   hovered: false
 }
-
-// All functions bandled together
+// All functions bundled together
 const utils = {
   clamp,
   format,
-  popup
+  popup,
+  eventBus
 }
 
 export default utils

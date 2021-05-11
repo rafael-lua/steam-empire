@@ -22,7 +22,6 @@ let week = 0
 
 // Main game loop. Its called every 100ms. It is the base game tick.
 const gameLoop = () => {
-
   // Calculates the time
   calendarClock += 1
   Player.updateTickRender()
@@ -52,12 +51,14 @@ export default {
     SideLeft,
     SideRight,
   },
+
   data () {
     return {
       gameLoaded: false,
       gameTimer: null
     }
   },
+
   mounted () {
     // Set the game timer and call to the main loop
     this.gameTimer = setInterval(gameLoop, 100)

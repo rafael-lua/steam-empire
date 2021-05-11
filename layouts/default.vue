@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Notification />
     <Popup />
     <Nuxt />
   </div>
