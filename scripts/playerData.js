@@ -291,7 +291,7 @@ let methods = {
   // Alchemy functions
   // Alchemy update. Everytime something that affects competency is acquired, call the update method.
   // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
-  updateAlchemy: function () {
+  calculateAlchemy: function () {
     let infusionMult = 1
     let chrysopoeiaMult = 1
 
@@ -315,7 +315,7 @@ let methods = {
         break
     }
 
-    this.updateAlchemy()
+    this.calculateAlchemy()
   },
 
 

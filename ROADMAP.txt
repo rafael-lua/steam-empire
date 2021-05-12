@@ -1,0 +1,98 @@
+/** Simple documentation of overall development and log **/
+
+# ---------------------------------------------------------------------------- #
+#                                  /* Queue */                                 #
+# ---------------------------------------------------------------------------- #
+
+[] Add the update method for Alchemy to be called every tick when it becomes automated
+[] Add the upgrade method for making the lachemy automated
+[] Add manual state mechanic for alchemy, which is the initial one
+
+[] Add the tavern logic for its completetation
+
+[] Add alchemy table to craftings to enable the alchemy menu
+
+[] Add the savages mechanics for population after the map #1 acquisition.
+
+# ------------------------------- /* Current */ ------------------------------ #
+
+[] Add the employement ratio (n% of total population) on the employed value in the population section on the left side menu.
+[] Add the population competency to the side menu.
+
+
+
+
+# ---------------------------------------------------------------------------- #
+#                                   /* Log */                                  #
+# ---------------------------------------------------------------------------- #
+
+
+05/10/2021 ~ 05/11/2021
+
+[x] Add notification system
+
+
+
+
+
+# ---------------------------------------------------------------------------- #
+#                             MAIN FEATURES TREE                               #
+# ---------------------------------------------------------------------------- #
+
+Game
+  |_Achievements: Several objectives that player most complete. Fundamentally, completing them all is the end game.
+    |_Achievement Points: Can be used mostly for upgrading alchemy for passive generation of resources.
+  |_Resources
+    |_Coal
+      |_Capacity 
+    |_Gold
+    |_Population
+      |_Status
+        |_Proficiency: Crafting effiency
+        |_Competency: Resources generation efficiency
+        |_Growth: Population passive increase overtime. New units are generated.
+        |_Employed
+      |_Happiness: A factor multiplier for the player's civilization status. It takes the (x)50% form, where the x represents the base multiplier for the population and the n% is a value between 1 and 100 on the current population status values. Example: If the base multiplier is 2 and competency is 100, competency will be 200. The % is a yearly value that when hits 100%, increases the base multipler permanently by 1. The % is affected by employement ratio, season effects, events and associations.
+
+Population
+  |_Savages: Special unit that the player can use as population at the beginning of the game.
+  |_Population: Group of units that player can employ into differents tasks to generate resources or other activities. They cost gold.
+  |_Events: Actions that the player can spend resources on every week/month/season/year to boost population happiness %, but it is a expense that don't give any other return (Except for Achievements)
+
+Mines
+  |_Coal Mine: Units and machines can be employed into coal mines to collect coal over time.
+
+Market
+  |_Nomads: NPCs to trade with. They buy a limited amount of coal that resets every week. They sell useful goods for gold.
+    |_Buy
+      |_Coal
+    |_Sell
+      |_Stone Equipment: Boosts popualtion competency
+      |_Crafting Tools: Open crafting menu
+      |_Map #1: Reveals Water, Barley and Wood resources. Reveals Savages.
+      |_Backpack: Increases coal capacity.
+  |_Caravans: Group of travelers that visit the player every 3 months and stays for a month. They buy huge amounts of coal and can sell interesting goods.
+
+Crafting
+  |_Craft: Offers tons of possible constructions to upgrade the city and allow more possibilities.
+    |_Tavern: First construction for the city and population generator.
+
+Alchemy:
+  |_Manual
+    |_Element Conversion: Convert Coal into Gold manually. It takes some time and it is not very efficient. Available only on the first stages of the game.
+  |_Auto
+    |_Infusion: Generates coal online and offline in a constant rate.
+      |_Upgrades: Can be directly upgraded with Achievement points.
+    |_Chrysopoeia: Generates gold online and offline in a constant rate.
+      |_Upgrades: Can be directly upgraded with Achievement points.
+
+Warehouse (Manage and upgrade your storage capacities)
+Engines (Gears to collect coal that have manutention costs and require either citizens employers or power)
+Fuel (Generate power to feed inventions)
+Management (Employ citizens into city management inventions as trains)
+Research (Knewlegde resource)
+Associations
+
+Logs:
+  |_Historic: Keep an historic of the last 25 entries that keeps track of important events for the player.
+
