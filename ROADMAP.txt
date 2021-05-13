@@ -4,6 +4,8 @@
 #                                  /* Queue */                                 #
 # ---------------------------------------------------------------------------- #
 
+[] Refactor prices to be on gamedata instead of components
+
 [] Add the update method for Alchemy to be called every tick when it becomes automated
 [] Add the upgrade method for making the lachemy automated
 [] Add manual state mechanic for alchemy, which is the initial one
@@ -12,13 +14,11 @@
 
 [] Add alchemy table to craftings to enable the alchemy menu
 
-[] Add the savages mechanics for population after the map #1 acquisition.
+
 
 # ------------------------------- /* Current */ ------------------------------ #
 
-[] Add the employement ratio (n% of total population) on the employed value in the population section on the left side menu.
-[] Add the population competency to the side menu.
-
+[] Add the savages mechanics for population after the map #1 acquisition.
 
 
 
@@ -26,6 +26,10 @@
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
 
+05/12/2021
+
+[x] Add the population competency to the side menu.
+[x] Add the employement ratio (n% of total population) on the employed value in the population section on the left side menu.
 
 05/10/2021 ~ 05/11/2021
 
