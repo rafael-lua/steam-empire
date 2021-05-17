@@ -1,15 +1,15 @@
 <template>
-  <div class="side-left bg-light border-dark">
+  <div class="side-left bg-light border-dark noselect">
     <p class="text-b1 text-700 text-italic text-center">
       CITY STATUS
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-small only-right">
-      Population: <span class="info-value text-500">{{formatedValue(player.population)}}</span>
+      Population: <span class="info-value text-500">{{formatedValue(player.population)}}<span v-if="player.stages.savages === true" class="text-s1"> + {{savages.total}}</span></span>
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/farmer.png" alt="Farmer Icon" class="icon-basic-small only-right">
-      Employed: <span class="info-value text-500">{{formatedValue(player.employed)}}</span>
+      Employed: <span class="info-value text-500">{{formatedValue(player.employed)}}<span v-if="player.stages.savages === true" class="text-s1"> + {{player.savages.employed}}</span></span>
     </p>
     <p class="flex-row flex-a-center text-s2">
       <span class="mg-left-05">\_ Ratio:</span> <span class="info-value text-500">({{employedPercentage()}})</span>
@@ -63,6 +63,7 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
+import { savagesData } from "~/scripts/gameData"
 
 export default {
   name: "SideLeft",
@@ -70,6 +71,7 @@ export default {
   data () {
     return {
       player: Player,
+      savages: savagesData
     }
   },
 
@@ -79,7 +81,11 @@ export default {
     },
 
     employedPercentage: function () {
-      return ((this.player.employed / this.player.population)*100).toFixed(2) + "%"
+      if (this.player.stages.savages === true){
+        return (((this.player.employed + this.player.savages.employed) / (this.player.population + this.savages.total))*100).toFixed(2) + "%"
+      } else {
+        return ((this.player.employed / this.player.population)*100).toFixed(2) + "%"
+      }
     },
 
     formatedValue: function (v) {

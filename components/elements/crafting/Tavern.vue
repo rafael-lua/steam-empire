@@ -14,7 +14,7 @@
         <p class="text-700">{{workValue}}</p>
       </div>
       <div class="flex-col flex-a-center limit-width">
-        <p class="text-400 flex-row flex-a-center">
+        <p class="text-400 flex-row flex-a-center text-s1">
           BASE COST
           <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
           <span class="text-700">{{player.crafting.tavern.baseCost}}</span>
@@ -137,7 +137,7 @@ export default {
     workValue: function () {
       let t = this.player.crafting.tavern
       let workValue = (this.player.proficiency / t.complexity).toFixed(2)
-      return `${workValue * 10 * t.workers} /s`
+      return `${(workValue * 10 * t.workers).toFixed(2)} /s`
     },
 
     dailyCost: function () {

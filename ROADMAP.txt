@@ -1,37 +1,55 @@
 /** Simple documentation of overall development and log **/
 
+### Current and future needed tasks are listed here as reminders as they come to my mind.
+
 # ---------------------------------------------------------------------------- #
 #                                  /* Queue */                                 #
 # ---------------------------------------------------------------------------- #
 
-[] Refactor prices to be on gamedata instead of components
+[] Check for DEBUG before doing any modifications on a save file in production to guard against possible conflicts. 
 
-[] Add the update method for Alchemy to be called every tick when it becomes automated
-[] Add the upgrade method for making the lachemy automated
+[] Refactor any component price to be on gamedata instead of components
+
+[] Add the update method and reportings for alchemy when it becomes automated
+[] Add the upgrade method for making the alchemy automated
+[] Add update logic for manual alchemy and reportings
 [] Add manual state mechanic for alchemy, which is the initial one
 
-[] Add the tavern logic for its completetation
 
+[] Explain to the player that savages don't like villages or cities and they will start to move away as the population grows.
+[] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
+[] Add the tavern logic for its completation
+
+[] Make alchemy table be much easier and important than tavern initially
 [] Add alchemy table to craftings to enable the alchemy menu
 
+[] Refactor all buttons (employ, reset, ...) to use buttons component
+[] Create a buttons component
 
 
 # ------------------------------- /* Current */ ------------------------------ #
 
-[] Add the savages mechanics for population after the map #1 acquisition.
-
-
+[-] Refactor components with gold values to use the gold component
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+05/17/2021
+
+[x] Add the savages mechanics for population after acquiring the item {map #1}
+
+05/16/2021
+
+[x] Add the debug state and red signal for development
+[x] Add a gold component for formatting the coin with its value easily
 
 05/12/2021
 
 [x] Add the population competency to the side menu.
 [x] Add the employement ratio (n% of total population) on the employed value in the population section on the left side menu.
 
-05/10/2021 ~ 05/11/2021
+05/11/2021
 
 [x] Add notification system
 

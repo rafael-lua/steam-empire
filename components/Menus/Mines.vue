@@ -4,7 +4,7 @@
 
       <div class="flex-row flex-a-center flex-j-center">
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <img src="~/assets/icons/cave-entrance.png" alt="Coal Button" class="icon-basic">
+          <img src="~/assets/icons/cave-entrance.png" alt="Coal Mine Icon" class="icon-basic">
           <p class="text-500">COAL MINE</p>
           <p class="text-italic line-s">(common)</p>
         </div>
@@ -53,6 +53,7 @@
 <script>
 import Player from "~/scripts/playerData"
 import utils from "~/scripts/utils"
+import { savagesData } from "~/scripts/gameData"
 
 export default {
   name: "Mines",
@@ -60,6 +61,7 @@ export default {
   data () {
     return {
       player: Player,
+      savages: savagesData
     }
   },
 
@@ -67,17 +69,32 @@ export default {
     commonEmploy: function () {
       let unemployed = this.player.getUnemployed()
       if (unemployed > 0) {
-        let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed
-        this.player.increaseEmployed(newEmployers)
+        let newEmployers = (unemployed >= this.player.amount) ? this.player.amount : unemployed
         this.player.mines.common.workers += newEmployers
+
+        if (this.player.stages.savages === true && this.player.savages.employed < 50) {
+          let newSavages = ((this.player.savages.employed + newEmployers) > 50) ? (50 - this.player.savages.employed) : newEmployers
+          newEmployers -= newSavages
+          this.player.increaseSavageEmployed(newSavages)
+          this.player.increaseEmployed(newEmployers)
+        } else {
+          this.player.increaseEmployed(newEmployers)
+        }
       }
     },
 
     commonReset: function () {
       let workers = this.player.mines.common.workers
       if (workers > 0) {
-        this.player.decreaseEmployed(workers)
         this.player.mines.common.workers = 0
+        if (this.player.stages.savages === true && this.player.savages.employed > 0) {
+          let unemployedSavages = ((this.player.savages.employed - workers) >= 0) ? workers : this.player.savages.employed
+          workers -= unemployedSavages
+          this.player.decreaseSavageEmployed(unemployedSavages)
+          this.player.decreaseEmployed(workers)
+        } else {
+          this.player.decreaseEmployed(workers)
+        }
       }
     },
   },
@@ -85,6 +102,7 @@ export default {
   computed: {
     amountCalculated: function () {
       let unemployed = this.player.getUnemployed()
+      console.log(unemployed)
       if (unemployed === 0) {
         return 0
       } else {
@@ -95,7 +113,11 @@ export default {
       return utils.format(this.player.mines.common.workers)
     },
     commonEmployedRatio: function () {
-      return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
+      if (this.player.stages.savages === true){
+        return `${((this.player.mines.common.workers / (this.player.population + this.savages.total)) * 100).toFixed(2)}%`
+      } else {
+        return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
+      }
     },
   }
 }

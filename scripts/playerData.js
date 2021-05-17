@@ -1,9 +1,13 @@
 import utils from "./utils"
+import { savagesData } from "~/scripts/gameData"
 
 /* The player status and functionalities */
 
 // The player data variables object
 let properties = {
+  debugMode: false,
+  version: 1,
+
   saveDate: new Date(),
 
   amount: 1,
@@ -11,13 +15,13 @@ let properties = {
   population: 1,
   employed: 0,
   proficiency: 1,
-  wildPopulation: 0,
+  price: 0.01,
 
   competency: 1,
 
   coal: 0,
   capacity: 10,
-  gold: 0,
+  gold: 5,
 
   day: 1,
   month: 1,
@@ -34,10 +38,15 @@ let properties = {
 
   stages: {
     // Initial/Dafault is all false
-    market: true,
-    craft: true,
-    alchemy: true,
-    savage: true
+    market: false,
+    craft: false,
+    alchemy: false,
+    savages: false,
+    village: false
+  },
+
+  savages: {
+    employed: 0
   },
 
   nomads: {
@@ -210,17 +219,43 @@ let methods = {
     this.reports.goldLosses.current += v
   },
 
-  // Population calculations
+  // Population methods
+  updatePopulation: function () {
+
+  },
+
   getUnemployed: function () {
-    return this.population - this.employed
+    let unemployed
+    if (this.stages.savages === true) {
+      unemployed = (this.population + savagesData.total) - (this.employed + this.savages.employed)
+    } else {
+      unemployed = this.population - this.employed
+    }
+    return unemployed
   },
 
   increaseEmployed: function (v) {
-    return this.employed += v
+    this.employed += v
   },
 
   decreaseEmployed: function (v) {
-    return this.employed -= v
+    if (this.stages.savages === true && this.savages.employed > 0) {
+      let unemployAmount = v
+      let unemployedSavages = ((this.savages.employed - unemployAmount) >= 0) ? unemployAmount : this.savages.employed
+      unemployAmount -= unemployedSavages
+      this.decreaseSavageEmployed(unemployedSavages)
+      this.employed -= unemployAmount
+    } else {
+      this.employed -= v
+    }
+  },
+
+  increaseSavageEmployed: function (v) {
+    this.savages.employed += v
+  },
+
+  decreaseSavageEmployed: function (v) {
+    this.savages.employed -= v
   },
 
   // Competency update. Everytime something that affects competency is acquired, call the update method.
@@ -245,8 +280,16 @@ let methods = {
 
   // Common mine update
   updateCommonMine: function () {
-    this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness)
-    if (this.coal >= 10 && this.stages.market === false){ this.setStage("market") }
+    const price = this.mines.common.workers * this.price
+    if (this.gold >= price) {
+      this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness)
+      if (this.coal >= 10 && this.stages.market === false) { this.setStage("market") }
+      this.decreaseGold(price)
+    } else {
+      // No gold, reset employed!
+      this.decreaseEmployed(this.mines.common.workers)
+      this.mines.common.workers = 0
+    }
   },
 
   // Nomads updates
@@ -265,8 +308,7 @@ let methods = {
           this.crafting[key].completed = true
         }
         this.decreaseGold(price)
-      }
-      else {
+      } else {
         // No gold, reset employed!
         this.decreaseEmployed(this.crafting[key].workers)
         this.crafting[key].workers = 0
@@ -303,7 +345,6 @@ let methods = {
   },
 
   // The upgrade requirement check happens on the component level.
-  // This only finishes the switch and call the update method.
   upgradeAlchemy: function (a) {
 
     switch (this.alchemy[a].class) {

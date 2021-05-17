@@ -17,11 +17,13 @@
       </p>
     </div>
 
-    <div v-else-if="player.inventory.map_1 === true && player.stages.savage === true">
+    <div v-else-if="player.inventory.map_1 === true && player.stages.savages === true">
       <p class="text-center text-500 initial-text">
         The alchemist learns about the savages in the surroundings.<br>
         They accept doing work for gold.
       </p>
+      <hr class="hr-light">
+      <Savages />
     </div>
 
   </div>
@@ -30,8 +32,14 @@
 <script>
 import Player from "~/scripts/playerData"
 
+import Savages from "../elements/population/Savages"
+
 export default {
   name: "Population",
+
+  components: {
+    Savages
+  },
 
   data () {
     return {

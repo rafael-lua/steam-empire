@@ -1,5 +1,9 @@
 // Contains data that will not be changing in the game, only referenced by components.
 
+export const savagesData = {
+  total: 50
+}
+
 export const infusionData = {
   "weak": {
     // Upgrade to median required data

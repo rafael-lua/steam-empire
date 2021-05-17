@@ -39,7 +39,7 @@ export default {
         this.player.rawMaterials.water = true
         this.player.rawMaterials.barley = true
         this.player.rawMaterials.wood = true
-        this.player.stages.savage = true
+        this.player.setStage("savages")
       }
     },
 

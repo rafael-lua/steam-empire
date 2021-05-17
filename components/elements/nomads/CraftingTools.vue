@@ -36,7 +36,7 @@ export default {
       if ((this.player.inventory.craftingTools !== true) && (this.player.gold >= this.price)) {
         this.player.gold -= this.price
         this.player.inventory.craftingTools = true
-        this.player.stages.craft = true
+        this.player.setStage("craft")
       }
     },
 

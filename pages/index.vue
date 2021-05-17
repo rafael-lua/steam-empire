@@ -1,5 +1,6 @@
 <template>
   <div class="main-grid">
+    <DebugMode v-if="player.debugMode === true" />
     <GameHeader />
     <SideLeft />
     <div class="container">
@@ -15,34 +16,7 @@ import Main from "../components/Main"
 import GameHeader from "../components/GameHeader"
 import SideLeft from "../components/SideLeft"
 import SideRight from "../components/SideRight"
-
-// Timer interval variables
-let calendarClock = 0
-let week = 0
-
-// Main game loop. Its called every 100ms. It is the base game tick.
-const gameLoop = () => {
-  // Calculates the time
-  calendarClock += 1
-  Player.updateTickRender()
-  if (calendarClock >= 100) { // Completed day update
-    week += 1
-    calendarClock = 0
-    Player.updateCalendar()
-  }
-
-  if (week === 7) { // Completed week.
-    week = 1
-
-    Player.resetNomadCoal()
-  }
-
-  // Per tick updates. Each 10 ticks is one second, or one wheel step.
-  Player.updateCraftings()
-  Player.updateCommonMine()
-
-  Player.updateReports()
-}
+import DebugMode from "../components/DebugMode"
 
 export default {
   components: {
@@ -50,19 +24,70 @@ export default {
     GameHeader,
     SideLeft,
     SideRight,
+    DebugMode
   },
 
   data () {
     return {
+      player: Player,
       gameLoaded: false,
-      gameTimer: null
+      gameTimer: null,
+      calendarClock: 0,
+      week: 0
+    }
+  },
+
+  methods: {
+    // Main game loop. Its called every 100ms. It is the base game tick.
+    gameLoop: function () {
+      // Calculates the time
+      this.calendarClock += 1
+      Player.updateTickRender()
+      if (this.calendarClock >= 100) { // Completed day update
+        this.week += 1
+        this.calendarClock = 0
+        Player.updateCalendar()
+      }
+
+      if (this.week === 7) { // Completed week.
+        this.week = 1
+
+        Player.resetNomadCoal()
+      }
+
+      // Per tick updates. Each 10 ticks is one second, or one wheel step.
+
+      Player.updatePopulation() // Always comes in first.
+
+      Player.updateCraftings()
+      Player.updateCommonMine()
+
+      Player.updateReports()
     }
   },
 
   mounted () {
-    // Set the game timer and call to the main loop
-    this.gameTimer = setInterval(gameLoop, 100)
+    // DEBUG MODE FOR DEVELOPMENT, set false for deploy
+    this.player.debugMode = true
 
+    // Load the game
+    if (this.player.debugMode === true)
+    {
+      // Base file with development modifications needed
+      this.player.gold = 100
+      this.player.coal = 100
+      Object.keys(this.player.stages).forEach((key) => {
+        this.player.stages[key] = true
+      })
+      this.player.stages.savages = false
+      this.player.stages.village = false
+
+    } else {
+      // Production load/initialization with storage
+    }
+
+    // Set the game timer and call to the main loop
+    this.gameTimer = setInterval(this.gameLoop, 100)
     this.gameLoaded = true
   }
 }
