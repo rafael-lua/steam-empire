@@ -36,18 +36,15 @@
         <p class="text-500 text-italic text-s1">({{employedRatio}})</p>
       </div>
       <div class="flex-col flex-a-center flex-j-center">
-        <div class="button-blue clickable flex-col flex-a-center" v-on:click="workersEmploy">
-          <p class="text-500">EMPLOY</p>
+        <Button title="EMPLOY" color="blue" v-on:handler="workersEmploy">
           <p class="text-700 text-italic flex-row flex-a-center">
             <img src="~/assets/icons/mustache.png" alt="Employ Icon" class="icon-basic-mini only-right">
             {{amountCalculated}}
           </p>
-        </div>
+        </Button>
       </div>
       <div class="flex-col flex-a-center flex-j-center">
-        <div class="button-wine clickable flex-col flex-a-center" v-on:click="workersReset">
-          <p class="text-500">RESET</p>
-        </div>
+        <Button title="RESET" color="wine" v-on:handler="workersReset" />
       </div>
       <div class="hr-4em"></div>
       <div class="flex-col flex-a-center flex-j-center">
@@ -69,12 +66,14 @@
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 import CoinFormat from "../CoinFormat"
+import Button from "../Button"
 
 export default {
   name: "Tavern",
 
   components: {
-    CoinFormat
+    CoinFormat,
+    Button
   },
 
   data () {

@@ -30,18 +30,15 @@
           <p class="text-500 text-italic text-s1">({{commonEmployedRatio}})</p>
         </div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <div class="button-blue clickable flex-col flex-a-center" v-on:click="commonEmploy">
-            <p class="text-500">EMPLOY</p>
+          <Button title="EMPLOY" color="blue" v-on:handler="commonEmploy">
             <p class="text-700 text-italic flex-row flex-a-center">
-              <img src="~/assets/icons/mustache.png" alt="Coin Icon" class="icon-basic-mini only-right">
+              <img src="~/assets/icons/mustache.png" alt="Employ Icon" class="icon-basic-mini only-right">
               {{amountCalculated}}
             </p>
-          </div>
+          </Button>
         </div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <div class="button-wine clickable flex-col flex-a-center" v-on:click="commonReset">
-            <p class="text-500">RESET</p>
-          </div>
+          <Button title="RESET" color="wine" v-on:handler="commonReset" />
         </div>
       </div>
       <hr class="hr-mg">
@@ -54,9 +51,14 @@
 import Player from "~/scripts/playerData"
 import utils from "~/scripts/utils"
 import { savagesData } from "~/scripts/gameData"
+import Button from "../elements/Button"
 
 export default {
   name: "Mines",
+
+  components: {
+    Button
+  },
 
   data () {
     return {

@@ -20,20 +20,22 @@
 [] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
 [] Add the tavern logic for its completation
 
-[] Make alchemy table be much easier and important than tavern initially
-[] Add alchemy table to craftings to enable the alchemy menu
-
-[] Refactor all buttons (employ, reset, ...) to use buttons component
-[] Create a buttons component
-
 
 # ------------------------------- /* Current */ ------------------------------ #
 
-[-] Refactor components with gold values to use the gold component
+[] Make alchemy table be much easier and important than tavern initially
+[] Add alchemy table to craftings to enable the alchemy menu
+
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+05/19/2021
+
+[x] Refactor components with gold values to use the gold component
+[x] Refactor all buttons (employ, reset, ...) to use buttons component
+[x] Create a buttons component
 
 05/17/2021
 

@@ -20,9 +20,7 @@
     </div>
 
     <div class="border-light flex-row flex-a-center flex-j-center pd-1">
-      <div class="button-aqua clickable flex-col flex-a-center mg-right-1" v-on:click="upgradeInfusion()">
-        <p class="text-500">UPGRADE</p>
-      </div>
+      <Button title="UPGRADE" color="aqua" v-on:handler="upgradeInfusion()" v-bind:extraStyle="{'mg-right-1': true}" />
 
       <div class="flex-col flex-a-center">
         <p class="text-700 text-s2">REQUIREMENTS</p>
@@ -45,9 +43,14 @@
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 import { infusionData } from "~/scripts/gameData"
+import Button from "../Button"
 
 export default {
   name: "Infusion",
+
+  components: {
+    Button
+  },
 
   data () {
     return {

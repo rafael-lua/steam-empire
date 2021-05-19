@@ -147,6 +147,13 @@ hr {
   margin-bottom: 0.5em;
 }
 
+.button-white {
+  padding: 0.25em;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgb(var(--light-shadow));
+  border-radius: 0.75em;
+}
+
 .button-blue {
   padding: 0.25em;
   background-color: rgb(var(--blue-tone-light));
