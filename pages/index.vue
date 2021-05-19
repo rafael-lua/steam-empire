@@ -68,12 +68,11 @@ export default {
 
   mounted () {
     // DEBUG MODE FOR DEVELOPMENT, set false for deploy
-    this.player.debugMode = true
+    this.player.debugMode = false
 
     // Load the game
-    if (this.player.debugMode === true)
-    {
-      // Base file with development modifications needed
+    if (this.player.debugMode === true) {
+      // Development file with the debug/test modifications needed
       this.player.gold = 100
       this.player.coal = 100
       Object.keys(this.player.stages).forEach((key) => {
