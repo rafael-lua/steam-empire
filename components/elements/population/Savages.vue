@@ -15,13 +15,13 @@
     <div class="flex-col flex-a-center flex-j-center pd-1x">
       <img src="~/assets/icons/receive-money.png" alt="Payment Icon" class="icon-basic">
       <p class="text-500 text-s1 text-center">TOTAL COSTS</p>
-      <CoinFormat v-bind:value="calculatedPrice">/s</CoinFormat>
+      <CoinFormat>{{calculatedPrice}} /s</CoinFormat>
     </div>
     <div class="hr-4em"></div>
     <div class="flex-col flex-a-center flex-j-center pd-1x">
       <img src="~/assets/icons/coins.png" alt="Payment Icon" class="icon-basic">
       <p class="text-500 text-s1 text-center">BASE PRICE</p>
-      <CoinFormat v-bind:value="player.price"><span class="mg-left-05">per tick</span></CoinFormat>
+      <CoinFormat>{{formatedValue(player.price)}}<span class="mg-left-05">per tick</span></CoinFormat>
     </div>
   </div>
 </template>
@@ -46,6 +46,12 @@ export default {
     }
   },
 
+  methods: {
+    formatedValue: function (v){
+      return utils.format(v)
+    }
+  },
+
   computed: {
     unemployedSavages: function () {
       let unemployed = this.player.getUnemployed()
@@ -57,7 +63,7 @@ export default {
     },
 
     calculatedPrice: function () {
-      return (this.player.price * 10) * this.player.savages.employed
+      return utils.format((this.player.price * 10) * this.player.savages.employed)
     }
   }
 }

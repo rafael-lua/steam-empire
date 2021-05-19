@@ -10,10 +10,7 @@
       <hr>
       <p class="text-center text-500">MAX ({{maxSold}})</p>
       <hr>
-      <p class="text-center text-italic flex-row flex-a-center">
-        <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
-        {{calculatedValue}}
-      </p>
+      <CoinFormat>{{calculatedValue}}</CoinFormat>
     </div>
   </div>
 </template>
@@ -21,9 +18,14 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
+import CoinFormat from "../CoinFormat"
 
 export default {
   name: "SellCoal",
+
+  components: {
+    CoinFormat
+  },
 
   data () {
     return {

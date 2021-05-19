@@ -8,10 +8,7 @@
     >
       <p class="text-center text-500">MAP #1</p>
       <hr>
-      <p class="text-center text-italic flex-row flex-a-center">
-        <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
-        {{price}}
-      </p>
+      <CoinFormat>{{formatedValue(price)}}</CoinFormat>
     </div>
   </div>
 </template>
@@ -19,9 +16,14 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
+import CoinFormat from "../CoinFormat"
 
 export default {
   name: "Map1",
+
+  components: {
+    CoinFormat
+  },
 
   data () {
     return {
@@ -32,6 +34,10 @@ export default {
   },
 
   methods: {
+    formatedValue: function (v) {
+      return utils.format(v)
+    },
+
     buy: function () {
       if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
         this.player.gold -= this.price

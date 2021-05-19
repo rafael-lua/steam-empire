@@ -7,7 +7,7 @@
         v-on:mouseleave="togglePopup('off', null)"
       >
         <p class="text-500">TAVERN</p>
-        <img src="~/assets/icons/tavern-sign.png" alt="Coin Icon" class="icon-basic">
+        <img src="~/assets/icons/tavern-sign.png" alt="Tavern Icon" class="icon-basic">
       </div>
       <div class="flex-col flex-a-center flex-j-center">
         <p class="text-400">WORK VALUE</p>
@@ -39,7 +39,7 @@
         <div class="button-blue clickable flex-col flex-a-center" v-on:click="workersEmploy">
           <p class="text-500">EMPLOY</p>
           <p class="text-700 text-italic flex-row flex-a-center">
-            <img src="~/assets/icons/mustache.png" alt="Coin Icon" class="icon-basic-mini only-right">
+            <img src="~/assets/icons/mustache.png" alt="Employ Icon" class="icon-basic-mini only-right">
             {{amountCalculated}}
           </p>
         </div>
@@ -52,10 +52,7 @@
       <div class="hr-4em"></div>
       <div class="flex-col flex-a-center flex-j-center">
         <p class="text-400">DAILY COST</p>
-        <p class="text-700 text-italic flex-row flex-a-center">
-          <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
-           {{dailyCost}}
-        </p>
+        <CoinFormat><span class="text-700">{{dailyCost}}</span></CoinFormat>
       </div>
       <div class="hr-4em"></div>
       <div class="flex-col flex-a-center flex-j-center">
@@ -71,9 +68,14 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
+import CoinFormat from "../CoinFormat"
 
 export default {
   name: "Tavern",
+
+  components: {
+    CoinFormat
+  },
 
   data () {
     return {
