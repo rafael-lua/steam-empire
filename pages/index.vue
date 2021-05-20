@@ -68,7 +68,7 @@ export default {
 
   mounted () {
     // DEBUG MODE FOR DEVELOPMENT, set false for deploy
-    this.player.debugMode = false
+    this.player.debugMode = true
 
     // Load the game
     if (this.player.debugMode === true) {

@@ -1,5 +1,8 @@
 import utils from "./utils"
-import { savagesData } from "~/scripts/gameData"
+import {
+  savagesData,
+  craftingsData
+} from "~/scripts/gameData"
 
 /* The player status and functionalities */
 
@@ -72,11 +75,14 @@ let properties = {
 
   crafting: {
     tavern: {
-      baseCost: 0.01,
       workers: 0,
-      complexity: 100,
       progress: 0,
-      target: 100,
+      completed: false
+    },
+
+    alchemyTable: {
+      workers: 0,
+      progress: 0,
       completed: false
     }
   },
@@ -302,9 +308,9 @@ let methods = {
     Object.keys(this.crafting).forEach(key => {
       let price = this.getCraftCost(key)
       if (this.gold >= price) {
-        let workValue = this.proficiency / this.crafting[key].complexity
+        let workValue = this.proficiency / craftingsData[key].complexity
         this.crafting[key].progress += workValue * this.crafting[key].workers
-        if (this.crafting[key].progress / this.crafting[key].target >= 1) {
+        if ((this.crafting[key].progress / craftingsData[key].target) >= 1) {
           this.crafting[key].completed = true
         }
         this.decreaseGold(price)
@@ -317,7 +323,7 @@ let methods = {
   },
 
   getCraftCost: function (c) {
-    let tickCost = this.crafting[c].workers * this.crafting[c].baseCost
+    let tickCost = this.crafting[c].workers * craftingsData[c].baseCost
     return tickCost
   },
 

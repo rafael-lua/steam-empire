@@ -1,13 +1,17 @@
 <template>
   <div class="item flex-col border-dark mg-bottom-05">
     <div class="flex-row flex-a-center flex-j-evenly">
-       <div
+      <div
         class="flex-col flex-a-center flex-j-center mg-1x hover-highlight"
-        v-on:mouseover="togglePopup('on', 'A small tavern with beer and accommodations. Travelers may want to stay permanently and they will be available for hiring. Population growth +1')"
+        v-on:mouseover="togglePopup('on', crafting.popupMessage)"
         v-on:mouseleave="togglePopup('off', null)"
       >
-        <p class="text-500">TAVERN</p>
-        <img src="~/assets/icons/tavern-sign.png" alt="Tavern Icon" class="icon-basic">
+        <p class="text-500">{{crafting.title.toUpperCase()}}</p>
+        <img
+          v-bind:src="require(`~/assets/icons/${crafting.icon}.png`)"
+          v-bind:alt="`${crafting.title} icon`"
+          class="icon-basic"
+        />
       </div>
       <div class="flex-col flex-a-center flex-j-center">
         <p class="text-400">WORK VALUE</p>
@@ -16,15 +20,14 @@
       <div class="flex-col flex-a-center limit-width">
         <p class="text-400 flex-row flex-a-center text-s1">
           BASE COST
-          <img src="~/assets/icons/two-coins.png" alt="Coin Icon" class="icon-basic-mini">
-          <span class="text-700">{{player.crafting.tavern.baseCost}}</span>
+          <CoinFormat><span class="text-700">{{crafting.baseCost}}</span></CoinFormat>
         </p>
         <hr>
         <p class="text-400 text-center"><span class="text-italic">
-          COMPLEXITY: <span class="text-500">{{player.crafting.tavern.complexity}}</span></span>
+          COMPLEXITY: <span class="text-500">{{crafting.complexity}}</span></span>
         </p>
         <p class="text-400">
-          PROGRESS: <span class="text-700"><span class="text-green">{{progress}}</span> / {{player.crafting.tavern.target}}</span>
+          PROGRESS: <span class="text-700"><span class="text-green">{{progress}}</span> / {{crafting.target}}</span>
         </p>
       </div>
     </div>
@@ -54,9 +57,13 @@
       <div class="hr-4em"></div>
       <div class="flex-col flex-a-center flex-j-center">
         <p class="text-400">MATERIALS REQUIRED</p>
-        <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('wood')">WOOD</p>
-        <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('water')">WATER</p>
-        <p class="text-s2 text-700 pd-05x" v-bind:class="notAcquired('barley')">BARLEY</p>
+        <p
+          v-for="m in crafting.materials"
+          v-bind:key="m" class="text-s2 text-700 pd-05x"
+          v-bind:class="notAcquired(m)"
+        >
+          {{m.toUpperCase()}}
+        </p>
       </div>
     </div>
   </div>
@@ -69,19 +76,23 @@ import CoinFormat from "../CoinFormat"
 import Button from "../Button"
 
 export default {
-  name: "Tavern",
+  name: "CraftingItem",
 
   components: {
     CoinFormat,
     Button
   },
 
+  props: {
+    crafting: {
+      type: Object,
+      required: true
+    }
+  },
+
   data () {
     return {
-      player: Player,
-      hovered: {
-        tavern: false,
-      }
+      player: Player
     }
   },
 
@@ -91,22 +102,22 @@ export default {
     },
 
     workersEmploy: function () {
-      let canCraft = this.player.hasMaterials(["water", "wood", "barley"])
+      let canCraft = this.player.hasMaterials(this.crafting.materials)
       if (canCraft === true) {
         let unemployed = this.player.getUnemployed()
         if (unemployed > 0) {
           let newEmployers = unemployed >= this.player.amount ? this.player.amount : unemployed
           this.player.increaseEmployed(newEmployers)
-          this.player.crafting.tavern.workers += newEmployers
+          this.player.crafting[this.crafting.name].workers += newEmployers
         }
       }
     },
 
     workersReset: function () {
-      let workers = this.player.crafting.tavern.workers
+      let workers = this.player.crafting[this.crafting.name].workers
       if (workers > 0) {
         this.player.decreaseEmployed(workers)
-        this.player.crafting.tavern.workers = 0
+        this.player.crafting[this.crafting.name].workers = 0
       }
     },
 
@@ -131,26 +142,25 @@ export default {
     },
 
     progress: function () {
-      let p = ((this.player.crafting.tavern.progress / this.player.crafting.tavern.target) * 100).toFixed(2)
-      return `${(this.player.crafting.tavern.progress).toFixed(2)} (${p}%)`
+      let p = ((this.player.crafting[this.crafting.name].progress / this.crafting.target) * 100).toFixed(2)
+      return `${(this.player.crafting[this.crafting.name].progress).toFixed(2)} (${p}%)`
     },
 
     workValue: function () {
-      let t = this.player.crafting.tavern
-      let workValue = (this.player.proficiency / t.complexity).toFixed(2)
-      return `${(workValue * 10 * t.workers).toFixed(2)} /s`
+      let workValue = (this.player.proficiency / this.crafting.complexity).toFixed(2)
+      return `${(workValue * 10 * this.player.crafting[this.crafting.name].workers).toFixed(2)} /s`
     },
 
     dailyCost: function () {
-      return utils.format(this.player.getCraftCost("tavern") * 100)
+      return utils.format(this.player.getCraftCost(this.crafting.name) * 100)
     },
 
     employed: function () {
-      return utils.format(this.player.crafting.tavern.workers)
+      return utils.format(this.player.crafting[this.crafting.name].workers)
     },
 
     employedRatio: function () {
-      return `${((this.player.crafting.tavern.workers / this.player.population) * 100).toFixed(2)}%`
+      return `${((this.player.crafting[this.crafting.name].workers / this.player.population) * 100).toFixed(2)}%`
     },
   }
 }
@@ -161,6 +171,7 @@ export default {
 .item {
   width: 100%;
   padding: 0.25em;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .material-not-acquired {

@@ -104,7 +104,6 @@ export default {
   computed: {
     amountCalculated: function () {
       let unemployed = this.player.getUnemployed()
-      console.log(unemployed)
       if (unemployed === 0) {
         return 0
       } else {

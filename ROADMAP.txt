@@ -8,6 +8,9 @@
 
 [] Check for DEBUG before doing any modifications on a save file in production to guard against possible conflicts. 
 
+[] When capacities are hit (Like coal), the employers still keep working and causing costs to the player by default. Give the player an config option to reset such situation in case the player wnats to. At same time, allow the idea of employing more than it is needed as a viable strategy against unemployement.
+[] Unemployed debuffs should be increased and decreased overtime, not at once.
+
 [] Refactor any component price to be on gamedata instead of components
 
 [] Add the update method and reportings for alchemy when it becomes automated
@@ -16,20 +19,24 @@
 [] Add manual state mechanic for alchemy, which is the initial one
 
 
-[] Explain to the player that savages don't like villages or cities and they will start to move away as the population grows.
-[] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
-[] Add the tavern logic for its completation
-
 
 # ------------------------------- /* Current */ ------------------------------ #
 
-[] Make alchemy table be much easier and important than tavern initially
-[] Add alchemy table to craftings to enable the alchemy menu
+[] Explain to the player that savages don't like villages or cities and they will start to move away as the population grows.
+[] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
+[-] Add the tavern logic for its completation
+
+[!] REFACTOR evevy small component that is possible into common reusable templates with the <slot> sintaxe.
 
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+05/20/2021
+
+[x] Make alchemy table be much easier and important than tavern initially
+[x] Add alchemy table to craftings to enable the alchemy menu
 
 05/19/2021
 
