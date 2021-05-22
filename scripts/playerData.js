@@ -33,7 +33,7 @@ let properties = {
   tickRender: 0,
 
   inventory: {
-    stoneEquiment: false,
+    stoneEquipment: false,
     craftingTools: false,
     map_1: false,
     backpack: false,
@@ -54,9 +54,7 @@ let properties = {
 
   nomads: {
     sellCoal: {
-      sold: 0,
-      max: 50,
-      value: 1
+      sold: 0
     }
   },
 
@@ -269,7 +267,7 @@ let methods = {
   updateCompetency: function () {
     let comp = 1
 
-    if (this.inventory.stoneEquiment === true) { comp += 1 }
+    if (this.inventory.stoneEquipment === true) { comp += 1 }
 
     this.competency = comp
   },

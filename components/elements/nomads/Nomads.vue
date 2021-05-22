@@ -29,7 +29,7 @@
     <!-- Buy section -->
 
     <div class="shop-wrapper" v-if="shopFocus === 'buy'">
-      <StoneEquipment v-if="!player.inventory.stoneEquiment" />
+      <StoneEquipment v-if="!player.inventory.stoneEquipment" />
       <CraftingTools v-if="!player.inventory.craftingTools" />
       <Map1 v-if="!player.inventory.map_1" />
       <Backpack v-if="!player.inventory.backpack" />

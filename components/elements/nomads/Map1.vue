@@ -1,35 +1,31 @@
 <template>
   <div>
-    <div
-      class="shop-item clickable"
-      v-on:click="buy"
-      v-on:mouseover="togglePopup('on', 'Acquire knowledge of the surroundings, revealing all types of useful information, materials and possibilities')"
-      v-on:mouseleave="togglePopup('off', null)"
-    >
-      <p class="text-center text-500">MAP #1</p>
-      <hr>
-      <CoinFormat>{{formatedValue(price)}}</CoinFormat>
-    </div>
+    <NomadItem
+      v-bind:item="map_1"
+      v-bind:price="formatedValue(map_1.value)"
+      v-on:handler="trade"
+    />
   </div>
 </template>
 
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import CoinFormat from "../CoinFormat"
+
+import { nomadData } from "~/scripts/gameData"
+import NomadItem from "./NomadItem"
 
 export default {
   name: "Map1",
 
   components: {
-    CoinFormat
+    NomadItem
   },
 
   data () {
     return {
       player: Player,
-      hovered: false,
-      price: 50
+      map_1: nomadData.map_1
     }
   },
 
@@ -38,9 +34,9 @@ export default {
       return utils.format(v)
     },
 
-    buy: function () {
-      if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.price)) {
-        this.player.gold -= this.price
+    trade: function () {
+      if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.map_1.value)) {
+        this.player.gold -= this.map_1.value
         this.player.inventory.map_1 = true
         this.player.rawMaterials.water = true
         this.player.rawMaterials.barley = true

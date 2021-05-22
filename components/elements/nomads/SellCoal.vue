@@ -1,50 +1,46 @@
 <template>
   <div>
-    <div
-      class="shop-item clickable"
-      v-on:click="sell"
-      v-on:mouseover="togglePopup('on', 'Sell a limited amount of coal to a traveling nomad. Resets every 7 days')"
-      v-on:mouseleave="togglePopup('off', null)"
+    <NomadItem
+      v-bind:item="sellCoal"
+      v-bind:price="calculatedValue"
+      v-on:handler="trade"
     >
-      <p class="text-center text-500">COAL</p>
-      <hr>
       <p class="text-center text-500">MAX ({{maxSold}})</p>
-      <hr>
-      <CoinFormat>{{calculatedValue}}</CoinFormat>
-    </div>
+    </NomadItem>
   </div>
 </template>
 
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import CoinFormat from "../CoinFormat"
+import { nomadData } from "~/scripts/gameData"
+
+import NomadItem from "./NomadItem"
 
 export default {
   name: "SellCoal",
 
   components: {
-    CoinFormat
+    NomadItem
   },
 
   data () {
     return {
       player: Player,
-      hovered: false
+      sellCoal: nomadData.sellCoal
     }
   },
 
   methods: {
-    sell: function () {
-      let sellCoal = this.player.nomads.sellCoal
-      let available = sellCoal.max - sellCoal.sold
+    trade: function () {
+      let available = this.sellCoal.max - this.player.nomads.sellCoal.sold
       if (available > 0) {
         let limit = (available <= this.player.coal) ? available : this.player.coal
         let amount = utils.clamp(this.player.amount, 1, limit)
         if (this.player.coal >= amount) {
-          sellCoal.sold += amount
+          this.player.nomads.sellCoal.sold += amount
           this.player.decreaseCoal(amount)
-          this.player.increaseGold(amount * sellCoal.value)
+          this.player.increaseGold(amount * this.sellCoal.value)
         }
       }
     },
@@ -61,16 +57,17 @@ export default {
 
   computed: {
     maxSold: function () {
-      let sellCoal = this.player.nomads.sellCoal
-      return utils.format(sellCoal.sold) + "/" + sellCoal.max
+      return utils.format(this.player.nomads.sellCoal.sold) + "/" + this.sellCoal.max
     },
+
     calculatedValue: function () {
-      let sellCoal = this.player.nomads.sellCoal
-      let available = sellCoal.max - sellCoal.sold
+      let available = this.sellCoal.max - this.player.nomads.sellCoal.sold
       let limit = (available <= this.player.coal) ? available : this.player.coal
       let amount = utils.clamp(this.player.amount, 1, limit)
-      return sellCoal.sold !== sellCoal.max ? utils.format(amount * sellCoal.value) : 0
-    },
+      return (this.player.nomads.sellCoal.sold !== this.sellCoal.max)
+        ? utils.format(amount * this.sellCoal.value)
+        : 0
+    }
   }
 }
 </script>

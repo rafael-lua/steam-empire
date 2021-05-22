@@ -26,7 +26,7 @@
 [] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
 [-] Add the tavern logic for its completation
 
-[!] REFACTOR evevy small component that is possible into common reusable templates with the <slot> sintaxe.
+[!] REFACTOR evevy small component that is possible into common reusable templates with the <slot> sintaxe and gameData.
 
 
 # ---------------------------------------------------------------------------- #

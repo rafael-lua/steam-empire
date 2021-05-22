@@ -1,35 +1,31 @@
 <template>
   <div>
-    <div
-      class="shop-item clickable"
-      v-on:click="buy"
-      v-on:mouseover="togglePopup('on', 'Open the crafting capability, allowing the construction of buildings and instruments')"
-      v-on:mouseleave="togglePopup('off', null)"
-    >
-      <p class="text-center text-500">CRAFTING<br>TOOLS</p>
-      <hr>
-      <CoinFormat>{{formatedValue(price)}}</CoinFormat>
-    </div>
+    <NomadItem
+      v-bind:item="craftingTools"
+      v-bind:price="formatedValue(craftingTools.value)"
+      v-on:handler="trade"
+    />
   </div>
 </template>
 
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import CoinFormat from "../CoinFormat"
+
+import { nomadData } from "~/scripts/gameData"
+import NomadItem from "./NomadItem"
 
 export default {
   name: "CraftingTools",
 
   components: {
-    CoinFormat
+    NomadItem
   },
 
   data () {
     return {
       player: Player,
-      hovered: false,
-      price: 50
+      craftingTools: nomadData.craftingTools
     }
   },
 
@@ -38,9 +34,9 @@ export default {
       return utils.format(v)
     },
 
-    buy: function () {
-      if ((this.player.inventory.craftingTools !== true) && (this.player.gold >= this.price)) {
-        this.player.gold -= this.price
+    trade: function () {
+      if ((this.player.inventory.craftingTools !== true) && (this.player.gold >= this.craftingTools.value)) {
+        this.player.gold -= this.craftingTools.value
         this.player.inventory.craftingTools = true
         this.player.setStage("craft")
       }

@@ -1,37 +1,33 @@
 <template>
   <div>
-    <div
-      class="shop-item clickable"
-      v-on:click="buy"
-      v-on:mouseover="togglePopup('on', 'Increases overall competency of collecting coal by 1')"
-      v-on:mouseleave="togglePopup('off', null)"
+    <NomadItem
+      v-bind:item="stoneEquipment"
+      v-bind:price="formatedValue(stoneEquipment.value)"
+      v-on:handler="trade"
     >
-      <p class="text-center text-500">STONE<br>EQUIPMENT</p>
-      <hr>
       <p class="text-center text-400 text-break">COMPETENCY<br><span class="text-700">1</span></p>
-      <hr>
-      <CoinFormat>{{formatedValue(price)}}</CoinFormat>
-    </div>
+    </NomadItem>
   </div>
 </template>
 
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import CoinFormat from "../CoinFormat"
+
+import { nomadData } from "~/scripts/gameData"
+import NomadItem from "./NomadItem"
 
 export default {
   name: "StoneEquipment",
 
   components: {
-    CoinFormat
+    NomadItem
   },
 
   data () {
     return {
       player: Player,
-      hovered: false,
-      price: 10
+      stoneEquipment: nomadData.stoneEquipment
     }
   },
 
@@ -40,20 +36,11 @@ export default {
       return utils.format(v)
     },
 
-    buy: function () {
-      if ((this.player.inventory.stoneEquiment !== true) && (this.player.gold >= this.price)) {
-        this.player.gold -= this.price
-        this.player.inventory.stoneEquiment = true
+    trade: function () {
+      if ((this.player.inventory.stoneEquipment !== true) && (this.player.gold >= this.stoneEquipment.value)) {
+        this.player.gold -= this.stoneEquipment.value
+        this.player.inventory.stoneEquipment = true
         this.player.updateCompetency()
-      }
-    },
-
-    togglePopup: function (e, t) {
-      if (e === "on") {
-        utils.popup.text = t
-        utils.popup.hovered = true
-      } else {
-        utils.popup.hovered = false
       }
     }
   },
