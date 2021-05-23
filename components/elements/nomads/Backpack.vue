@@ -40,7 +40,6 @@ export default {
       if ((this.player.inventory.backpack !== true) && (this.player.gold >= this.backpack.value)) {
         this.player.gold -= this.backpack.value
         this.player.inventory.backpack = true
-        this.player.updateCapacity()
       }
     },
 

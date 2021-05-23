@@ -24,14 +24,19 @@
 
 [] Explain to the player that savages don't like villages or cities and they will start to move away as the population grows.
 [] Every time a new citizen is gained, an savage is removed, so current employement is not affected.
-[-] Add the tavern logic for its completation
-
-[!] REFACTOR evevy small component that is possible into common reusable templates with the <slot> sintaxe and gameData.
 
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+05/23/2021
+
+[x] Add the tavern logic for its completion
+
+05/22/2021
+
+[x] REFACTOR evevy small component that is possible into common reusable templates with the <slot> sintaxe and gameData.
 
 05/20/2021
 
@@ -83,7 +88,7 @@ Game
         |_Competency: Resources generation efficiency
         |_Growth: Population passive increase overtime. New units are generated.
         |_Employed
-      |_Happiness: A factor multiplier for the player's civilization status. It takes the (x)50% form, where the x represents the base multiplier for the population and the n% is a value between 1 and 100 on the current population status values. Example: If the base multiplier is 2 and competency is 100, competency will be 200. The % is a yearly value that when hits 100%, increases the base multipler permanently by 1. The % is affected by employement ratio, season effects, events and associations.
+      |_Happiness: A factor multiplier for the player's civilization status. It takes the (x)50% form, where the x represents the base multiplier for the population and the n% is a value between 1 and 100 on the current population status values. Example: If the base multiplier is 2 and competency is 100, competency will be 200. The % is a value that when hits 100%, increases the base multipler permanently by 1. The % is affected by employement ratio, season effects, events and associations.
 
 Population
   |_Savages: Special unit that the player can use as population at the beginning of the game.

@@ -2,12 +2,12 @@
   <div class="crafting-wrapper bg-light border-dark">
     <div class="crafting flex-col flex-a-center">
       <CraftingItem
-        v-if="player.crafting['tavern'].completed === false"
-        v-bind:crafting="tavernData"
-      />
-      <CraftingItem
         v-if="player.crafting['alchemyTable'].completed === false"
         v-bind:crafting="alchemyTableData"
+      />
+      <CraftingItem
+        v-if="player.crafting['tavern'].completed === false"
+        v-bind:crafting="tavernData"
       />
     </div>
   </div>

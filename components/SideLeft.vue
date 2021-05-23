@@ -5,7 +5,7 @@
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/mustache.png" alt="Population Icon" class="icon-basic-small only-right">
-      Population: <span class="info-value text-500">{{formatedValue(player.population)}}<span v-if="player.stages.savages === true" class="text-s1"> + {{savages.total}}</span></span>
+      Population: <span class="info-value text-500">{{formatedValue(player.population)}}<span v-if="player.stages.savages === true" class="text-s1"> + {{player.savages.total}}</span></span>
     </p>
     <p class="flex-row flex-a-center">
       <img src="~/assets/icons/farmer.png" alt="Farmer Icon" class="icon-basic-small only-right">
@@ -63,15 +63,13 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import { savagesData } from "~/scripts/gameData"
 
 export default {
   name: "SideLeft",
 
   data () {
     return {
-      player: Player,
-      savages: savagesData
+      player: Player
     }
   },
 
@@ -82,7 +80,7 @@ export default {
 
     employedPercentage: function () {
       if (this.player.stages.savages === true){
-        return (((this.player.employed + this.player.savages.employed) / (this.player.population + this.savages.total))*100).toFixed(2) + "%"
+        return (((this.player.employed + this.player.savages.employed) / (this.player.population + this.player.savages.total))*100).toFixed(2) + "%"
       } else {
         return ((this.player.employed / this.player.population)*100).toFixed(2) + "%"
       }

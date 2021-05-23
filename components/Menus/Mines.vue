@@ -50,7 +50,6 @@
 <script>
 import Player from "~/scripts/playerData"
 import utils from "~/scripts/utils"
-import { savagesData } from "~/scripts/gameData"
 import Button from "../elements/Button"
 
 export default {
@@ -62,8 +61,7 @@ export default {
 
   data () {
     return {
-      player: Player,
-      savages: savagesData
+      player: Player
     }
   },
 
@@ -115,7 +113,7 @@ export default {
     },
     commonEmployedRatio: function () {
       if (this.player.stages.savages === true){
-        return `${((this.player.mines.common.workers / (this.player.population + this.savages.total)) * 100).toFixed(2)}%`
+        return `${((this.player.mines.common.workers / (this.player.population + this.player.savages.total)) * 100).toFixed(2)}%`
       } else {
         return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
       }

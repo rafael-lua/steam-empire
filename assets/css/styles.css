@@ -453,6 +453,62 @@ hr {
   margin-left: 1em;
 }
 
+.pd-2 {
+  padding: 2em;
+}
+
+.mg-2 {
+  margin: 2em;
+}
+
+.pd-2x {
+  padding: 0 2em;
+}
+
+.mg-2x {
+  margin: 0 2em;
+}
+
+.pd-2y {
+  padding: 2em 0;
+}
+
+.mg-2y {
+  margin: 2em 0;
+}
+
+.pd-top-2 {
+  padding-top: 2em;
+}
+
+.mg-top-2 {
+  margin-top: 2em;
+}
+
+.pd-bottom-2 {
+  padding-bottom: 2em;
+}
+
+.mg-bottom-2 {
+  margin-bottom: 2em;
+}
+
+.pd-right-2 {
+  padding-right: 2em;
+}
+
+.mg-right-2 {
+  margin-right: 2em;
+}
+
+.pd-left-2 {
+  padding-left: 2em;
+}
+
+.mg-left-2 {
+  margin-left: 2em;
+}
+
 .pd-05 {
   padding: .5em;
 }

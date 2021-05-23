@@ -171,7 +171,7 @@ export default {
 .item {
   width: 100%;
   padding: 0.25em;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.075);
 }
 
 .material-not-acquired {

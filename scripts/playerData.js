@@ -1,6 +1,5 @@
 import utils from "./utils"
 import {
-  savagesData,
   craftingsData
 } from "~/scripts/gameData"
 
@@ -19,6 +18,9 @@ let properties = {
   employed: 0,
   proficiency: 1,
   price: 0.01,
+  happiness: 0,
+  growth: 0,
+  newCitizens: 0,
 
   competency: 1,
 
@@ -40,7 +42,6 @@ let properties = {
   },
 
   stages: {
-    // Initial/Dafault is all false
     market: false,
     craft: false,
     alchemy: false,
@@ -49,7 +50,8 @@ let properties = {
   },
 
   savages: {
-    employed: 0
+    employed: 0,
+    total: 50
   },
 
   nomads: {
@@ -128,6 +130,10 @@ let methods = {
   // Change stage
   setStage: function (v) {
     this.stages[v] = true
+  },
+
+  unsetStage: function (v) {
+    this.stages[v] = false
   },
 
   // Calendar update
@@ -224,14 +230,31 @@ let methods = {
   },
 
   // Population methods
-  updatePopulation: function () {
+  updatePopulation: function (isDayUpdate) {
+    this.updateGrowth()
+    this.newCitizens += this.growth
 
+    if (isDayUpdate) { // New citizens accumlated become part of the population
+      let citizens = Math.floor(this.newCitizens)
+      this.increasePopulation(citizens)
+      if (this.stages.savages === true) {
+        this.decreaseSavages(citizens)
+      }
+      this.newCitizens -= citizens
+    }
+
+    this.updateCompetency()
+    this.updateCapacity()
+  },
+
+  increasePopulation: function (v) {
+    this.population += v
   },
 
   getUnemployed: function () {
     let unemployed
     if (this.stages.savages === true) {
-      unemployed = (this.population + savagesData.total) - (this.employed + this.savages.employed)
+      unemployed = (this.population + this.savages.total) - (this.employed + this.savages.employed)
     } else {
       unemployed = this.population - this.employed
     }
@@ -254,6 +277,14 @@ let methods = {
     }
   },
 
+  decreaseSavages: function (v) {
+    this.savages.total -= v
+    if (this.savages.total <= 0) {
+      this.unsetStage("savages")
+      this.savages.total = 0
+    }
+  },
+
   increaseSavageEmployed: function (v) {
     this.savages.employed += v
   },
@@ -262,8 +293,6 @@ let methods = {
     this.savages.employed -= v
   },
 
-  // Competency update. Everytime something that affects competency is acquired, call the update method.
-  // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
   updateCompetency: function () {
     let comp = 1
 
@@ -272,14 +301,20 @@ let methods = {
     this.competency = comp
   },
 
-  // Capacity update. Everytime something that affects Capacity is acquired, call the update method.
-  // Using this instead of getCapacity so it doesn't need to run the checks every game tick.
   updateCapacity: function () {
     let cap = 10
 
     if (this.inventory.backpack === true) { cap += 15 }
 
     this.capacity = cap
+  },
+
+  updateGrowth: function () {
+    let grow = 0
+
+    if (this.crafting.tavern.completed === true) { grow += 0.01 }
+
+    this.growth = grow
   },
 
   // Common mine update
@@ -335,8 +370,10 @@ let methods = {
   },
 
   // Alchemy functions
-  // Alchemy update. Everytime something that affects competency is acquired, call the update method.
-  // Using this instead of getCompetency so it doesn't need to run the checks every game tick.
+  updateAlchemy: function () {
+    this.calculateAlchemy()
+  },
+
   calculateAlchemy: function () {
     let infusionMult = 1
     let chrysopoeiaMult = 1
@@ -359,8 +396,6 @@ let methods = {
       default:
         break
     }
-
-    this.calculateAlchemy()
   },
 
 

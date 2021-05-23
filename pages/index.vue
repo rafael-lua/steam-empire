@@ -33,20 +33,24 @@ export default {
       gameLoaded: false,
       gameTimer: null,
       calendarClock: 0,
-      week: 0
+      week: 0,
+      isDayUpdate: false
     }
   },
 
   methods: {
     // Main game loop. Its called every 100ms. It is the base game tick.
     gameLoop: function () {
+      this.isDayUpdate = false // Always reset to false
+
       // Calculates the time
       this.calendarClock += 1
       Player.updateTickRender()
-      if (this.calendarClock >= 100) { // Completed day update
+      if (this.calendarClock >= 100) { // Completed day updates
         this.week += 1
         this.calendarClock = 0
         Player.updateCalendar()
+        this.isDayUpdate = true
       }
 
       if (this.week === 7) { // Completed week.
@@ -57,8 +61,9 @@ export default {
 
       // Per tick updates. Each 10 ticks is one second, or one wheel step.
 
-      Player.updatePopulation() // Always comes in first.
+      Player.updatePopulation(this.isDayUpdate)
 
+      Player.updateAlchemy()
       Player.updateCraftings()
       Player.updateCommonMine()
 
@@ -73,14 +78,13 @@ export default {
     // Load the game
     if (this.player.debugMode === true) {
       // Development file with the debug/test modifications needed
-      this.player.gold = 100
+      this.player.gold = 1000
       this.player.coal = 100
       Object.keys(this.player.stages).forEach((key) => {
         this.player.stages[key] = true
       })
       this.player.stages.savages = false
       this.player.stages.village = false
-
     } else {
       // Production load/initialization with storage
     }

@@ -40,7 +40,6 @@ export default {
       if ((this.player.inventory.stoneEquipment !== true) && (this.player.gold >= this.stoneEquipment.value)) {
         this.player.gold -= this.stoneEquipment.value
         this.player.inventory.stoneEquipment = true
-        this.player.updateCompetency()
       }
     }
   },
