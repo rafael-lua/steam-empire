@@ -11,16 +11,15 @@
         <div class="hr-4em"></div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400 text-s1">HARDNESS</p>
-          <p class="text-700">1</p>
+          <p class="text-700">{{player.mines.common.hardness}}</p>
           <p class="text-400 text-s1">COMPETENCY</p>
-          <p class="text-700">1</p>
+          <p class="text-700">{{player.competency}}</p>
         </div>
         <div class="hr-4em"></div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400">YIELD VALUE</p>
           <p class="text-700 text-b2">
-            <!-- Multiply per 10 because Yield shows daily gains -->
-            {{ ((player.competency * player.mines.common.workers) / player.mines.common.hardness) * 10 }} /day
+            {{ ((player.competency * player.mines.common.workers) / player.mines.common.hardness) * 10 }} /sec
           </p>
         </div>
         <div class="hr-4em"></div>

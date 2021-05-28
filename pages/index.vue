@@ -60,6 +60,7 @@ export default {
       }
 
       // Per tick updates. Each 10 ticks is one second, or one wheel step.
+      Player.updateTasks()
 
       Player.updatePopulation(this.isDayUpdate)
 
@@ -73,18 +74,20 @@ export default {
 
   mounted () {
     // DEBUG MODE FOR DEVELOPMENT, set false for deploy
-    this.player.debugMode = false
+    this.player.debugMode = true
 
     // Load the game
     if (this.player.debugMode === true) {
       // Development file with the debug/test modifications needed
       this.player.gold = 1000
-      this.player.coal = 100
+      this.player.coal = 1000
       Object.keys(this.player.stages).forEach((key) => {
         this.player.stages[key] = true
       })
-      this.player.stages.savages = false
+      this.player.stages.savages = true
       this.player.stages.village = false
+      this.player.stages.alchemy = false
+      this.player.stages.autoAlchemy = false
     } else {
       // Production load/initialization with storage
     }

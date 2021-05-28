@@ -1,6 +1,7 @@
 // Contains data that will not be changing in the game, only referenced by components.
 
 export const infusionData = {
+  popupMessage: "Through very unique chemicals reactions, the alchemist is capable of generating coal from less valuable materials, such as rocks and dirt.",
   "weak": {
     // Upgrade to median required data
     coal: 25,
@@ -32,6 +33,10 @@ export const infusionData = {
       }
     }
   }
+}
+
+export const chrysopoeiaData = {
+  popupMessage: "Through very unique chemicals reactions, the alchemist is capable of converting coal to pure gold."
 }
 
 // Shop methods like "sell/buy" or extra aspects need to be dealed in the component level
@@ -84,6 +89,7 @@ export const craftingsData = {
     baseCost: 0.01,
     complexity: 100,
     target: 10,
-    materials: ["wood"]
+    materials: ["wood"],
+    task: "alchemy_table_completed"
   },
 }

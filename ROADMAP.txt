@@ -24,11 +24,13 @@
 [] Add update logic for manual alchemy and reportings
 [-] Add manual state mechanic for alchemy, which is the initial one
 
-
-
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+05/28/2021
+
+[x] Added task system for cheap event report and reaction
 
 05/23/2021
 

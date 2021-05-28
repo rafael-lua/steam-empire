@@ -46,7 +46,8 @@ let properties = {
     craft: false,
     alchemy: false,
     savages: false,
-    village: false
+    village: false,
+    autoAlchemy: false
   },
 
   savages: {
@@ -63,7 +64,7 @@ let properties = {
   mines: {
     common: {
       workers: 0,
-      hardness: 10
+      hardness: 25
     }
   },
 
@@ -102,6 +103,8 @@ let properties = {
   achievements: {
     firstSteps: { progress: 0, target: 10, completed: false }
   },
+
+  tasksList: [],
 
   reports: {
     coalGains: { current: 0, reported: 0 },
@@ -172,8 +175,12 @@ let methods = {
     }
   },
 
-  // General methods (items is an array of objects with type/value)
-  increaseAny: function (items) {
+  // General methods
+  registerTask: function (t) { // A string with the name of the task
+    this.tasksList = this.tasksList.concat(t)
+  },
+
+  increaseAny: function (items) { //  (items is an array of objects with type / value)
     items.forEach((item) => {
       if (item.type === "coal") {
         this.increaseCoal(item.value)
@@ -339,18 +346,23 @@ let methods = {
   // Crafting functions
   updateCraftings: function () {
     Object.keys(this.crafting).forEach(key => {
-      let price = this.getCraftCost(key)
-      if (this.gold >= price) {
-        let workValue = this.proficiency / craftingsData[key].complexity
-        this.crafting[key].progress += workValue * this.crafting[key].workers
-        if ((this.crafting[key].progress / craftingsData[key].target) >= 1) {
-          this.crafting[key].completed = true
+      if (this.crafting[key].completed === false) {
+        let price = this.getCraftCost(key)
+        if (this.gold >= price) {
+          let workValue = this.proficiency / craftingsData[key].complexity
+          this.crafting[key].progress += workValue * this.crafting[key].workers
+          if ((this.crafting[key].progress / craftingsData[key].target) >= 1) {
+            this.crafting[key].completed = true
+            if (craftingsData[key].task !== undefined) {
+              this.registerTask(craftingsData[key].task)
+            }
+          }
+          this.decreaseGold(price)
+        } else {
+          // No gold, reset employed!
+          this.decreaseEmployed(this.crafting[key].workers)
+          this.crafting[key].workers = 0
         }
-        this.decreaseGold(price)
-      } else {
-        // No gold, reset employed!
-        this.decreaseEmployed(this.crafting[key].workers)
-        this.crafting[key].workers = 0
       }
     })
   },
@@ -433,10 +445,44 @@ let methods = {
   }
 }
 
+/* -------------------------------------------------------------------------- */
+/*                           The player tasks list                            */
+/* -------------------------------------------------------------------------- */
+
+/*
+  Tasks are a cheap way of reacting to events during the gameplay. For example, when a crafting completes,
+  it may not only change its own status to completed, but also trigger other switches in different places.
+  So when the crafting finishes, it will report a task that will take care of updating everything needed.
+  This is weird as fuck, but I find the better way of solving my current problem. Otherwise I would need
+  refactor a lot of things since I didn't use OOP or any useful pattern. Sigh.
+*/
+
+let tasks = {
+  updateTasks: function () {
+    if (this.tasksList.length > 0) {
+      console.log(this.tasksList.length)
+      const tasksListRef = [...this.tasksList] // Shallow copy of the strings, so they can be safely removed and not fuck up any loop
+      tasksListRef.forEach((task) => {
+        switch (task) {
+          case "alchemy_table_completed": {
+            this.setStage("alchemy")
+            break
+          }
+
+          default:
+            break
+        }
+        this.tasksList = this.tasksList.filter((t) => t !== task) // Remove task from the list
+      })
+    }
+  }
+}
+
 // Construct the player object
 const Player = {
   ...properties,
-  ...methods
+  ...methods,
+  ...tasks
 }
 
 export default Player

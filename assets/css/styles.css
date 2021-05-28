@@ -80,6 +80,10 @@ hr {
   margin: 0.35em auto;
 }
 
+.hr-25 {
+  width: 25%;
+}
+
 .hr-half {
   width: 50%;
 }
