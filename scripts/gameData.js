@@ -2,6 +2,8 @@
 
 export const infusionData = {
   popupMessage: "Through very unique chemicals reactions, the alchemist is capable of generating coal from less valuable materials, such as rocks and dirt.",
+  rawValue: 10, // Manual gains
+  rawTick: 0.01, // Manual speed per tick for the progress
   "weak": {
     // Upgrade to median required data
     coal: 25,
@@ -36,7 +38,9 @@ export const infusionData = {
 }
 
 export const chrysopoeiaData = {
-  popupMessage: "Through very unique chemicals reactions, the alchemist is capable of converting coal to pure gold."
+  popupMessage: "Through very unique chemicals reactions, the alchemist is capable of converting coal to pure gold.",
+  rawValue: 0, // Manual gains
+  rawTick: 0, // Manual speed per tick for the progress
 }
 
 // Shop methods like "sell/buy" or extra aspects need to be dealed in the component level

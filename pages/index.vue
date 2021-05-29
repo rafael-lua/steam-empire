@@ -80,13 +80,13 @@ export default {
     if (this.player.debugMode === true) {
       // Development file with the debug/test modifications needed
       this.player.gold = 1000
-      this.player.coal = 1000
+      this.player.coal = 0
       Object.keys(this.player.stages).forEach((key) => {
         this.player.stages[key] = true
       })
-      this.player.stages.savages = true
+      this.player.stages.savages = false
       this.player.stages.village = false
-      this.player.stages.alchemy = false
+      this.player.stages.alchemy = true
       this.player.stages.autoAlchemy = false
     } else {
       // Production load/initialization with storage

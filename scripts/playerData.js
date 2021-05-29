@@ -1,6 +1,8 @@
 import utils from "./utils"
 import {
-  craftingsData
+  craftingsData,
+  infusionData,
+  chrysopoeiaData
 } from "~/scripts/gameData"
 
 /* The player status and functionalities */
@@ -92,10 +94,14 @@ let properties = {
     infusion: {
       class: "weak",
       multiplier: 1,
+      manualTick: 0,
+      manualState: false
     },
     chrysopoeia: {
       class: "weak",
       multiplier: 1,
+      manualTick: 0,
+      manualState: false
     }
   },
 
@@ -384,6 +390,26 @@ let methods = {
   // Alchemy functions
   updateAlchemy: function () {
     this.calculateAlchemy()
+
+    if (this.stages.autoAlchemy === false) {
+      if (this.alchemy.infusion.manualState === true) {
+        this.alchemy.infusion.manualTick += infusionData.rawTick
+        if (this.alchemy.infusion.manualTick >= 1) {
+          this.setManualState("infusion", false)
+          this.alchemy.infusion.manualTick = 0
+          this.increaseCoal(infusionData.rawValue)
+        }
+      }
+
+      if (this.alchemy.chrysopoeia.manualState === true) {
+        this.alchemy.chrysopoeia.manualTick += chrysopoeiaData.rawTick
+
+      }
+    }
+  },
+
+  setManualState: function (type, value) {
+    this.alchemy[type].manualState = value
   },
 
   calculateAlchemy: function () {

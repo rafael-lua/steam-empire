@@ -19,7 +19,7 @@
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400">YIELD VALUE</p>
           <p class="text-700 text-b2">
-            {{ ((player.competency * player.mines.common.workers) / player.mines.common.hardness) * 10 }} /sec
+            {{ commonYieldValue }} /sec
           </p>
         </div>
         <div class="hr-4em"></div>
@@ -117,6 +117,9 @@ export default {
         return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
       }
     },
+    commonYieldValue: function () {
+      return utils.format(((this.player.competency * this.player.mines.common.workers) / this.player.mines.common.hardness) * 10)
+    }
   }
 }
 </script>

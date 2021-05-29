@@ -13,7 +13,9 @@ const format = (value) => {
   if (value >= 1000000) {
     formatedValue = value.toExponential(3)
   } else {
-    formatedValue = (value === Math.floor(value)) ? String(value).replace(/(.)(?=(\d{3})+$)/g,"$1,") : String(value.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,"$1,")
+    const parsedValue = parseFloat(value.toFixed(2))
+    formatedValue = (parsedValue === Math.floor(parsedValue)) ? String(parsedValue).replace(/(.)(?=(\d{3})+$)/g,"$1,") : String(parsedValue.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,"$1,")
+    // formatedValue = String(value.toFixed(2)).replace(/(.)(?=(\d{3})+$)/g,"$1,")
   }
   return formatedValue
 }

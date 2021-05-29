@@ -23,13 +23,22 @@ export default {
     extraStyle: {
       type: Object,
       default: null
+    },
+
+    disabledStatus: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
     buttonStyle: function () {
       let styleClass = this.extraStyle === null ? {} : this.extraStyle
-      styleClass["button-" + this.color] = true
+      if (this.disabledStatus === false) {
+        styleClass["button-" + this.color] = true
+      } else {
+        styleClass["button-greyedOut"] = true
+      }
       return styleClass
     }
   }
