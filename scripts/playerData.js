@@ -8,7 +8,7 @@ import {
 /* The player status and functionalities */
 
 // The player data variables object
-let properties = {
+const properties = {
   debugMode: false,
   version: 1,
 
@@ -40,7 +40,7 @@ let properties = {
     stoneEquipment: false,
     craftingTools: false,
     map_1: false,
-    backpack: false,
+    backpack: false
   },
 
   stages: {
@@ -118,35 +118,33 @@ let properties = {
     goldGains: { current: 0, reported: 0 },
     goldLosses: { current: 0, reported: 0 },
     infusion: { current: 0, reported: 0 },
-    chrysopoeia: { current: 0, reported: 0 },
+    chrysopoeia: { current: 0, reported: 0 }
   }
 }
-
-
 
 /* -------------------------------------------------------------------------- */
 /*                           The player methods list                          */
 /* -------------------------------------------------------------------------- */
 
-let methods = {
+const methods = {
   // Change amount
-  setAmount: function (v) {
+  setAmount: function(v) {
     if (isNaN(v) === false && v > 0) {
       this.amount = v
     }
   },
 
   // Change stage
-  setStage: function (v) {
+  setStage: function(v) {
     this.stages[v] = true
   },
 
-  unsetStage: function (v) {
+  unsetStage: function(v) {
     this.stages[v] = false
   },
 
   // Calendar update
-  updateCalendar: function () {
+  updateCalendar: function() {
     this.day += 1
     if (this.day > 30) {
       this.day = 1
@@ -174,7 +172,7 @@ let methods = {
     }
   },
 
-  updateTickRender: function () {
+  updateTickRender: function() {
     this.tickRender += 1
     if (this.tickRender >= 100) {
       this.tickRender = 0
@@ -182,12 +180,14 @@ let methods = {
   },
 
   // General methods
-  registerTask: function (t) { // A string with the name of the task
+  registerTask: function(t) {
+    // A string with the name of the task
     this.tasksList = this.tasksList.concat(t)
   },
 
-  increaseAny: function (items) { //  (items is an array of objects with type / value)
-    items.forEach((item) => {
+  increaseAny: function(items) {
+    //  (items is an array of objects with type / value)
+    items.forEach(item => {
       if (item.type === "coal") {
         this.increaseCoal(item.value)
       } else if (item.type === "gold") {
@@ -196,8 +196,8 @@ let methods = {
     })
   },
 
-  decreaseAny: function (items) {
-    items.forEach((item) => {
+  decreaseAny: function(items) {
+    items.forEach(item => {
       if (item.type === "coal") {
         this.decreaseCoal(item.value)
       } else if (item.type === "gold") {
@@ -209,7 +209,7 @@ let methods = {
   },
 
   // Coal methods
-  increaseCoal: function (v) {
+  increaseCoal: function(v) {
     if (this.coal < this.capacity) {
       this.coal += v
       this.coal = utils.clamp(this.coal, 0, this.capacity)
@@ -219,8 +219,8 @@ let methods = {
     this.reports.coalGains.current += v
   },
 
-  decreaseCoal: function (v) {
-    if ((this.coal - v) >= 0) {
+  decreaseCoal: function(v) {
+    if (this.coal - v >= 0) {
       this.coal -= v
     }
 
@@ -228,14 +228,14 @@ let methods = {
   },
 
   // Gold methods
-  increaseGold: function (v) {
+  increaseGold: function(v) {
     this.gold += v
 
     this.reports.goldGains.current += v
   },
 
-  decreaseGold: function (v) {
-    if ((this.gold - v) >= 0) {
+  decreaseGold: function(v) {
+    if (this.gold - v >= 0) {
       this.gold -= v
     }
 
@@ -243,12 +243,13 @@ let methods = {
   },
 
   // Population methods
-  updatePopulation: function (isDayUpdate) {
+  updatePopulation: function(isDayUpdate) {
     this.updateGrowth()
     this.newCitizens += this.growth
 
-    if (isDayUpdate) { // New citizens accumlated become part of the population
-      let citizens = Math.floor(this.newCitizens)
+    if (isDayUpdate) {
+      // New citizens accumlated become part of the population
+      const citizens = Math.floor(this.newCitizens)
       this.increasePopulation(citizens)
       if (this.stages.savages === true) {
         this.decreaseSavages(citizens)
@@ -260,28 +261,34 @@ let methods = {
     this.updateCapacity()
   },
 
-  increasePopulation: function (v) {
+  increasePopulation: function(v) {
     this.population += v
   },
 
-  getUnemployed: function () {
+  getUnemployed: function() {
     let unemployed
     if (this.stages.savages === true) {
-      unemployed = (this.population + this.savages.total) - (this.employed + this.savages.employed)
+      unemployed =
+        this.population +
+        this.savages.total -
+        (this.employed + this.savages.employed)
     } else {
       unemployed = this.population - this.employed
     }
     return unemployed
   },
 
-  increaseEmployed: function (v) {
+  increaseEmployed: function(v) {
     this.employed += v
   },
 
-  decreaseEmployed: function (v) {
+  decreaseEmployed: function(v) {
     if (this.stages.savages === true && this.savages.employed > 0) {
       let unemployAmount = v
-      let unemployedSavages = ((this.savages.employed - unemployAmount) >= 0) ? unemployAmount : this.savages.employed
+      const unemployedSavages =
+        this.savages.employed - unemployAmount >= 0
+          ? unemployAmount
+          : this.savages.employed
       unemployAmount -= unemployedSavages
       this.decreaseSavageEmployed(unemployedSavages)
       this.employed -= unemployAmount
@@ -290,7 +297,7 @@ let methods = {
     }
   },
 
-  decreaseSavages: function (v) {
+  decreaseSavages: function(v) {
     this.savages.total -= v
     if (this.savages.total <= 0) {
       this.unsetStage("savages")
@@ -298,44 +305,55 @@ let methods = {
     }
   },
 
-  increaseSavageEmployed: function (v) {
+  increaseSavageEmployed: function(v) {
     this.savages.employed += v
   },
 
-  decreaseSavageEmployed: function (v) {
+  decreaseSavageEmployed: function(v) {
     this.savages.employed -= v
   },
 
-  updateCompetency: function () {
+  updateCompetency: function() {
     let comp = 1
 
-    if (this.inventory.stoneEquipment === true) { comp += 1 }
+    if (this.inventory.stoneEquipment === true) {
+      comp += 1
+    }
 
     this.competency = comp
   },
 
-  updateCapacity: function () {
+  updateCapacity: function() {
     let cap = 10
 
-    if (this.inventory.backpack === true) { cap += 15 }
+    if (this.inventory.backpack === true) {
+      cap += 15
+    }
 
     this.capacity = cap
   },
 
-  updateGrowth: function () {
+  updateGrowth: function() {
     let grow = 0
 
-    if (this.crafting.tavern.completed === true) { grow += 0.01 }
+    if (this.crafting.tavern.completed === true) {
+      grow += 0.01
+    }
 
     this.growth = grow
   },
 
   // Common mine update
-  updateCommonMine: function () {
+  updateCommonMine: function() {
     const price = this.mines.common.workers * this.price
     if (this.gold >= price) {
-      this.increaseCoal((this.competency * this.mines.common.workers) / this.mines.common.hardness)
-      if (this.coal >= 10 && this.stages.market === false) { this.setStage("market") }
+      this.increaseCoal(
+        (this.competency * this.mines.common.workers) /
+          this.mines.common.hardness
+      )
+      if (this.coal >= 10 && this.stages.market === false) {
+        this.setStage("market")
+      }
       this.decreaseGold(price)
     } else {
       // No gold, reset employed!
@@ -345,19 +363,19 @@ let methods = {
   },
 
   // Nomads updates
-  resetNomadCoal: function () {
+  resetNomadCoal: function() {
     this.nomads.sellCoal.sold = 0
   },
 
   // Crafting functions
-  updateCraftings: function () {
+  updateCraftings: function() {
     Object.keys(this.crafting).forEach(key => {
       if (this.crafting[key].completed === false) {
-        let price = this.getCraftCost(key)
+        const price = this.getCraftCost(key)
         if (this.gold >= price) {
-          let workValue = this.proficiency / craftingsData[key].complexity
+          const workValue = this.proficiency / craftingsData[key].complexity
           this.crafting[key].progress += workValue * this.crafting[key].workers
-          if ((this.crafting[key].progress / craftingsData[key].target) >= 1) {
+          if (this.crafting[key].progress / craftingsData[key].target >= 1) {
             this.crafting[key].completed = true
             if (craftingsData[key].task !== undefined) {
               this.registerTask(craftingsData[key].task)
@@ -373,12 +391,12 @@ let methods = {
     })
   },
 
-  getCraftCost: function (c) {
-    let tickCost = this.crafting[c].workers * craftingsData[c].baseCost
+  getCraftCost: function(c) {
+    const tickCost = this.crafting[c].workers * craftingsData[c].baseCost
     return tickCost
   },
 
-  hasMaterials: function (materials) {
+  hasMaterials: function(materials) {
     return materials.reduce((hasAll, material) => {
       if (this.rawMaterials[material] === false) {
         hasAll = false
@@ -388,7 +406,7 @@ let methods = {
   },
 
   // Alchemy functions
-  updateAlchemy: function () {
+  updateAlchemy: function() {
     this.calculateAlchemy()
 
     if (this.stages.autoAlchemy === false) {
@@ -403,29 +421,36 @@ let methods = {
 
       if (this.alchemy.chrysopoeia.manualState === true) {
         this.alchemy.chrysopoeia.manualTick += chrysopoeiaData.rawTick
-
+        if (this.alchemy.chrysopoeia.manualTick >= 1) {
+          this.setManualState("chrysopoeia", false)
+          this.alchemy.chrysopoeia.manualTick = 0
+          this.increaseGold(chrysopoeiaData.rawValue)
+        }
       }
     }
   },
 
-  setManualState: function (type, value) {
+  setManualState: function(type, value) {
     this.alchemy[type].manualState = value
   },
 
-  calculateAlchemy: function () {
+  calculateAlchemy: function() {
     let infusionMult = 1
     let chrysopoeiaMult = 1
 
-    if (this.alchemy.infusion.class === "median") { infusionMult += 1 }
-    if (this.alchemy.chrysopoeia.class === "median") { chrysopoeiaMult += 1 }
+    if (this.alchemy.infusion.class === "median") {
+      infusionMult += 1
+    }
+    if (this.alchemy.chrysopoeia.class === "median") {
+      chrysopoeiaMult += 1
+    }
 
     this.alchemy.infusion.multiplier = infusionMult
     this.alchemy.chrysopoeia.multiplier = chrysopoeiaMult
   },
 
   // The upgrade requirement check happens on the component level.
-  upgradeAlchemy: function (a) {
-
+  upgradeAlchemy: function(a) {
     switch (this.alchemy[a].class) {
       case "weak": {
         this.alchemy[a].class = "median"
@@ -436,14 +461,12 @@ let methods = {
     }
   },
 
-
   // Achievements functions
   // Achivements are either increment or set value for its progress. The update should be called anywhere
   // that can affect the achievement progress.
-  updateAchievement: function (name, value, method) {
-    let achievement = this.achievements[name]
+  updateAchievement: function(name, value, method) {
+    const achievement = this.achievements[name]
     if (achievement.completed === false) {
-
       if (method === "set") {
         achievement.progress = value
       } else if (method === "add") {
@@ -454,17 +477,16 @@ let methods = {
         achievement.completed = true
         this.achievementPoints += 1
       }
-
     }
   },
 
-  decreaseAchievementPoints: function (v) {
-    return this.achievementPoints -= v
+  decreaseAchievementPoints: function(v) {
+    return (this.achievementPoints -= v)
   },
 
   // Report the gains per tick accumulatted in the current accumulator
-  updateReports: function () {
-    (Object.keys(this.reports)).forEach((key) => {
+  updateReports: function() {
+    Object.keys(this.reports).forEach(key => {
       this.reports[key].reported = this.reports[key].current
       this.reports[key].current = 0
     })
@@ -483,12 +505,12 @@ let methods = {
   refactor a lot of things since I didn't use OOP or any useful pattern. Sigh.
 */
 
-let tasks = {
-  updateTasks: function () {
+const tasks = {
+  updateTasks: function() {
     if (this.tasksList.length > 0) {
       console.log(this.tasksList.length)
       const tasksListRef = [...this.tasksList] // Shallow copy of the strings, so they can be safely removed and not fuck up any loop
-      tasksListRef.forEach((task) => {
+      tasksListRef.forEach(task => {
         switch (task) {
           case "alchemy_table_completed": {
             this.setStage("alchemy")
@@ -498,7 +520,7 @@ let tasks = {
           default:
             break
         }
-        this.tasksList = this.tasksList.filter((t) => t !== task) // Remove task from the list
+        this.tasksList = this.tasksList.filter(t => t !== task) // Remove task from the list
       })
     }
   }

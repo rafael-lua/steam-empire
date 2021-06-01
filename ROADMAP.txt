@@ -22,11 +22,14 @@
 [] Add the update method and reportings for alchemy when it becomes automated
 [] Add the upgrade method for making the alchemy automated with AP costs
 [] Add update logic for manual alchemy and reportings
-[-] Add manual state mechanic for alchemy, which is the initial one
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+06/01/2021
+
+[x] Add manual state mechanic for alchemy, which is the initial one
 
 05/28/2021
 

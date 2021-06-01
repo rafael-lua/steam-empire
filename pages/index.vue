@@ -4,7 +4,7 @@
     <GameHeader />
     <SideLeft />
     <div class="container">
-      <Main v-if="gameLoaded"/>
+      <Main v-if="gameLoaded" />
     </div>
     <SideRight />
   </div>
@@ -27,7 +27,7 @@ export default {
     DebugMode
   },
 
-  data () {
+  data() {
     return {
       player: Player,
       gameLoaded: false,
@@ -40,20 +40,22 @@ export default {
 
   methods: {
     // Main game loop. Its called every 100ms. It is the base game tick.
-    gameLoop: function () {
+    gameLoop: function() {
       this.isDayUpdate = false // Always reset to false
 
       // Calculates the time
       this.calendarClock += 1
       Player.updateTickRender()
-      if (this.calendarClock >= 100) { // Completed day updates
+      if (this.calendarClock >= 100) {
+        // Completed day updates
         this.week += 1
         this.calendarClock = 0
         Player.updateCalendar()
         this.isDayUpdate = true
       }
 
-      if (this.week === 7) { // Completed week.
+      if (this.week === 7) {
+        // Completed week.
         this.week = 1
 
         Player.resetNomadCoal()
@@ -72,7 +74,7 @@ export default {
     }
   },
 
-  mounted () {
+  mounted() {
     // DEBUG MODE FOR DEVELOPMENT, set false for deploy
     this.player.debugMode = true
 
@@ -81,7 +83,7 @@ export default {
       // Development file with the debug/test modifications needed
       this.player.gold = 1000
       this.player.coal = 0
-      Object.keys(this.player.stages).forEach((key) => {
+      Object.keys(this.player.stages).forEach(key => {
         this.player.stages[key] = true
       })
       this.player.stages.savages = false
@@ -100,7 +102,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main-grid {
   position: relative;
   height: 100vh;
@@ -108,9 +109,8 @@ export default {
   grid-template-columns: 1fr auto 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-		"header header header"
-		"left center right";
+    "header header header"
+    "left center right";
   gap: 0.5em;
 }
-
 </style>

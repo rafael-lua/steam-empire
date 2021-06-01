@@ -1,14 +1,17 @@
 <template>
   <div class="alchemy bg-light border-dark">
-    <div v-if="player.stages.autoAlchemy === false" class="alchemy-wrapper flex-col flex-a-center flex-j-evenly">
+    <div
+      v-if="player.stages.autoAlchemy === false"
+      class="alchemy-wrapper flex-col flex-a-center flex-j-evenly"
+    >
       <InfusionManual />
-      <hr>
+      <hr />
       <ChrysopoeiaManual />
     </div>
 
     <div v-else class="alchemy-wrapper flex-col flex-a-center flex-j-evenly">
       <Infusion />
-      <hr>
+      <hr />
       <Chrysopoeia />
     </div>
   </div>
@@ -31,17 +34,15 @@ export default {
     ChrysopoeiaManual
   },
 
-  data () {
+  data() {
     return {
       player: Player
     }
   }
-
 }
 </script>
 
 <style scoped>
-
 .alchemy {
   height: 100%;
   padding: 0.5em;
@@ -51,5 +52,4 @@ export default {
   height: 100%;
   width: 100%;
 }
-
 </style>
