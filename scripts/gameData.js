@@ -6,7 +6,7 @@ export const infusionData = {
   rawValue: 1, // Manual gains
   rawTick: 0.05, // Manual speed per tick for the progress
   weak: {
-    // Upgrade to median required data
+    // required data for upgrading to median
     coal: 25,
     ap: 5,
     inventory: ["backpack"],

@@ -377,7 +377,7 @@ const methods = {
           this.crafting[key].progress += workValue * this.crafting[key].workers
           if (this.crafting[key].progress / craftingsData[key].target >= 1) {
             this.crafting[key].completed = true
-            if (craftingsData[key].task !== undefined) {
+            if (craftingsData[key].task) {
               this.registerTask(craftingsData[key].task)
             }
           }
@@ -503,12 +503,12 @@ const methods = {
   So when the crafting finishes, it will report a task that will take care of updating everything needed.
   This is weird as fuck, but I find the better way of solving my current problem. Otherwise I would need
   refactor a lot of things since I didn't use OOP or any useful pattern. Sigh.
+  Maybe I could just a vue bus event, but well...
 */
 
 const tasks = {
   updateTasks: function() {
     if (this.tasksList.length > 0) {
-      console.log(this.tasksList.length)
       const tasksListRef = [...this.tasksList] // Shallow copy of the strings, so they can be safely removed and not fuck up any loop
       tasksListRef.forEach(task => {
         switch (task) {

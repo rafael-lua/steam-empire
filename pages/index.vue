@@ -88,7 +88,7 @@ export default {
       })
       this.player.stages.savages = false
       this.player.stages.village = false
-      this.player.stages.alchemy = true
+      this.player.stages.alchemy = false
       this.player.stages.autoAlchemy = false
     } else {
       // Production load/initialization with storage

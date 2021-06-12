@@ -15,13 +15,12 @@
 
 [] Refactor any component price to be on gamedata instead of components
 
-
-
 # ------------------------------- /* Current */ ------------------------------ #
 
 [] Add the update method and reportings for alchemy when it becomes automated
 [] Add the upgrade method for making the alchemy automated with AP costs
-[] Add update logic for manual alchemy and reportings
+
+
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
@@ -29,6 +28,7 @@
 
 06/01/2021
 
+[x] Add update logic for manual alchemy and reportings
 [x] Add manual state mechanic for alchemy, which is the initial one
 
 05/28/2021
@@ -138,4 +138,3 @@ Associations
 
 Logs:
   |_Historic: Keep an historic of the last 25 entries that keeps track of important events for the player.
-
