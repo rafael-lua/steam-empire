@@ -1,11 +1,9 @@
 <template>
   <div>
-    <NomadItem
-      v-bind:item="backpack"
-      v-bind:price="formatedValue(backpack.value)"
-      v-on:handler="trade"
-    >
-      <p class="text-center text-400 text-break">CAPACITY<br><span class="text-700">15</span></p>
+    <NomadItem v-bind:item="backpack" v-on:handler="trade">
+      <p class="text-center text-400 text-break">
+        CAPACITY<br /><span class="text-700">15</span>
+      </p>
     </NomadItem>
   </div>
 </template>
@@ -14,7 +12,6 @@
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 
-import { nomadData } from "~/scripts/gameData"
 import NomadItem from "./NomadItem"
 
 export default {
@@ -24,26 +21,34 @@ export default {
     NomadItem
   },
 
-  data () {
+  data() {
     return {
-      player: Player,
-      backpack: nomadData.backpack
+      player: Player
+    }
+  },
+
+  computed: {
+    backpack: function() {
+      return this.player.modules.nomads.getNomadData("backpack")
     }
   },
 
   methods: {
-    formatedValue: function (v) {
+    formatedValue: function(v) {
       return utils.format(v)
     },
 
-    trade: function () {
-      if ((this.player.inventory.backpack !== true) && (this.player.gold >= this.backpack.value)) {
-        this.player.gold -= this.backpack.value
-        this.player.inventory.backpack = true
+    trade: function() {
+      if (
+        !this.player.modules.inventory.checkIfHas("backpack") &&
+        this.player.modules.gold.amount >= this.backpack.value
+      ) {
+        this.player.modules.gold.decreaseGold(this.backpack.value)
+        this.player.modules.inventory.insert("backpack")
       }
     },
 
-    togglePopup: function (e, t) {
+    togglePopup: function(e, t) {
       if (e === "on") {
         utils.popup.text = t
         utils.popup.hovered = true
@@ -51,6 +56,6 @@ export default {
         utils.popup.hovered = false
       }
     }
-  },
+  }
 }
 </script>

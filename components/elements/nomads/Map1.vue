@@ -1,10 +1,6 @@
 <template>
   <div>
-    <NomadItem
-      v-bind:item="map_1"
-      v-bind:price="formatedValue(map_1.value)"
-      v-on:handler="trade"
-    />
+    <NomadItem v-bind:item="map_1" v-on:handler="trade" />
   </div>
 </template>
 
@@ -12,7 +8,6 @@
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 
-import { nomadData } from "~/scripts/gameData"
 import NomadItem from "./NomadItem"
 
 export default {
@@ -22,30 +17,38 @@ export default {
     NomadItem
   },
 
-  data () {
+  data() {
     return {
-      player: Player,
-      map_1: nomadData.map_1
+      player: Player
+    }
+  },
+
+  computed: {
+    map_1: function() {
+      return this.player.modules.nomads.getNomadData("map_1")
     }
   },
 
   methods: {
-    formatedValue: function (v) {
+    formatedValue: function(v) {
       return utils.format(v)
     },
 
-    trade: function () {
-      if ((this.player.inventory.map_1 !== true) && (this.player.gold >= this.map_1.value)) {
-        this.player.gold -= this.map_1.value
-        this.player.inventory.map_1 = true
-        this.player.rawMaterials.water = true
-        this.player.rawMaterials.barley = true
-        this.player.rawMaterials.wood = true
-        this.player.setStage("savages")
+    trade: function() {
+      if (
+        !this.player.modules.inventory.checkIfHas("map_1") &&
+        this.player.modules.gold.amount >= this.map_1.value
+      ) {
+        this.player.modules.gold.decreaseGold(this.stoneEquipment.value)
+        this.player.modules.inventory.insert("stoneEquipment")
+        this.player.modules.materials.insert("water")
+        this.player.modules.materials.insert("barley")
+        this.player.modules.materials.insert("wood")
+        this.player.modules.stage.setStage("savages")
       }
     },
 
-    togglePopup: function (e, t) {
+    togglePopup: function(e, t) {
       if (e === "on") {
         utils.popup.text = t
         utils.popup.hovered = true
@@ -53,6 +56,6 @@ export default {
         utils.popup.hovered = false
       }
     }
-  },
+  }
 }
 </script>

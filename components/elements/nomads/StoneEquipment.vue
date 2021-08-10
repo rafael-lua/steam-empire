@@ -1,20 +1,16 @@
 <template>
   <div>
-    <NomadItem
-      v-bind:item="stoneEquipment"
-      v-bind:price="formatedValue(stoneEquipment.value)"
-      v-on:handler="trade"
-    >
-      <p class="text-center text-400 text-break">COMPETENCY<br><span class="text-700">1</span></p>
+    <NomadItem v-bind:item="stoneEquipment" v-on:handler="trade">
+      <p class="text-center text-400 text-break">
+        COMPETENCY<br /><span class="text-700">1</span>
+      </p>
     </NomadItem>
   </div>
 </template>
 
 <script>
-import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 
-import { nomadData } from "~/scripts/gameData"
 import NomadItem from "./NomadItem"
 
 export default {
@@ -24,24 +20,28 @@ export default {
     NomadItem
   },
 
-  data () {
+  data() {
     return {
-      player: Player,
-      stoneEquipment: nomadData.stoneEquipment
+      player: Player
+    }
+  },
+
+  computed: {
+    stoneEquipment: function() {
+      return this.player.modules.nomads.getNomadData("stoneEquipment")
     }
   },
 
   methods: {
-    formatedValue: function (v) {
-      return utils.format(v)
-    },
-
-    trade: function () {
-      if ((this.player.inventory.stoneEquipment !== true) && (this.player.gold >= this.stoneEquipment.value)) {
-        this.player.gold -= this.stoneEquipment.value
-        this.player.inventory.stoneEquipment = true
+    trade: function() {
+      if (
+        !this.player.modules.inventory.checkIfHas("stoneEquipment") &&
+        this.player.modules.gold.amount >= this.stoneEquipment.value
+      ) {
+        this.player.modules.gold.decreaseGold(this.stoneEquipment.value)
+        this.player.modules.inventory.insert("stoneEquipment")
       }
     }
-  },
+  }
 }
 </script>

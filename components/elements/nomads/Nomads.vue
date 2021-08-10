@@ -18,7 +18,7 @@
       </p>
     </nav>
 
-    <hr>
+    <hr />
 
     <!-- Sell section -->
 
@@ -29,10 +29,10 @@
     <!-- Buy section -->
 
     <div class="shop-wrapper" v-if="shopFocus === 'buy'">
-      <StoneEquipment v-if="!player.inventory.stoneEquipment" />
-      <CraftingTools v-if="!player.inventory.craftingTools" />
-      <Map1 v-if="!player.inventory.map_1" />
-      <Backpack v-if="!player.inventory.backpack" />
+      <StoneEquipment v-if="!inventoryHas('stoneEquipment')" />
+      <CraftingTools v-if="!inventoryHas('craftingTools')" />
+      <Map1 v-if="!inventoryHas('map_1')" />
+      <Backpack v-if="!inventoryHas('backpack')" />
     </div>
   </div>
 </template>
@@ -53,10 +53,10 @@ export default {
     StoneEquipment,
     CraftingTools,
     Map1,
-    Backpack,
+    Backpack
   },
 
-  data () {
+  data() {
     return {
       player: Player,
       shopFocus: "sell",
@@ -65,18 +65,24 @@ export default {
   },
 
   methods: {
-    toggleShopFocus: function (f) {
+    toggleShopFocus: function(f) {
       this.shopFocus = f
     },
-    navFocus: function (f) {
-      return this.shopFocus === f ? { "nomads-nav-selected": true } : { "nomads-nav-notselected": true }
+
+    navFocus: function(f) {
+      return this.shopFocus === f
+        ? { "nomads-nav-selected": true }
+        : { "nomads-nav-notselected": true }
+    },
+
+    inventoryHas: function(item) {
+      return this.player.modules.inventory.checkIfHas(item)
     }
   }
 }
 </script>
 
 <style scoped>
-
 .nomads {
   height: 75vh;
   display: flex;
@@ -141,5 +147,4 @@ export default {
 ::v-deep .shop-item:hover {
   background-color: rgba(110, 223, 100, 0.219);
 }
-
 </style>

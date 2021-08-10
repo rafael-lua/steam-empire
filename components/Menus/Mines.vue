@@ -1,47 +1,53 @@
 <template>
   <div class="mines-wrapper bg-light border-dark">
     <div class="mines">
-
       <div class="flex-row flex-a-center flex-j-center">
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <img src="~/assets/icons/cave-entrance.png" alt="Coal Mine Icon" class="icon-basic">
+          <img
+            src="~/assets/icons/cave-entrance.png"
+            alt="Coal Mine Icon"
+            class="icon-basic"
+          />
           <p class="text-500">COAL MINE</p>
           <p class="text-italic line-s">(common)</p>
         </div>
         <div class="hr-4em"></div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400 text-s1">HARDNESS</p>
-          <p class="text-700">{{player.mines.common.hardness}}</p>
+          <p class="text-700">{{ getHardness("common") }}</p>
           <p class="text-400 text-s1">COMPETENCY</p>
-          <p class="text-700">{{player.competency}}</p>
+          <p class="text-700">{{ competency }}</p>
         </div>
         <div class="hr-4em"></div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400">YIELD VALUE</p>
-          <p class="text-700 text-b2">
-            {{ commonYieldValue }} /sec
-          </p>
+          <p class="text-700 text-b2">{{ getYieldValue("common") }} /sec</p>
         </div>
         <div class="hr-4em"></div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
           <p class="text-400">EMPLOYED</p>
-          <p class="text-700">{{commonEmployed}}</p>
-          <p class="text-500 text-italic text-s1">({{commonEmployedRatio}})</p>
+          <p class="text-700">{{ getWorkers("common") }}</p>
+          <p class="text-500 text-italic text-s1">
+            ({{ getWorkersRatio("common") }})
+          </p>
         </div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <Button title="EMPLOY" color="blue" v-on:handler="commonEmploy">
+          <Button title="EMPLOY" color="blue" v-on:handler="employ('common')">
             <p class="text-700 text-italic flex-row flex-a-center">
-              <img src="~/assets/icons/mustache.png" alt="Employ Icon" class="icon-basic-mini only-right">
-              {{amountCalculated}}
+              <img
+                src="~/assets/icons/mustache.png"
+                alt="Employ Icon"
+                class="icon-basic-mini only-right"
+              />
+              {{ amountCalculated }}
             </p>
           </Button>
         </div>
         <div class="flex-col flex-a-center flex-j-center pd-1x">
-          <Button title="RESET" color="wine" v-on:handler="commonReset" />
+          <Button title="RESET" color="wine" v-on:handler="reset('common')" />
         </div>
       </div>
-      <hr class="hr-mg">
-
+      <hr class="hr-mg" />
     </div>
   </div>
 </template>
@@ -58,74 +64,62 @@ export default {
     Button
   },
 
-  data () {
+  data() {
     return {
       player: Player
     }
   },
 
-  methods: {
-    commonEmploy: function () {
-      let unemployed = this.player.getUnemployed()
-      if (unemployed > 0) {
-        let newEmployers = (unemployed >= this.player.amount) ? this.player.amount : unemployed
-        this.player.mines.common.workers += newEmployers
-
-        if (this.player.stages.savages === true && this.player.savages.employed < 50) {
-          let newSavages = ((this.player.savages.employed + newEmployers) > 50) ? (50 - this.player.savages.employed) : newEmployers
-          newEmployers -= newSavages
-          this.player.increaseSavageEmployed(newSavages)
-          this.player.increaseEmployed(newEmployers)
-        } else {
-          this.player.increaseEmployed(newEmployers)
-        }
-      }
-    },
-
-    commonReset: function () {
-      let workers = this.player.mines.common.workers
-      if (workers > 0) {
-        this.player.mines.common.workers = 0
-        if (this.player.stages.savages === true && this.player.savages.employed > 0) {
-          let unemployedSavages = ((this.player.savages.employed - workers) >= 0) ? workers : this.player.savages.employed
-          workers -= unemployedSavages
-          this.player.decreaseSavageEmployed(unemployedSavages)
-          this.player.decreaseEmployed(workers)
-        } else {
-          this.player.decreaseEmployed(workers)
-        }
-      }
-    },
-  },
-
   computed: {
-    amountCalculated: function () {
-      let unemployed = this.player.getUnemployed()
+    competency: function() {
+      return this.player.modules.population.competency
+    },
+
+    amountCalculated: function() {
+      const unemployed = this.player.modules.population.getUnemployed()
       if (unemployed === 0) {
         return 0
       } else {
-        return utils.format(unemployed >= this.player.amount ? this.player.amount : unemployed)
+        return utils.format(
+          unemployed >= this.player.amount ? this.player.amount : unemployed
+        )
       }
     },
-    commonEmployed: function () {
-      return utils.format(this.player.mines.common.workers)
+
+    getWorkers: function(mine) {
+      return this.formatedValue(this.player.modules.mines.getWorkers(mine))
     },
-    commonEmployedRatio: function () {
-      if (this.player.stages.savages === true){
-        return `${((this.player.mines.common.workers / (this.player.population + this.player.savages.total)) * 100).toFixed(2)}%`
-      } else {
-        return `${((this.player.mines.common.workers / this.player.population) * 100).toFixed(2)}%`
-      }
+
+    getHardness: function(mine) {
+      return this.formatedValue(this.player.modules.mines.getHardness(mine))
     },
-    commonYieldValue: function () {
-      return utils.format(((this.player.competency * this.player.mines.common.workers) / this.player.mines.common.hardness) * 10)
+
+    getWorkersRatio: function(mine) {
+      return this.player.modules.mines.getWorkersRatio(mine)
+    },
+
+    getYieldValue: function(mine) {
+      return this.formatedValue(this.player.modules.mines.getYieldValue(mine))
+    }
+  },
+
+  methods: {
+    formatedValue: function(v) {
+      return utils.format(v)
+    },
+
+    employ: function(mine) {
+      this.player.modules.mines.employ(mine)
+    },
+
+    reset: function(mine) {
+      this.player.modules.mines.reset(mine)
     }
   }
 }
 </script>
 
 <style scoped>
-
 .mines-wrapper {
   height: 100%;
   padding: 0.5em;
@@ -135,5 +129,4 @@ export default {
   max-height: 77vh;
   overflow-y: auto;
 }
-
 </style>

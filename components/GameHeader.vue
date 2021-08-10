@@ -1,7 +1,6 @@
 <template>
   <header class="header bg-light flex-row flex-a-center flex-j-evenly">
-
-    <p class="text-500">{{player.season.toUpperCase()}}</p>
+    <p class="text-500">{{ currentSeason }}</p>
 
     <div class="tick-render">
       <img
@@ -15,16 +14,30 @@
     </div>
 
     <p class="calendar">
-      <span>Day:<span class="info-value-calendar text-500">{{player.day}}</span></span>
-      <span>Month:<span class="info-value-calendar text-500">{{player.month}}</span></span>
-      <span>Year:<span class="info-value-calendar text-500">{{player.year}}</span></span>
+      <span
+        >Day:<span class="info-value-calendar text-500">{{
+          player.day
+        }}</span></span
+      >
+      <span
+        >Month:<span class="info-value-calendar text-500">{{
+          player.month
+        }}</span></span
+      >
+      <span
+        >Year:<span class="info-value-calendar text-500">{{
+          player.year
+        }}</span></span
+      >
     </p>
 
     <form v-on:submit.prevent="changeAmount">
-      <div class="amount-form noselect hover-clean" v-on:mouseover="togglePopup('on')" v-on:mouseleave="togglePopup('off')">
-        <div class="amount">
-          Amount: {{formatedAmount}}
-        </div>
+      <div
+        class="amount-form noselect hover-clean"
+        v-on:mouseover="togglePopup('on')"
+        v-on:mouseleave="togglePopup('off')"
+      >
+        <div class="amount">Amount: {{ formatedAmount }}</div>
         <input
           type="number"
           v-model.number="modelAmount"
@@ -33,10 +46,9 @@
           min="1"
           max="999999999"
           step="0.001"
-        >
+        />
       </div>
     </form>
-
   </header>
 </template>
 
@@ -45,10 +57,9 @@ import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 
 export default {
-
   name: "GameHeader",
 
-  data () {
+  data() {
     return {
       player: Player,
       newAmount: 1,
@@ -57,19 +68,20 @@ export default {
   },
 
   methods: {
-    rotateClass: function (i) {
-      let classNames = {}
+    rotateClass: function(i) {
+      const classNames = {}
       classNames["rotate-" + i] = true
       return classNames
     },
 
-    changeAmount: function () {
+    changeAmount: function() {
       this.player.setAmount(this.newAmount)
     },
 
-    togglePopup: function (e) {
+    togglePopup: function(e) {
       if (e === "on") {
-        utils.popup.text = "Type a new amount value and press enter to register."
+        utils.popup.text =
+          "Type a new amount value and press enter to register."
         utils.popup.hovered = true
       } else {
         utils.popup.hovered = false
@@ -78,29 +90,31 @@ export default {
   },
 
   computed: {
-    modelAmount: { // With get and set
-      get (){
+    modelAmount: {
+      get() {
         return this.newAmount
       },
-      set (newVal){
+      set(newVal) {
         this.newAmount = newVal
       }
     },
 
-    formatedAmount: function () {
+    formatedAmount: function() {
       return utils.format(this.player.amount)
     },
 
-    tickAmount: function () {
-      return Math.floor(this.player.tickRender / 10)
+    tickAmount: function() {
+      return Math.floor(this.player.modules.calendar.tickRender / 10)
+    },
+
+    currentSeason: function() {
+      return this.player.modules.calendar.season.toUpperCase()
     }
   }
-
 }
 </script>
 
 <style scoped>
-
 .header {
   width: 100%;
   border-bottom: 2px solid rgb(var(--dark-shadow));
@@ -195,5 +209,4 @@ export default {
 .rotate-10 {
   transform: rotate(162deg);
 }
-
 </style>

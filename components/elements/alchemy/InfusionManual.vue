@@ -5,11 +5,9 @@
     <div class="wrapper flex-row flex-a-center flex-j-evenly pd-1">
       <div class="fixed-width">
         <Button
-          v-bind:title="
-            !player.alchemy.infusion.manualState ? 'Process' : 'Processing'
-          "
+          v-bind:title="!manualState ? 'Process' : 'Processing'"
           v-on:handler="handleClick"
-          v-bind:disabledStatus="player.alchemy.infusion.manualState"
+          v-bind:disabledStatus="manualState"
         />
       </div>
       <div class="fixed-width flex-col flex-a-center flex-j-center">
@@ -33,7 +31,6 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import { infusionData } from "~/scripts/gameData"
 import Button from "../Button"
 import CoalFormat from "../CoalFormat"
 
@@ -47,20 +44,29 @@ export default {
 
   data() {
     return {
-      player: Player,
-      infusion: infusionData
+      player: Player
+    }
+  },
+
+  computed: {
+    infusion: function() {
+      return this.player.modules.alchemy.getAlchemyData("infusion")
+    },
+
+    progress: function() {
+      return utils.format(
+        this.player.modules.alchemy.getManualTick("infusion") * 100
+      )
+    },
+
+    manualState: function() {
+      return this.player.modules.alchemy.getManualState("infusion")
     }
   },
 
   methods: {
     handleClick: function() {
-      this.player.setManualState("infusion", true)
-    }
-  },
-
-  computed: {
-    progress: function() {
-      return utils.format(this.player.alchemy.infusion.manualTick * 100)
+      this.player.modules.alchemy.setManualState("infusion", true)
     }
   }
 }

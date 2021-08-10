@@ -1,10 +1,6 @@
 <template>
   <div>
-    <NomadItem
-      v-bind:item="craftingTools"
-      v-bind:price="formatedValue(craftingTools.value)"
-      v-on:handler="trade"
-    />
+    <NomadItem v-bind:item="craftingTools" v-on:handler="trade" />
   </div>
 </template>
 
@@ -12,7 +8,6 @@
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
 
-import { nomadData } from "~/scripts/gameData"
 import NomadItem from "./NomadItem"
 
 export default {
@@ -22,27 +17,35 @@ export default {
     NomadItem
   },
 
-  data () {
+  data() {
     return {
-      player: Player,
-      craftingTools: nomadData.craftingTools
+      player: Player
+    }
+  },
+
+  computed: {
+    craftingTools: function() {
+      return this.player.modules.nomads.getNomadData("craftingTools")
     }
   },
 
   methods: {
-    formatedValue: function (v) {
+    formatedValue: function(v) {
       return utils.format(v)
     },
 
-    trade: function () {
-      if ((this.player.inventory.craftingTools !== true) && (this.player.gold >= this.craftingTools.value)) {
-        this.player.gold -= this.craftingTools.value
-        this.player.inventory.craftingTools = true
-        this.player.setStage("craft")
+    trade: function() {
+      if (
+        !this.player.modules.inventory.checkIfHas("craftingTools") &&
+        this.player.modules.gold.amount >= this.craftingTools.value
+      ) {
+        this.player.modules.gold.decreaseGold(this.craftingTools.value)
+        this.player.modules.inventory.insert("craftingTools")
+        this.player.modules.stage.setStage("craft")
       }
     },
 
-    togglePopup: function (e, t) {
+    togglePopup: function(e, t) {
       if (e === "on") {
         utils.popup.text = t
         utils.popup.hovered = true
@@ -50,6 +53,6 @@ export default {
         utils.popup.hovered = false
       }
     }
-  },
+  }
 }
 </script>

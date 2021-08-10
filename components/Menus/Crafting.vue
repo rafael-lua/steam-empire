@@ -2,12 +2,12 @@
   <div class="crafting-wrapper bg-light border-dark">
     <div class="crafting flex-col flex-a-center">
       <CraftingItem
-        v-if="player.crafting['alchemyTable'].completed === false"
-        v-bind:crafting="alchemyTableData"
+        v-if="!isCraftCompleted('alchemyTable')"
+        v-bind:crafting="getCraftData('alchemyTable')"
       />
       <CraftingItem
-        v-if="player.crafting['tavern'].completed === false"
-        v-bind:crafting="tavernData"
+        v-if="!isCraftCompleted('alchemyTable')"
+        v-bind:crafting="getCraftData('tavern')"
       />
     </div>
   </div>
@@ -15,7 +15,6 @@
 
 <script>
 import Player from "~/scripts/playerData"
-import { craftingsData } from "~/scripts/gameData"
 
 import CraftingItem from "../elements/crafting/CraftingItem"
 
@@ -26,21 +25,25 @@ export default {
     CraftingItem
   },
 
-  data () {
+  data() {
     return {
       player: Player
     }
   },
 
-  computed: {
-    tavernData: function () { return craftingsData.tavern },
-    alchemyTableData: function () { return craftingsData.alchemyTable },
+  methods: {
+    isCraftCompleted: function(craft) {
+      return this.player.modules.craftings.isCompleted(craft)
+    },
+
+    getCraftData: function(craft) {
+      return this.player.modules.craftings.getCraftData(craft)
+    }
   }
 }
 </script>
 
 <style scoped>
-
 .crafting-wrapper {
   height: 100%;
   padding: 0.5em;
@@ -50,5 +53,4 @@ export default {
   max-height: 77vh;
   overflow-y: auto;
 }
-
 </style>

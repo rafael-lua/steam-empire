@@ -7,9 +7,10 @@
           v-on:mouseover="togglePopup('on')"
           v-on:mouseleave="togglePopup('off')"
         >
-          AP: <span class="info-value text-700">{{player.achievementPoints}}</span>
+          AP:
+          <span class="info-value text-700">{{ achievementPoints }}</span>
         </p>
-        <hr>
+        <hr />
       </div>
 
       <Achievement
@@ -18,7 +19,6 @@
         v-bind:factor="firstStep"
         desc="Collect your first 10 coal ores"
       />
-
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     Achievement
   },
 
-  data () {
+  data() {
     return {
       player: Player,
       apHovered: false
@@ -43,9 +43,10 @@ export default {
   },
 
   methods: {
-    togglePopup: function (e) {
+    togglePopup: function(e) {
       if (e === "on") {
-        utils.popup.text = "AP (achievement points) can be used to upgrade alchemy/idle mechanics."
+        utils.popup.text =
+          "AP (achievement points) can be used to upgrade alchemy/idle mechanics."
         utils.popup.hovered = true
       } else {
         utils.popup.hovered = false
@@ -54,8 +55,14 @@ export default {
   },
 
   computed: {
-    firstStep: function () {
-      let p = this.player.achievements.firstSteps.progress / this.player.achievements.firstSteps.target
+    achievementPoints: function() {
+      return this.player.modules.achievements.points
+    },
+
+    firstStep: function() {
+      const p =
+        this.player.modules.achievements.firstSteps.progress /
+        this.player.modules.achievements.firstSteps.target
       return p
     }
   }
@@ -63,7 +70,6 @@ export default {
 </script>
 
 <style scoped>
-
 .side-right {
   margin: 0 0.5em 0.5em 0;
 }
@@ -71,5 +77,4 @@ export default {
 .info-wrapper {
   padding: 0.25em;
 }
-
 </style>

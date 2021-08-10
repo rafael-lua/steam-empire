@@ -16,10 +16,10 @@
 
     <div class="flex-col flex-a-center">
       <p class="text-500 text-s1">CURRENT CLASS</p>
-      <p class="text-700">{{ player.alchemy.infusion.class }}</p>
+      <p class="text-700">{{ infusionClass }}</p>
       <hr class="hr-light hr-mg" />
       <p class="text-500 text-s1">MULTIPLIER</p>
-      <p class="text-700">{{ player.alchemy.chrysopoeia.multiplier }}</p>
+      <p class="text-700">{{ infusionMultiplier }}</p>
     </div>
 
     <div class="border-light flex-row flex-a-center flex-j-center pd-1">
@@ -34,12 +34,12 @@
         <p class="text-700 text-s2">REQUIREMENTS</p>
         <hr class="hr-half hr-light" />
         <p
-          v-for="required in requiredMaterials()"
+          v-for="required in requiredMaterials"
           v-bind:key="required.name"
           v-bind:class="required.has === true ? hasStyle : hasntStyle"
         >
           <span>{{ required.name }}</span>
-          <span class="text-italic">{{ formatNumber(required.amount) }}</span>
+          <span class="text-italic">{{ formatNumber(required.value) }}</span>
         </p>
       </div>
     </div>
@@ -49,7 +49,6 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import { infusionData } from "~/scripts/gameData"
 import Button from "../Button"
 
 export default {
@@ -74,56 +73,40 @@ export default {
     }
   },
 
-  methods: {
-    upgradeInfusion: function() {
-      switch (this.player.alchemy.infusion.class) {
-        case "weak": {
-          const upgradeData = infusionData["weak"].canUpgrade(this.player)
-          if (upgradeData) {
-            this.player.decreaseAny(upgradeData)
-            this.player.upgradeAlchemy("infusion")
-          }
-          break
-        }
+  computed: {
+    infusion: function() {
+      return this.player.modules.alchemy.getAlchemyData("infusion")
+    },
 
-        case "median": {
-          break
-        }
+    infusionReport: function() {
+      return utils.format(this.player.modules.reports.getReported("infusion"))
+    },
 
-        default:
-          break
-      }
+    infusionClass: function() {
+      return this.player.modules.alchemy.getClassName("infusion")
+    },
+
+    infusionMultplier: function() {
+      return this.player.modules.alchemy.getMultiplier("infusion")
     },
 
     requiredMaterials: function() {
-      switch (this.player.alchemy.infusion.class) {
-        case "weak": {
-          return infusionData["weak"].getRequiredList(this.player)
-        }
+      return this.player.modules.alchemy.getRequiredListForNextClass("infusion")
+    }
+  },
 
-        case "median": {
-          const required = [
-            { name: "Material A", amount: 5, has: false },
-            { name: "Material B", amount: null, has: true },
-            { name: "Material C", amount: null, has: false },
-            { name: "Material D", amount: 999999999, has: false }
-          ]
-          return required
-        }
-
-        default:
-          break
+  methods: {
+    upgradeInfusion: function() {
+      const [canUpgrade, costList] = this.player.modules.alchemy.canUpgrade(
+        "infusion"
+      )
+      if (canUpgrade) {
+        this.player.modules.alchemy.upgrade("infusion", costList)
       }
     },
 
     formatNumber: function(n) {
       return n === null ? null : utils.format(n)
-    }
-  },
-
-  computed: {
-    infusionReport: function() {
-      return utils.format(this.player.reports.infusion.reported)
     }
   }
 }

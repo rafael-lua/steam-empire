@@ -5,11 +5,13 @@
     v-on:mouseover="togglePopup('on', item.popupMessage)"
     v-on:mouseleave="togglePopup('off', null)"
   >
-    <p class="break-line text-center text-500">{{item.title.toUpperCase()}}</p>
-    <hr>
+    <p class="break-line text-center text-500">
+      {{ item.title.toUpperCase() }}
+    </p>
+    <hr />
     <slot></slot>
-    <hr>
-    <CoinFormat>{{price}}</CoinFormat>
+    <hr />
+    <CoinFormat>{{ formatedValue(item.price) }}</CoinFormat>
   </div>
 </template>
 
@@ -24,10 +26,6 @@ export default {
     item: {
       type: Object,
       required: true
-    },
-
-    price: {
-      required: true
     }
   },
 
@@ -36,7 +34,11 @@ export default {
   },
 
   methods: {
-    togglePopup: function (e, t) {
+    formatedValue: function(v) {
+      return utils.format(v)
+    },
+
+    togglePopup: function(e, t) {
       if (e === "on") {
         utils.popup.text = t
         utils.popup.hovered = true

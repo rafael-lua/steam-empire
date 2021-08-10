@@ -1,13 +1,13 @@
 <template>
   <div class="bars-wrapper" v-bind:class="uniqueStyle">
-    <p class="text-500 text-center text-s1">{{desc}}</p>
+    <p class="text-500 text-center text-s1">{{ desc }}</p>
     <div v-bind:class="uniqueClass" class="bar"></div>
-    <p class="bar-value text-s2">{{progress}}</p>
+    <p class="bar-value text-s2">{{ progress }}</p>
   </div>
 </template>
 
 <script>
-let ProgressBar = require("progressbar.js")
+const ProgressBar = require("progressbar.js")
 
 export default {
   name: "Achievement",
@@ -31,14 +31,14 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      bar: null,
+      bar: null
     }
   },
 
-  mounted () {
-    let selector = "." + this.className
+  mounted() {
+    const selector = "." + this.className
     this.bar = new ProgressBar.Line(selector, {
       strokeWidth: 3,
       trailColor: "#3a3a3a",
@@ -47,7 +47,7 @@ export default {
 
       from: { color: "#dd5456" },
       to: { color: "#4ee564" },
-      step: function (state, bar, attachment) {
+      step: function(state, bar, attachment) {
         bar.path.setAttribute("stroke", state.color)
       }
     })
@@ -56,7 +56,7 @@ export default {
 
   watch: {
     // whenever factor changes, this function will run
-    factor: function (newFactor, oldFactor) {
+    factor: function(newFactor, oldFactor) {
       if (oldFactor < 100) {
         this.bar.animate(newFactor > 1 ? 1 : newFactor)
       }
@@ -64,26 +64,25 @@ export default {
   },
 
   computed: {
-    progress: function () {
-      let v = this.factor * 100
+    progress: function() {
+      const v = this.factor * 100
       return v >= 1 ? "COMPLETED" : `${v.toFixed(2)}%`
     },
-    uniqueClass: function () {
-      let c = {}
+    uniqueClass: function() {
+      const c = {}
       c[this.className] = true
       return c
     },
-    uniqueStyle: function () {
-      let c = {}
+    uniqueStyle: function() {
+      const c = {}
       c["style-" + this.classStyle] = true
       return c
-    },
+    }
   }
 }
 </script>
 
 <style scoped>
-
 .bars-wrapper {
   width: 100%;
   padding: 0.25em 0.2em;
@@ -94,7 +93,7 @@ export default {
 }
 
 .style-2 {
-  background-color: rgba(var(--dark-shadow), 0.30);
+  background-color: rgba(var(--dark-shadow), 0.3);
 }
 
 .bar {
@@ -106,5 +105,4 @@ export default {
   width: 100%;
   text-align: center;
 }
-
 </style>

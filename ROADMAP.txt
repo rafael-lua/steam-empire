@@ -15,16 +15,25 @@
 
 [] Refactor any component price to be on gamedata instead of components
 
-# ------------------------------- /* Current */ ------------------------------ #
-
 [] Add the update method and reportings for alchemy when it becomes automated
 [] Add the upgrade method for making the alchemy automated with AP costs
 
+# ------------------------------- /* Current */ ------------------------------ #
 
+[] Styling refactor: Implement tailwindcss
+
+[] Create Initializers, Save and Load functionilities for each module, so they can be properly persisted
+
+[] Remove multiple Player imports by passing a unique reference as prop. Props are read only, but objects are passed by reference, so changing its values will work.
 
 # ---------------------------------------------------------------------------- #
 #                                   /* Log */                                  #
 # ---------------------------------------------------------------------------- #
+
+10/08/2021
+
+[x] Transfer modules related data from the playerData to the module itself
+[x] Full refactoring of the system with modules
 
 06/01/2021
 

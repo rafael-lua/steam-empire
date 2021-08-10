@@ -36,7 +36,7 @@
             changeMenu('market')
           }
         "
-        v-if="player.stages.market === true"
+        v-if="isStageSet('market')"
       />
 
       <img
@@ -49,7 +49,7 @@
             changeMenu('craft')
           }
         "
-        v-if="player.stages.craft === true"
+        v-if="isStageSet('craft')"
       />
 
       <img
@@ -62,16 +62,16 @@
             changeMenu('alchemy')
           }
         "
-        v-if="player.stages.alchemy === true"
+        v-if="isStageSet('alchemy')"
       />
     </nav>
 
     <!-- Main items view -->
     <Population v-if="menuFocus === 'population'" />
     <Mines v-if="menuFocus === 'mines'" />
-    <Market v-if="menuFocus === 'market' && player.stages.market === true" />
-    <Crafting v-if="menuFocus === 'craft' && player.stages.craft === true" />
-    <Alchemy v-if="menuFocus === 'alchemy' && player.stages.alchemy === true" />
+    <Market v-if="menuFocus === 'market' && isStageSet('market')" />
+    <Crafting v-if="menuFocus === 'craft' && isStageSet('craft')" />
+    <Alchemy v-if="menuFocus === 'alchemy' && isStageSet('alchemy')" />
   </div>
 </template>
 
@@ -107,8 +107,13 @@ export default {
     changeMenu: function(m) {
       this.menuFocus = m
     },
+
     isFocused: function(m) {
       return this.menuFocus === m ? { "is-focused": true } : {}
+    },
+
+    isStageSet: function(stage) {
+      return this.player.modules.stages.isSet(stage)
     }
   }
 }

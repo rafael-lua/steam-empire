@@ -11,12 +11,18 @@
 </template>
 
 <script>
-import Player from "~/scripts/playerData"
 import Main from "../components/Main"
 import GameHeader from "../components/GameHeader"
 import SideLeft from "../components/SideLeft"
 import SideRight from "../components/SideRight"
 import DebugMode from "../components/DebugMode"
+
+import Player from "~/scripts/playerData"
+
+// Inject current player object instance reference in each module
+Object.keys(Player.modules).forEach(key => {
+  Player.modules[key].player = Player
+})
 
 export default {
   components: {
@@ -31,46 +37,15 @@ export default {
     return {
       player: Player,
       gameLoaded: false,
-      gameTimer: null,
-      calendarClock: 0,
-      week: 0,
-      isDayUpdate: false
+      gameTimer: null
     }
   },
 
   methods: {
     // Main game loop. Its called every 100ms. It is the base game tick.
+    // Each 10 ticks is one second, or one wheel step.
     gameLoop: function() {
-      this.isDayUpdate = false // Always reset to false
-
-      // Calculates the time
-      this.calendarClock += 1
-      Player.updateTickRender()
-      if (this.calendarClock >= 100) {
-        // Completed day updates
-        this.week += 1
-        this.calendarClock = 0
-        Player.updateCalendar()
-        this.isDayUpdate = true
-      }
-
-      if (this.week === 7) {
-        // Completed week.
-        this.week = 1
-
-        Player.resetNomadCoal()
-      }
-
-      // Per tick updates. Each 10 ticks is one second, or one wheel step.
-      Player.updateTasks()
-
-      Player.updatePopulation(this.isDayUpdate)
-
-      Player.updateAlchemy()
-      Player.updateCraftings()
-      Player.updateCommonMine()
-
-      Player.updateReports()
+      this.player.modules.time.updateTick()
     }
   },
 
@@ -81,15 +56,15 @@ export default {
     // Load the game
     if (this.player.debugMode === true) {
       // Development file with the debug/test modifications needed
-      this.player.gold = 1000
-      this.player.coal = 0
-      Object.keys(this.player.stages).forEach(key => {
-        this.player.stages[key] = true
+      this.player.modules.gold = 1000
+      this.player.modules.coal = 0
+      Object.keys(this.player.modules.stages).forEach(key => {
+        this.player.modules.stages[key] = false
       })
-      this.player.stages.savages = false
-      this.player.stages.village = false
-      this.player.stages.alchemy = false
-      this.player.stages.autoAlchemy = false
+      this.player.modules.stages.savages = false
+      this.player.modules.stages.village = false
+      this.player.modules.stages.alchemy = false
+      this.player.modules.stages.autoAlchemy = false
     } else {
       // Production load/initialization with storage
     }

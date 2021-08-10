@@ -1,7 +1,7 @@
 <template>
   <div class="alchemy bg-light border-dark">
     <div
-      v-if="player.stages.autoAlchemy === false"
+      v-if="!isStageSet('autoAlchemy')"
       class="alchemy-wrapper flex-col flex-a-center flex-j-evenly"
     >
       <InfusionManual />
@@ -37,6 +37,12 @@ export default {
   data() {
     return {
       player: Player
+    }
+  },
+
+  method: {
+    isStageSet: function(stage) {
+      return this.player.modules.stages.isSet(stage)
     }
   }
 }

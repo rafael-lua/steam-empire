@@ -5,11 +5,9 @@
     <div class="wrapper flex-row flex-a-center flex-j-evenly pd-1">
       <div class="fixed-width">
         <Button
-          v-bind:title="
-            !player.alchemy.chrysopoeia.manualState ? 'Process' : 'Processing'
-          "
+          v-bind:title="!manualState ? 'Process' : 'Processing'"
           v-on:handler="handleClick"
-          v-bind:disabledStatus="player.alchemy.chrysopoeia.manualState"
+          v-bind:disabledStatus="manualState"
         />
       </div>
       <div class="fixed-width flex-col flex-a-center flex-j-center">
@@ -35,7 +33,6 @@
 <script>
 import utils from "~/scripts/utils"
 import Player from "~/scripts/playerData"
-import { chrysopoeiaData } from "~/scripts/gameData"
 import Button from "../Button"
 import CoinFormat from "../CoinFormat"
 import CoalFormat from "../CoalFormat"
@@ -51,32 +48,45 @@ export default {
 
   data() {
     return {
-      player: Player,
-      chrysopoeia: chrysopoeiaData
+      player: Player
+    }
+  },
+
+  computed: {
+    chrysopoeia: function() {
+      return this.player.modules.alchemy.getAlchemyData("chrysopoeia")
+    },
+
+    progress: function() {
+      return utils.format(
+        this.player.modules.alchemy.getManualTick("chrysopoeia") * 100
+      )
+    },
+
+    manualState: function() {
+      return this.player.modules.alchemy.getManualState("chrysopoeia")
+    },
+
+    canProcessClass: function() {
+      const classes = {}
+      const c = `text-${
+        this.player.modules.resources.get("coal") >= this.chrysopoeia.costValue
+          ? "green"
+          : "red"
+      }`
+      classes[c] = true
+      return classes
     }
   },
 
   methods: {
     handleClick: function() {
-      if (this.player.coal >= this.chrysopoeia.costValue) {
-        this.player.decreaseCoal(this.chrysopoeia.costValue)
+      if (
+        this.player.modules.resources.get("coal") >= this.chrysopoeia.costValue
+      ) {
+        this.player.modules.coal.decreaseCoal(this.chrysopoeia.costValue)
         this.player.setManualState("chrysopoeia", true)
       }
-    }
-  },
-
-  computed: {
-    progress: function() {
-      return utils.format(this.player.alchemy.chrysopoeia.manualTick * 100)
-    },
-
-    canProcessClass: function() {
-      const classes = {}
-      const c =
-        "text-" +
-        (this.player.coal >= this.chrysopoeia.costValue ? "green" : "red")
-      classes[c] = true
-      return classes
     }
   }
 }
