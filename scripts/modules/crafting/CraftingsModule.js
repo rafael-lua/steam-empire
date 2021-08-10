@@ -40,7 +40,9 @@ const Module = {
           this.player.modules.gold.decreaseGold(price)
         } else {
           // No gold, reset employed!
-          this.player.population.decreaseEmployed(this.status[key].workers)
+          this.player.modules.population.decreaseEmployed(
+            this.status[key].workers
+          )
           this.status[key].workers = 0
         }
       }

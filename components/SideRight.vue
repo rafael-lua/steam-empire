@@ -56,13 +56,13 @@ export default {
 
   computed: {
     achievementPoints: function() {
-      return this.player.modules.achievements.points
+      return this.player.modules.resources.get("ap")
     },
 
     firstStep: function() {
       const p =
-        this.player.modules.achievements.firstSteps.progress /
-        this.player.modules.achievements.firstSteps.target
+        this.player.modules.achievement.getProgress("firstSteps") /
+        this.player.modules.achievement.getTarget("firstSteps")
       return p
     }
   }

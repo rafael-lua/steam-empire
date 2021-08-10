@@ -28,6 +28,8 @@ const Module = {
   decreaseCoal: function(value) {
     if (this.amount - value >= 0) {
       this.amount -= value
+    } else {
+      this.amount = 0
     }
 
     this.player.modules.report.register("coalLosses", value)

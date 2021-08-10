@@ -44,7 +44,7 @@ export default {
         this.player.modules.materials.insert("water")
         this.player.modules.materials.insert("barley")
         this.player.modules.materials.insert("wood")
-        this.player.modules.stage.setStage("savages")
+        this.player.modules.stages.setStage("savages")
       }
     },
 

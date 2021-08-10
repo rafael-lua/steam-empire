@@ -28,6 +28,18 @@ const Module = {
 
   increasePoints: function(value) {
     this.points += value
+  },
+
+  getProgress: function(achievement) {
+    return this.achievements[achievement].progress
+  },
+
+  getTarget: function(achievement) {
+    return this.achievements[achievement].target
+  },
+
+  isCompleted: function(achievement) {
+    return this.achievements[achievement].completed
   }
 }
 

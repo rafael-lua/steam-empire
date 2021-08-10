@@ -84,6 +84,20 @@ export default {
           unemployed >= this.player.amount ? this.player.amount : unemployed
         )
       }
+    }
+  },
+
+  methods: {
+    formatedValue: function(v) {
+      return utils.format(v)
+    },
+
+    employ: function(mine) {
+      this.player.modules.mines.employ(mine)
+    },
+
+    reset: function(mine) {
+      this.player.modules.mines.reset(mine)
     },
 
     getWorkers: function(mine) {
@@ -100,20 +114,6 @@ export default {
 
     getYieldValue: function(mine) {
       return this.formatedValue(this.player.modules.mines.getYieldValue(mine))
-    }
-  },
-
-  methods: {
-    formatedValue: function(v) {
-      return utils.format(v)
-    },
-
-    employ: function(mine) {
-      this.player.modules.mines.employ(mine)
-    },
-
-    reset: function(mine) {
-      this.player.modules.mines.reset(mine)
     }
   }
 }

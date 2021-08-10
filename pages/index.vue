@@ -2,11 +2,11 @@
   <div class="main-grid">
     <DebugMode v-if="player.debugMode === true" />
     <GameHeader />
-    <SideLeft />
+    <SideLeft v-if="gameLoaded" />
     <div class="container">
       <Main v-if="gameLoaded" />
     </div>
-    <SideRight />
+    <SideRight v-if="gameLoaded" />
   </div>
 </template>
 
@@ -19,11 +19,6 @@ import DebugMode from "../components/DebugMode"
 
 import Player from "~/scripts/playerData"
 
-// Inject current player object instance reference in each module
-Object.keys(Player.modules).forEach(key => {
-  Player.modules[key].player = Player
-})
-
 export default {
   components: {
     Main,
@@ -35,7 +30,7 @@ export default {
 
   data() {
     return {
-      player: Player,
+      player: null,
       gameLoaded: false,
       gameTimer: null
     }
@@ -49,6 +44,15 @@ export default {
     }
   },
 
+  created() {
+    this.player = Player
+
+    // Inject current player object instance reference in each module
+    Object.keys(this.player.modules).forEach(key => {
+      this.player.modules[key].player = this.player
+    })
+  },
+
   mounted() {
     // DEBUG MODE FOR DEVELOPMENT, set false for deploy
     this.player.debugMode = true
@@ -56,15 +60,15 @@ export default {
     // Load the game
     if (this.player.debugMode === true) {
       // Development file with the debug/test modifications needed
-      this.player.modules.gold = 1000
-      this.player.modules.coal = 0
-      Object.keys(this.player.modules.stages).forEach(key => {
-        this.player.modules.stages[key] = false
+      this.player.modules.resources.increase("gold", 1000)
+      this.player.modules.resources.decrease("coal", 1000)
+      Object.keys(this.player.modules.stages.getStages()).forEach(key => {
+        this.player.modules.stages.unsetStage(key)
       })
-      this.player.modules.stages.savages = false
-      this.player.modules.stages.village = false
-      this.player.modules.stages.alchemy = false
-      this.player.modules.stages.autoAlchemy = false
+      this.player.modules.stages.unsetStage("savages")
+      this.player.modules.stages.unsetStage("village")
+      this.player.modules.stages.unsetStage("alchemy")
+      this.player.modules.stages.unsetStage("autoAlchemy")
     } else {
       // Production load/initialization with storage
     }

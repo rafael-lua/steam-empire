@@ -14,6 +14,10 @@ const Module = {
     autoAlchemy: false
   },
 
+  getStages: function() {
+    return this.stages
+  },
+
   setStage: function(stage) {
     this.stages[stage] = true
   },

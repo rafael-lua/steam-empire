@@ -52,6 +52,15 @@ const Module = {
           break
       }
     }
+  },
+
+  getCalendar: function() {
+    return {
+      day: this.day,
+      month: this.month,
+      year: this.year,
+      season: this.season
+    }
   }
 }
 

@@ -44,7 +44,7 @@ const Player = {
   ...properties,
   ...methods,
   modules: {
-    stage: StagesModule,
+    stages: StagesModule,
     time: TimeModule,
     calendar: CalendarModule,
     report: ReportModule,

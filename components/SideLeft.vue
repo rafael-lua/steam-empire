@@ -174,7 +174,7 @@ export default {
     },
 
     gold: function() {
-      return this.formatedValue(this.player.modules.gold.amount)
+      return this.formatedValue(this.player.modules.resources.get("gold"))
     },
 
     coalGains: function() {

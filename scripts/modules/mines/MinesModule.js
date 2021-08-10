@@ -24,7 +24,7 @@ const Module = {
         )
         if (
           this.player.modules.resources.get("coal") >= 10 &&
-          !this.player.stages.isSet("market")
+          !this.player.modules.stages.isSet("market")
         ) {
           this.player.modules.stages.setStage("market")
         }
@@ -43,7 +43,7 @@ const Module = {
     return this.status[mine].workers
   },
 
-  getHardnesss: function(mine) {
+  getHardness: function(mine) {
     return this.status[mine].hardness
   },
 
@@ -66,7 +66,7 @@ const Module = {
   getYieldValue: function(mine) {
     return (
       ((this.player.modules.population.competency * this.getWorkers(mine)) /
-        this.getHardnesss(mine)) *
+        this.getHardness(mine)) *
       10
     )
   },
@@ -79,7 +79,7 @@ const Module = {
       this.status[mine].workers += newEmployers
 
       if (
-        this.player.stages.isSet("savages") &&
+        this.player.modules.stages.isSet("savages") &&
         this.player.modules.population.savages.employed < 50
       ) {
         const newSavages =
@@ -100,7 +100,7 @@ const Module = {
     if (workers > 0) {
       this.status[mine].workers = 0
       if (
-        this.player.stages.isSet("savages") &&
+        this.player.modules.stages.isSet("savages") &&
         this.player.modules.population.savages.employed > 0
       ) {
         const unemployedSavages =

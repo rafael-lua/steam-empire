@@ -41,7 +41,7 @@ export default {
       ) {
         this.player.modules.gold.decreaseGold(this.craftingTools.value)
         this.player.modules.inventory.insert("craftingTools")
-        this.player.modules.stage.setStage("craft")
+        this.player.modules.stages.setStage("craft")
       }
     },
 

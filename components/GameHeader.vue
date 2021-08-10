@@ -16,17 +16,17 @@
     <p class="calendar">
       <span
         >Day:<span class="info-value-calendar text-500">{{
-          player.day
+          calendar.day
         }}</span></span
       >
       <span
         >Month:<span class="info-value-calendar text-500">{{
-          player.month
+          calendar.month
         }}</span></span
       >
       <span
         >Year:<span class="info-value-calendar text-500">{{
-          player.year
+          calendar.year
         }}</span></span
       >
     </p>
@@ -108,7 +108,11 @@ export default {
     },
 
     currentSeason: function() {
-      return this.player.modules.calendar.season.toUpperCase()
+      return this.calendar.season.toUpperCase()
+    },
+
+    calendar: function() {
+      return this.player.modules.calendar.getCalendar()
     }
   }
 }

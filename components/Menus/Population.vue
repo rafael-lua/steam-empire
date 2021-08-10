@@ -14,7 +14,7 @@
       <p class="text-center text-500 text-b2">CITIZENS</p>
     </div>
 
-    <div v-if="inventoryHas('map_1')">
+    <div v-if="!inventoryHas('map_1')">
       <p class="text-center text-500 initial-text">
         The alchemist observes a flat land ahead.<br />
         It seems empty and large.<br />
