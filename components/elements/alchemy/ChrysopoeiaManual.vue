@@ -85,7 +85,7 @@ export default {
         this.player.modules.resources.get("coal") >= this.chrysopoeia.costValue
       ) {
         this.player.modules.coal.decreaseCoal(this.chrysopoeia.costValue)
-        this.player.setManualState("chrysopoeia", true)
+        this.player.modules.alchemy.setManualState("chrysopoeia", true)
       }
     }
   }

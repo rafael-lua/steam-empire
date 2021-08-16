@@ -12,11 +12,11 @@ const Module = {
   },
 
   updateMines: function() {
-    Object.keys(status).forEach(key => {
+    Object.keys(this.status).forEach(key => {
       const price =
         this.status[key].workers * this.player.modules.population.price
 
-      if (this.player.modules.gold.amount >= price) {
+      if (this.player.modules.resources.get("gold") >= price) {
         this.player.modules.coal.increaseCoal(
           (this.player.modules.population.competency *
             this.status[key].workers) /
@@ -74,24 +74,10 @@ const Module = {
   employ: function(mine) {
     const unemployed = this.player.modules.population.getUnemployed()
     if (unemployed > 0) {
-      let newEmployers =
+      const newEmployers =
         unemployed >= this.player.amount ? this.player.amount : unemployed
       this.status[mine].workers += newEmployers
-
-      if (
-        this.player.modules.stages.isSet("savages") &&
-        this.player.modules.population.savages.employed < 50
-      ) {
-        const newSavages =
-          this.player.modules.population.savages.employed + newEmployers > 50
-            ? 50 - this.player.modules.population.savages.employed
-            : newEmployers
-        newEmployers -= newSavages
-        this.player.modules.population.increaseSavageEmployed(newSavages)
-        this.player.modules.population.increaseEmployed(newEmployers)
-      } else {
-        this.player.modules.population.increaseEmployed(newEmployers)
-      }
+      this.player.modules.population.increaseEmployed(newEmployers)
     }
   },
 

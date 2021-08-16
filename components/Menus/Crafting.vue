@@ -6,7 +6,7 @@
         v-bind:crafting="getCraftData('alchemyTable')"
       />
       <CraftingItem
-        v-if="!isCraftCompleted('alchemyTable')"
+        v-if="!isCraftCompleted('tavern')"
         v-bind:crafting="getCraftData('tavern')"
       />
     </div>

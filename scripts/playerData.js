@@ -12,6 +12,7 @@ import InventoryModule from "~/scripts/modules/resources/InventoryModule"
 import MaterialsModule from "~/scripts/modules/resources/MaterialsModule"
 import MinesModule from "~/scripts/modules/mines/MinesModule"
 import NomadsModule from "~/scripts/modules/shop/NomadsModule"
+import AlchemyModule from "~/scripts/modules/alchemy/AlchemyModule"
 
 /* 
   The player data variables object, which is also the piece that holds data to be persisted. 
@@ -57,7 +58,8 @@ const Player = {
     population: PopulationModule,
     coal: CoalModule,
     gold: GoldModule,
-    nomads: NomadsModule
+    nomads: NomadsModule,
+    alchemy: AlchemyModule
   }
 }
 

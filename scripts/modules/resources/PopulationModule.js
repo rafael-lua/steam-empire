@@ -59,7 +59,21 @@ const Module = {
   },
 
   increaseEmployed: function(value) {
-    this.employed += value
+    let newEmployers = value
+    if (
+      this.player.modules.stages.isSet("savages") &&
+      this.savages.employed < 50
+    ) {
+      const newSavages =
+        this.savages.employed + newEmployers > 50
+          ? 50 - this.savages.employed
+          : newEmployers
+      newEmployers -= newSavages
+      this.increaseSavageEmployed(newSavages)
+      this.employed += newEmployers
+    } else {
+      this.employed += newEmployers
+    }
   },
 
   decreaseEmployed: function(value) {

@@ -188,13 +188,13 @@ export default {
 
     employed: function() {
       return this.formatedValue(
-        this.player.modules.craftings.getworkers(this.crafting.name)
+        this.player.modules.craftings.getWorkers(this.crafting.name)
       )
     },
 
     employedRatio: function() {
       return `${(
-        (this.player.modules.craftings.getworkers(this.crafting.name) /
+        (this.player.modules.craftings.getWorkers(this.crafting.name) /
           this.player.modules.population.citizens) *
         100
       ).toFixed(2)}%`

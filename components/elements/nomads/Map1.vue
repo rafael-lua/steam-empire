@@ -39,8 +39,8 @@ export default {
         !this.player.modules.inventory.checkIfHas("map_1") &&
         this.player.modules.gold.amount >= this.map_1.value
       ) {
-        this.player.modules.gold.decreaseGold(this.stoneEquipment.value)
-        this.player.modules.inventory.insert("stoneEquipment")
+        this.player.modules.gold.decreaseGold(this.map_1.value)
+        this.player.modules.inventory.insert("map_1")
         this.player.modules.materials.insert("water")
         this.player.modules.materials.insert("barley")
         this.player.modules.materials.insert("wood")

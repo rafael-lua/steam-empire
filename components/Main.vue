@@ -62,7 +62,7 @@
             changeMenu('alchemy')
           }
         "
-        v-if="isStageSet('alchemy')"
+        v-if="isCraftCompleted('alchemyTable')"
       />
     </nav>
 
@@ -71,7 +71,9 @@
     <Mines v-if="menuFocus === 'mines'" />
     <Market v-if="menuFocus === 'market' && isStageSet('market')" />
     <Crafting v-if="menuFocus === 'craft' && isStageSet('craft')" />
-    <Alchemy v-if="menuFocus === 'alchemy' && isStageSet('alchemy')" />
+    <Alchemy
+      v-if="menuFocus === 'alchemy' && isCraftCompleted('alchemyTable')"
+    />
   </div>
 </template>
 
@@ -114,6 +116,10 @@ export default {
 
     isStageSet: function(stage) {
       return this.player.modules.stages.isSet(stage)
+    },
+
+    isCraftCompleted: function(craft) {
+      return this.player.modules.craftings.isCompleted(craft)
     }
   }
 }

@@ -34,10 +34,6 @@ export default {
   },
 
   methods: {
-    formatedValue: function(v) {
-      return utils.format(v)
-    },
-
     trade: function() {
       if (
         !this.player.modules.inventory.checkIfHas("backpack") &&

@@ -66,7 +66,7 @@ export default {
   computed: {
     progress: function() {
       const v = this.factor * 100
-      return v >= 1 ? "COMPLETED" : `${v.toFixed(2)}%`
+      return v >= 100 ? "COMPLETED" : `${v.toFixed(2)}%`
     },
     uniqueClass: function() {
       const c = {}

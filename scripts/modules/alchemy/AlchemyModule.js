@@ -43,7 +43,10 @@ const Module = {
         if (this.status.infusion.manualTick >= 1) {
           this.setManualState("infusion", false)
           this.status.infusion.manualTick = 0
-          this.increaseCoal(this.data["infusion"].rawValue)
+          this.player.modules.resources.increase(
+            "coal",
+            this.data["infusion"].rawValue
+          )
         }
       }
 
@@ -52,7 +55,10 @@ const Module = {
         if (this.status.chrysopoeia.manualTick >= 1) {
           this.setManualState("chrysopoeia", false)
           this.status.chrysopoeia.manualTick = 0
-          this.increaseGold(this.data["chrysopoeia"].rawValue)
+          this.player.modules.resources.increase(
+            "gold",
+            this.data["chrysopoeia"].rawValue
+          )
         }
       }
     }

@@ -40,7 +40,7 @@ export default {
     }
   },
 
-  method: {
+  methods: {
     isStageSet: function(stage) {
       return this.player.modules.stages.isSet(stage)
     }

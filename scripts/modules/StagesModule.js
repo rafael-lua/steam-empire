@@ -8,7 +8,6 @@ const Module = {
   stages: {
     market: false,
     craft: false,
-    alchemy: false,
     savages: false,
     village: false,
     autoAlchemy: false

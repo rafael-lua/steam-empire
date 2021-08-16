@@ -170,7 +170,7 @@ export default {
     },
 
     capacity: function() {
-      return this.formatedValue(this.player.modules.coal.capacity)
+      return this.formatedValue(this.player.modules.coal.getCapacity())
     },
 
     gold: function() {
@@ -207,7 +207,7 @@ export default {
       return (
         (
           (this.player.modules.resources.get("coal") /
-            this.player.modules.coal.capacity) *
+            this.player.modules.coal.getCapacity()) *
           100
         ).toFixed(2) + "%"
       )

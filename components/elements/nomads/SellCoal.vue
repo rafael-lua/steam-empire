@@ -60,7 +60,7 @@ export default {
         if (playersCoal >= amount) {
           this.player.modules.nomads.increaseCoalSold(amount)
           this.player.modules.coal.decreaseCoal(amount)
-          this.player.module.gold.increaseGold(amount * this.sellCoal.value)
+          this.player.modules.gold.increaseGold(amount * this.sellCoal.value)
         }
       }
     },

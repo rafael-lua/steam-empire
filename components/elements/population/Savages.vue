@@ -17,7 +17,7 @@
         class="icon-basic"
       />
       <p class="text-500 text-s1">CONTRACTED</p>
-      <p class="text-700">0</p>
+      <p class="text-700">{{ contracted }}</p>
     </div>
     <div class="hr-4em"></div>
     <div class="flex-col flex-a-center flex-j-center pd-1x">
@@ -63,12 +63,6 @@ export default {
     }
   },
 
-  methods: {
-    formatedValue: function(v) {
-      return utils.format(v)
-    }
-  },
-
   computed: {
     price: function() {
       return this.formatedValue(this.player.modules.population.price)
@@ -80,6 +74,16 @@ export default {
           10 *
           this.player.modules.population.savages.employed
       )
+    },
+
+    contracted: function() {
+      return this.player.modules.population.savages.employed
+    }
+  },
+
+  methods: {
+    formatedValue: function(v) {
+      return utils.format(v)
     }
   }
 }

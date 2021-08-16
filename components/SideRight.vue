@@ -14,7 +14,7 @@
       </div>
 
       <Achievement
-        className="test1"
+        className="first-step"
         v-bind:classStyle="1"
         v-bind:factor="firstStep"
         desc="Collect your first 10 coal ores"

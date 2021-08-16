@@ -28,14 +28,16 @@ const Module = {
 
   updateCraftings: function() {
     Object.keys(this.status).forEach(key => {
-      if (this.status[key].completed === false) {
+      if (!this.isCompleted(key) && this.status[key].workers > 0) {
         const price = this.getCraftCost(key)
-        if (this.player.gold >= price) {
+        if (this.player.modules.resources.get("gold") >= price) {
           const workValue =
-            this.player.proficiency / this.craftingsData[key].complexity
+            this.player.modules.population.proficiency /
+            this.craftingsData[key].complexity
           this.status[key].progress += workValue * this.status[key].workers
           if (this.status[key].progress / this.craftingsData[key].target >= 1) {
             this.status[key].completed = true
+            this.resetWorkers(key)
           }
           this.player.modules.gold.decreaseGold(price)
         } else {

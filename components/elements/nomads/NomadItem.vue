@@ -5,13 +5,11 @@
     v-on:mouseover="togglePopup('on', item.popupMessage)"
     v-on:mouseleave="togglePopup('off', null)"
   >
-    <p class="break-line text-center text-500">
-      {{ item.title.toUpperCase() }}
-    </p>
+    <p class="break-line text-center text-500">{{ title }}</p>
     <hr />
     <slot></slot>
     <hr />
-    <CoinFormat>{{ formatedValue(item.price) }}</CoinFormat>
+    <CoinFormat>{{ formatedValue(item.value) }}</CoinFormat>
   </div>
 </template>
 
@@ -31,6 +29,12 @@ export default {
 
   components: {
     CoinFormat
+  },
+
+  computed: {
+    title: function() {
+      return this.item.title.toUpperCase()
+    }
   },
 
   methods: {
