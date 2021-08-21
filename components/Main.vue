@@ -81,11 +81,11 @@
 import Player from "~/scripts/playerData"
 
 // All game components will be imported and managed in here
-import Population from "./menus/Population"
-import Mines from "./menus/Mines"
-import Market from "./menus/Market"
-import Crafting from "./menus/Crafting"
-import Alchemy from "./menus/Alchemy"
+import Population from "./Menus/Population"
+import Mines from "./Menus/Mines"
+import Market from "./Menus/Market"
+import Crafting from "./Menus/Crafting"
+import Alchemy from "./Menus/Alchemy"
 
 export default {
   name: "Main",
